@@ -1,0 +1,145 @@
+/* GMNav.css - Ultra Premium Sidebar Navigation Design */
+
+:root {
+    --nav-bg: linear-gradient(135deg, #4f46e5, #6d28d9);
+    --nav-bg-hover: rgba(255, 255, 255, 0.05);
+    --nav-bg-active: rgba(255, 255, 255, 0.15);
+    --nav-text: #f4f4f5;
+    --nav-icon: #ffffff;
+    --nav-badge-bg: #ef4444;
+    --nav-badge-text: #fff;
+    --nav-width: 90px;
+    --nav-expanded-width: 240px;
+    --transition-fast: 0.3s ease;
+    --nav-font: 'Segoe UI', Roboto, sans-serif;
+}
+
+.GMNav-sidenav-gm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--nav-width);
+    /*background: var(--nav-bg);*/
+    transition: width var(--transition-fast);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    font-family: var(--nav-font);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.GMNav-open {
+    width: var(--nav-expanded-width);
+}
+
+.GMNav-sidenav-gm ul {
+    list-style: none;
+    padding: 0 0 40px 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.GMNav-home-a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: var(--nav-text);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    gap: 16px;
+    position: relative;
+}
+
+.GMNav-home-a:hover {
+    background: var(--nav-bg-hover);
+    transform: translateX(4px);
+}
+
+.GMNav-active {
+    background: var(--nav-bg-active);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.GMNav-center-icon-btn {
+    border: none;
+    background: none;
+    color: var(--nav-icon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-fast);
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+.GMNav-center-icon-btn:hover {
+    transform: scale(1.1);
+}
+
+.GMNav-nav-label {
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity var(--transition-fast);
+    color: var(--nav-text);
+}
+
+.GMNav-open .GMNav-nav-label {
+    opacity: 1;
+}
+
+.GMNav-bi {
+    width: 28px;
+    height: 28px;
+}
+
+
+/* Badge for notification count */
+
+.GMNav-icon-with-badge {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.GMNav-request-count-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--nav-badge-bg);
+    color: var(--nav-badge-text);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 6px;
+    border-radius: 999px;
+    box-shadow: 0 0 0 2px var(--nav-bg);
+}
+
+
+/* Toggle button */
+
+.toggle-nav-btn {
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    background: #ffffff;
+    color: #8346e5;
+    border-radius: 50%;
+    padding: 6px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform var(--transition-fast);
+}
+
+.toggle-nav-btn:hover {
+    transform: rotate(90deg);
+}
