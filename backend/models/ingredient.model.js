@@ -7,7 +7,7 @@ const ingredientSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    ingredient_name: {
+    material_name: {
       type: String,
       required: true,
     },
@@ -15,7 +15,7 @@ const ingredientSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    ingredient_quantity: {
+    material_quantity: {
       type: Number,
       required: true,
     },
