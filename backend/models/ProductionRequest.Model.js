@@ -14,7 +14,7 @@ const productionRequestSchema = new mongoose.Schema({
   unit: {
     type: String,
     required: true,
-    enum: ['kg', 'liter', 'gram', 'piece', 'packet'],
+    enum: ['kg', 'ton', 'gram', 'piece', 'packet'],
     default: 'kg'
   },
   dateNeeded: {
