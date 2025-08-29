@@ -7,8 +7,8 @@ function Logo() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/login");  // Redirect to login after 3 sec
-    }, 3000);
+      navigate("/login");  // Redirect to login after 10 sec
+    }, 10000);
 
     return () => clearTimeout(timer); // cleanup
   }, [navigate]);
