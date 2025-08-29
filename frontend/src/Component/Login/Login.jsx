@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import LoginImage from "../images/login-bg.svg";
 import "./Login.css";
 
 function Login() {
@@ -16,7 +15,7 @@ function Login() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setError(null); // clear error on typing
+    setError(null);
   };
 
   const handleSubmit = async (e) => {
@@ -32,13 +31,9 @@ function Login() {
 
       if (response.data.success) {
         const { username, accessLevel } = response.data.data;
-
-        // Store in session
         sessionStorage.setItem("user", JSON.stringify(response.data.data));
 
-        // Simulate delay to show loader
         setTimeout(() => {
-          // ✅ Redirect based on access level or username
           if (username === "Chandula" || accessLevel === "Executive") {
             navigate("/home-gm");
           } else {
@@ -59,7 +54,6 @@ function Login() {
                 setError("Unknown access level.");
             }
           }
-
           setIsLoading(false);
         }, 1000);
       } else {
@@ -74,67 +68,43 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-content">
-        <div className="login-image-container">
-          <img src={LoginImage} alt="Login" className="login-image" />
-        </div>
+    <div className="login-page">
+      <div className="login-card animate">
+        <h2 className="login-title">Welcome Back</h2>
 
-        <div className="login-form-container">
-          <h2 className="login-title">Sign In</h2>
+        {error && <div className="error-message">{error}</div>}
 
-          {error && (
-            <div className="error-container">
-              <p className="error-text">{error}</p>
-            </div>
-          )}
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <input
+              type="text"
+              name="username"
+              required
+              value={formData.username}
+              onChange={handleChange}
+            />
+            <label>Username</label>
+          </div>
 
-          <form onSubmit={handleSubmit} className="login-form-bg">
-            <div className="form-group-login">
-              <div className="input-wrapper-lg">
-                <i className="input-icon user-icon"></i>
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  required
-                  className="text-input-login"
-                  placeholder="Username"
-                />
-              </div>
-            </div>
+          <div className="input-group">
+            <input
+              type="password"
+              name="password"
+              required
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <label>Password</label>
+          </div>
 
-            <div className="form-group-login">
-              <div className="input-wrapper-lg">
-                <i className="input-icon password-icon"></i>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  className="text-input-login"
-                  placeholder="Password"
-                />
-              </div>
-            </div>
+          <div className="forgot-link">
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </div>
 
-            <div className="forgot-password">
-              <Link to="/forgot-password">Forgot Password?</Link>
-            </div>
-
-            <button
-              type="submit"
-              className={`login-btn ${isLoading ? "loading" : ""}`}
-              disabled={isLoading}
-            >
-              {isLoading ? <span className="loader"></span> : "Log In"}
-            </button>
-          </form>
-        </div>
+          <button type="submit" className={`login-btn ${isLoading ? "loading" : ""}`} disabled={isLoading}>
+            {isLoading ? <span className="spinner"></span> : "Log In"}
+          </button>
+        </form>
       </div>
     </div>
   );

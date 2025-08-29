@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: rgb(23, 2, 68);
+    background: linear-gradient(135deg, #121780 0%, #170244 100%);
     /* can change to your brand color */
 }
 
