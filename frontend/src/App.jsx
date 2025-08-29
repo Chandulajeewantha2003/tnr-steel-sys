@@ -78,7 +78,7 @@ function App() {
       if (!user && window.location.pathname === "/") {
         navigate("/login"); // redirect to login after splash
       }
-    }, 6000); // 5 seconds splash
+    }, 8000); // 5 seconds splash
 
     return () => clearTimeout(timer);
   }, [navigate]);
