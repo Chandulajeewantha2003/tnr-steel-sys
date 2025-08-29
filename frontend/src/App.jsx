@@ -7,6 +7,9 @@ const ProtectedRoute = ({ element }) => {
   return user ? element : <Navigate to="/login" />;
 };
 
+// ✅ Import your new Logo screen
+import Logo from "./Component/Logo/Logo";
+
 import Home from "@/Component/Home/Home";
 import AddStock from "@/Component/AddStock/AddStock";
 import IssueItems from "@/Component/IssueItems/IssueItems";
@@ -72,7 +75,12 @@ function App() {
     <div>
       <React.Fragment>
         <Routes>
-          <Route path="/" element={<Login />} />
+          {/* ✅ First page is Logo screen */}
+          <Route path="/" element={<Logo />} />
+
+          {/* Login page */}
+          <Route path="/login" element={<Login />} />
+
           <Route
             path="/mainhome"
             element={<ProtectedRoute element={<Home />} />}
@@ -194,9 +202,8 @@ function App() {
             path="/create-user"
             element={<ProtectedRoute element={<CreateUser />} />}
           />
-           <Route path="/Accessdashboard" element={<AccessControlDashboard />} />
+          <Route path="/Accessdashboard" element={<AccessControlDashboard />} />
 
-          <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
 
