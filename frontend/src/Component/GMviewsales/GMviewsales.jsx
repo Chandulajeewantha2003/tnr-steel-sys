@@ -9,7 +9,7 @@ import HeadBar from "../HeadBar/HeadBar";
 function GMviewsales() {
   return (
     <div>
-      Testing Page GMviewsales
+       <GMNav />
     </div>
   )
 }

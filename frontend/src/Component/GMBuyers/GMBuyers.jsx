@@ -12,7 +12,7 @@ const URL = "http://localhost:5000/buyers";
 function GMBuyers() {
   return (
     <div>
-      Testing Page GMBuyers
+      <GMNav />
     </div>
   )
 }

@@ -6,7 +6,7 @@ import HeadBar from "../HeadBar/HeadBar";
 function GMviewproducts() {
   return (
     <div>
-      Testing Page GMviewproducts
+        <GMNav />
     </div>
   )
 }
