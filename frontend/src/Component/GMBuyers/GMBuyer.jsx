@@ -1,18 +1,12 @@
 import React from "react";
 import "./GMBuyer.css";
 
-function GMBuyer({ buyer }) {
-  const { _id, name, contact, address } = buyer;
-
+function GMBuyer() {
   return (
-    <tr>
+    <div>
       
-      <td>{_id}</td>
-      <td>{name}</td>
-      <td>{address}</td>
-      <td>{contact}</td>
-    </tr>
-  );
+    </div>
+  )
 }
 
-export default GMBuyer;
+export default GMBuyer

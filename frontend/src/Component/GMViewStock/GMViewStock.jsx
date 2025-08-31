@@ -7,7 +7,7 @@ import HeadBar from "../HeadBar/HeadBar";
 function GMViewStock() {
   return (
     <div>
-      
+      Testing Page GMViewStock
     </div>
   )
 }
