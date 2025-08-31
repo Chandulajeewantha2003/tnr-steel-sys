@@ -91,11 +91,11 @@ function IngredientRequestForm() {
         </div>
         <div className="ingredient-request-main-content">
           <div className="ingredient-request-content-wrapper">
-            <h2 className="ingredient-request-title">Request Ingredient</h2>
+            <h2 className="ingredient-request-title">Request Material</h2>
             {isLoading ? (
               <div className="ingredient-request-loading-spinner">
                 <div className="ingredient-request-spinner"></div>
-                <p>Loading ingredients...</p>
+                <p>Loading Material...</p>
               </div>
             ) : (
               <div className="ingredient-request-form-container">
@@ -104,7 +104,7 @@ function IngredientRequestForm() {
                 <form onSubmit={handleSubmit} className="ingredient-request-form">
                   <div className="ingredient-request-form-group">
                     <label htmlFor="ingredient" className="ingredient-request-label">
-                      Select Ingredient
+                      Select Material
                     </label>
                     <select
                       id="ingredient"
@@ -112,7 +112,7 @@ function IngredientRequestForm() {
                       onChange={(e) => setSelectedIngredient(e.target.value)}
                       className="ingredient-request-select"
                     >
-                      <option value="">-- Select an Ingredient --</option>
+                      <option value="">-- Select an Materialt --</option>
                       {ingredients.map((ingredient) => (
                         <option key={ingredient._id} value={ingredient._id}>
                           {ingredient.ingredient_name} (Qty: {ingredient.ingredient_quantity})
