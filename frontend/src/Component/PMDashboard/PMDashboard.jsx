@@ -190,7 +190,7 @@ function PMDashboard() {
 
       <div className="pm-dashboard-content">
         <div className="pm-dashboard-header">
-          <h2 className="pm-dashboard-title">Production Manager Kisara Dashboard</h2>
+          <h2 className="pm-dashboard-title">Production Manager  Dashboard</h2>
           <div className="pm-dashboard-date">
             {new Date().toLocaleDateString("en-US", {
               weekday: "long",
