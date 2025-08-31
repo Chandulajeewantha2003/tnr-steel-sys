@@ -138,7 +138,7 @@ function ViewIngredientRequests() {
         </div>
         <div className="view-ingredient-requests-main-content">
           <div className="view-ingredient-requests-content-wrapper">
-            <h2 className="view-ingredient-requests-title">My Ingredient Requests</h2>
+            <h2 className="view-ingredient-requests-title">My Materials Requests</h2>
             <div className="search-and-sort-container">
               <div className="search-bar-container">
                 <input
@@ -199,7 +199,7 @@ function ViewIngredientRequests() {
                     <thead>
                       <tr>
                         <th>Request ID</th>
-                        <th>Ingredient Name</th>
+                        <th>Material Name</th>
                         <th>Requested Quantity</th>
                         <th>Status</th>
                         <th>Requested At</th>
