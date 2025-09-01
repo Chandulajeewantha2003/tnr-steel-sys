@@ -53,7 +53,7 @@ function GMViewStock() {
             value={selection}
             onChange={(e) => setSelection(e.target.value)}
           >
-            <option value="ingredients">Ingredients</option>
+            <option value="ingredients">Materials</option>
             <option value="products">Products</option>
           </select>
         </div>
@@ -69,7 +69,7 @@ function GMViewStock() {
                   <>
                     <th>Supplier</th>
                     <th>Invoice ID</th>
-                    <th>Ingredient Name</th>
+                    <th>Materials Name</th>
                     <th>Quantity</th>
                     <th>Lot Price</th>
                   </>
