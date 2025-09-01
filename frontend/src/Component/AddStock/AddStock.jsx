@@ -274,7 +274,7 @@ function AddStock() {
               </>
             ) : (
               <>
-                <FaLeaf className="header-icon" /> Add Ingredients
+                <FaLeaf className="header-icon" /> Add Materials
               </>
             )}
           </h2>
@@ -288,7 +288,7 @@ function AddStock() {
               onChange={handleSelectionChange}
             >
               <option value="addProducts">Add Products</option>
-              <option value="addIngredients">Add Ingredients</option>
+              <option value="addIngredients">Add Materials</option>
             </select>
           </div>
         </div>
@@ -350,7 +350,7 @@ function AddStock() {
                       <>
                         <th>Supplier</th>
                         <th>Invoice ID</th>
-                        <th>Ingredient Name</th>
+                        <th>Materials Name</th>
                         <th>Quantity</th>
                         <th>Lot Price</th>
                         <th>Action</th>
@@ -470,7 +470,7 @@ function AddStock() {
                             <input
                               className="text-input"
                               type="text"
-                              placeholder="Ingredient name"
+                              placeholder="Materials name"
                               value={row.ingredientName}
                               onChange={(e) =>
                                 handleIngredientChange(

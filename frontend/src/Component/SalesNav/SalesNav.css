@@ -1,172 +1,189 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
+* {
+    box-sizing: border-box;
+}
 
 body,
 html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Noto Sans", sans-serif;
+    background: #f9fafb;
+    color: #111827;
 }
+
+
+/* ======================
+   Username Display
+   ====================== */
 
 .salesNav-username-display {
-  position: fixed;
-  top: 50px;
-  right: 20px;
-  background-color: #efefef;
-  padding: 10px;
-  border-radius: 5px;
-  color: #37474f;
-  font-family: "Noto Sans", sans-serif;
-  font-size: 14px;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    background: #1f2937;
+    color: #f9fafb;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.3s ease-in-out;
+    z-index: 1000;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ======================
+   Sidebar Container
+   ====================== */
+
 .salesNav-sidenav {
-  width: 80px;
-  background-color: #ffff;
-  height: 65vh;
-  margin-top: 7%;
-  margin-left: 2%;
-  padding: 20px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  color: #5d4037;
-  position: fixed;
-  top: 60px;
-  left: 0;
-  font-family: "Noto Sans", sans-serif;
-  transition: transform 0.3s ease-in-out;
-  transform: translateX(0);
-  overflow-y: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 90px;
+    /* collapsed */
+    background: linear-gradient(180deg, #111827, #1f2937);
+    padding: 1rem 0.5rem;
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: width 0.3s ease-in-out;
+    overflow-x: hidden;
+    z-index: 999;
 }
 
 .salesNav-sidenav.salesNav-open {
-  transform: translateX(-260px);
+    width: 240px;
+    /* expanded */
 }
 
-.salesNav-center-icon-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #37474f;
-  width: 70px;
-  height: 70px;
-  background-color: #ffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0 auto;
-}
 
-.salesNav-nav-label {
-  color: #37474f;
-  font-weight: bold;
-  font-size: small;
-}
-
-.salesNav-profile-icon-btn {
-  color: #37474f;
-  background-color: #efefef;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  position: fixed;
-  top: 15px;
-  right: 20px;
-  padding: 5px;
-  z-index: 1000;
-}
-
-.salesNav-center-icon-btn svg {
-  display: block;
-}
+/* ======================
+   List + Items
+   ====================== */
 
 .salesNav-sidenav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
 }
 
-.salesNav-sidenav ul li {
-  margin: 5px 0;
-  text-align: center;
+.salesNav-sidenav li {
+    margin: 6px 0;
 }
 
-.salesNav-sidenav ul li a {
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-  display: block;
+.salesNav-home-a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    color: #9ca3af;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
 }
 
-.salesNav-sidenav ul hr {
-  border: 0;
-  height: 1px;
-  background-color: white;
-  opacity: 0.5;
-  margin: 5px 0;
+.salesNav-home-a:hover {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+    transform: translateX(6px);
 }
 
-main {
-  margin-left: 220px;
-  padding: 20px;
-}
 
-.salesNav-center-icon-btn.salesNav-active {
-  background-color: rgba(154, 195, 221, 0.2);
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(154, 195, 221, 0.7);
-  transition: all 0.3s ease-in-out;
-}
+/* ======================
+   Icon Buttons
+   ====================== */
 
-@keyframes salesNav-shadowPulse {
-  0% {
-    box-shadow: 0 0 10px rgba(154, 195, 221, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(154, 195, 221, 0.9);
-  }
-  100% {
-    box-shadow: 0 0 10px rgba(154, 195, 221, 0.5);
-  }
+.salesNav-center-icon-btn {
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease-in-out, color 0.3s ease;
 }
 
 .salesNav-center-icon-btn:hover {
-  background-color: rgba(154, 195, 221, 0.2);
-  border-radius: 50%;
-  box-shadow: 0 0 15px #9ac3dd;
-  transition: all 0.3s ease-in-out;
+    transform: scale(1.15);
+    color: #3b82f6;
+}
+
+
+/* ======================
+   Active State
+   ====================== */
+
+.salesNav-active {
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    color: #ffffff !important;
+    box-shadow: 0 3px 12px rgba(37, 99, 235, 0.4);
 }
 
 .salesNav-center-icon-btn.salesNav-active {
-  animation: salesNav-shadowPulse 1.5s infinite;
+    color: #fff;
 }
+
+
+/* ======================
+   Labels (show only when expanded)
+   ====================== */
+
+.salesNav-nav-label {
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    flex-grow: 1;
+}
+
+.salesNav-sidenav.salesNav-open .salesNav-nav-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+/* Divider */
+
+.salesNav-nav-hr {
+    border: 0;
+    border-top: 1px solid rgba(75, 85, 99, 0.4);
+    margin: 10px 16px;
+}
+
+
+/* ======================
+   Responsive
+   ====================== */
 
 @media (max-width: 768px) {
-  .salesNav-sidenav {
-    transform: translateX(-220px);
-  }
-
-  .salesNav-sidenav.salesNav-open {
-    transform: translateX(0);
-  }
-
-  .salesNav-sidenav {
-    width: 200px;
-  }
-
-  main {
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .salesNav-sidenav {
-    width: 180px;
-  }
-
-  .salesNav-sidenav ul li a {
-    font-size: 14px;
-  }
+    .salesNav-sidenav {
+        transform: translateX(-100%);
+    }
+    .salesNav-sidenav.salesNav-open {
+        transform: translateX(0);
+    }
+    .salesNav-sidenav {
+        width: 220px;
+    }
 }
