@@ -181,7 +181,7 @@ function ViewStock() {
                 onChange={(e) => setSelection(e.target.value)}
               >
                 <option value="products">Products</option>
-                <option value="ingredients">Ingredients</option>
+                <option value="ingredients">Materials</option>
               </select>
             </div>
 
@@ -229,7 +229,7 @@ function ViewStock() {
                       onClick={() => handleSort("ingredient_name")}
                       className="VS-sortable-header"
                     >
-                      Ingredient Name {getSortIndicator("ingredient_name")}
+                      Materials Name {getSortIndicator("ingredient_name")}
                     </th>
                     <th
                       onClick={() => handleSort("ingredient_quantity")}
