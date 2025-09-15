@@ -1,229 +1,220 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
-html,
-body {
-    background-color: #efefef;
+/* ==================== Ultra Premium GM Buyers CSS ==================== */
+
+
+/* Root Variables - Matching the Stock View Theme */
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #ff6a00 0%, #ee0979 100%);
+    --secondary-gradient: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
+    --success-gradient: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+    --warning-gradient: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+    --info-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+    --purple-gradient: linear-gradient(135deg, #9d50bb 0%, #6e48aa 100%);
+    /* Background Gradients */
+    --bg-main: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    --bg-glass: rgba(255, 255, 255, 0.08);
+    --bg-glass-hover: rgba(255, 255, 255, 0.18);
+    --bg-card: rgba(255, 255, 255, 0.07);
+    /* Text Colors */
+    --text-primary: #f8fafc;
+    --text-secondary: rgba(255, 255, 255, 0.9);
+    --text-muted: rgba(255, 255, 255, 0.6);
+    /* Glass Effects */
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    --glass-backdrop: blur(18px);
+    /* Shadows */
+    --shadow-glow: 0 0 25px rgba(255, 106, 0, 0.5);
+    --shadow-glow-hover: 0 0 45px rgba(238, 9, 121, 0.7);
 }
 
 
-/* General Styling */
+/* Global Reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+}
+
+
+/* ==================== Buyers Container ==================== */
 
 .buyers-container {
-    padding: 20px;
-    background-color: #efefef;
-    border-radius: 8px;
-    font-family: "Noto Sans", sans-serif;
+    width: 1100px;
+    max-width: 1450px;
+    margin: 20px auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
 }
 
-
-/* Table Styling */
-
-.buyers-table {
-    width: 80%;
-    border-collapse: collapse;
-    text-align: center;
-    margin-left: 15%;
-    margin-top: 3%;
+.header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
 }
 
 .buyer-title {
-    font-size: 28px;
-    font-size: 28px;
-    font-weight: 400;
-    color: #37474f;
-    padding: 5px;
-    margin-top: 5px;
-    text-align: left;
-    margin-bottom: 20px;
-    margin-left: 20%;
-    font-family: "Noto Sans", sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, #e0e0e0, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textShine 3s ease-in-out infinite;
+    text-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
 }
 
-.buyers-table th,
-.buyers-table td {
-    padding: 12px 15px;
-    border-bottom: 2px solid #ccc;
+@keyframes textShine {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+
+/* ==================== Table Container ==================== */
+
+.table-container {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--glass-shadow);
+    padding: 2rem;
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+}
+
+.table-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.search-input {
+    padding: 0.9rem 1.5rem;
+    border-radius: 12px;
+    border: 2px solid var(--glass-border);
+    background: var(--bg-glass);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-glow);
+    background: var(--bg-glass-hover);
+    transform: scale(1.02);
+}
+
+
+/* ==================== Buyers Table ==================== */
+
+.buyers-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
 }
 
 .buyers-table th {
-    background-color: #efefef;
-    color: #4e4a4a;
-    text-align: center;
+    text-align: left;
+    padding: 1.2rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-bottom: 2px solid var(--glass-border);
+    text-transform: uppercase;
+    color: var(--text-secondary);
 }
 
 .buyers-table td {
-    font-size: 0.9rem;
-    color: #555;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    transition: 0.3s ease;
+}
+
+.buyers-table tbody tr:hover {
+    background: var(--bg-glass-hover);
+    transform: scale(1.01);
+}
+
+.buyers-table tbody tr:hover td {
+    color: var(--text-primary);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 
-/* Action Icons */
-
-.action-icons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.action-icons i {
-    cursor: pointer;
-    color: #37474F;
-    font-size: 1.2rem;
-    transition: transform 0.2s ease;
-}
-
-.action-icons i:hover {
-    transform: scale(1.2);
-}
-
-.action {
-    background-color: transparent;
-    border: none;
-}
-
-
-/* Input Fields */
-
-.search-input {
-    width: 60%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    margin: 10px auto;
-    display: block;
-    background-color: #efefef;
-}
-
-
-/* Table Checkbox */
-
-.buyers-table th input[type="checkbox"],
-.buyers-table td input[type="checkbox"] {
-    transform: scale(1.2);
-    cursor: pointer;
-}
-
-.new-buyer-btn {
-    background: linear-gradient(to right, #37474F, #3d5c6b, #37474F);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    background-size: 200%;
-    /* Makes gradient movement more noticeable */
-    transition: background-position 0.5s ease;
-    /* Adds animation effect */
-    margin-left: 90%;
-    font-family: "Noto Sans", sans-serif;
-}
-
-.new-buyer-btn:hover {
-    background-position: right center;
-    /* Animate gradient on hover */
-}
-
-.report-btn {
-    background: linear-gradient(to right, #37474F, #3d5c6b, #37474F);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    background-size: 200%;
-    transition: background-position 0.5s ease, transform 0.2s ease;
-    padding: 10px 20px;
-    font-family: "Noto Sans", sans-serif;
-}
-
-.report-btn:hover {
-    background-position: right;
-    transform: scale(1.05);
-}
+/* ==================== Report Button ==================== */
 
 .report-btn-container {
     display: flex;
-    /* Aligns buttons horizontally */
-    justify-content: flex-end;
-    /* Aligns buttons to the right */
-    gap: 10px;
-    /* Small space between buttons */
-    margin-top: 5%;
-    /* Keeps vertical position */
-    margin-right: 5%;
-    /* Moves buttons slightly to the right */
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.report-btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    background: var(--primary-gradient);
+    box-shadow: var(--shadow-glow);
+    transition: all 0.4s ease;
+}
+
+.report-btn:hover {
+    background: var(--secondary-gradient);
+    box-shadow: var(--shadow-glow-hover);
+    transform: translateY(-3px) scale(1.05);
 }
 
 
-/* Media Queries for Responsiveness */
+/* ==================== Responsive ==================== */
 
 @media (max-width: 768px) {
-    .buyers-table {
-        width: 100%;
-        margin-left: 0;
-        /* Remove left margin */
-        margin-top: 20px;
-        font-size: 0.8rem;
-        /* Adjust font size for smaller screens */
+    .buyers-container {
+        width: 95%;
+        padding: 1rem;
+    }
+    .buyer-title {
+        font-size: 2rem;
+        text-align: center;
+    }
+    .table-container {
+        padding: 1rem;
     }
     .buyers-table th,
     .buyers-table td {
-        padding: 8px;
-        /* Reduce padding for smaller screens */
-    }
-    .buyers-table td {
-        font-size: 0.8rem;
-        /* Adjust text size */
-    }
-    .new-buyer-btn,
-    .report-btn {
-        width: 100%;
-        /* Make buttons full width */
+        padding: 0.8rem;
         font-size: 0.9rem;
-        padding: 12px;
-        margin-left: 0;
-        /* Remove left margin */
-    }
-    .buyers-table th {
-        font-size: 14px;
-    }
-    .buyers-table td {
-        font-size: 12px;
-    }
-    /* Stack action icons vertically on smaller screens */
-    .action-icons {
-        flex-direction: column;
-        align-items: center;
-    }
-    .action-icons i {
-        font-size: 1rem;
-    }
-    .report-btn-container {
-        flex-direction: column;
-        /* Stack buttons vertically */
-        align-items: center;
-        /* Center buttons */
-        margin-top: 10px;
     }
 }
 
 @media (max-width: 480px) {
-    .buyers-table th,
-    .buyers-table td {
-        padding: 6px;
-        /* Further reduce padding */
-    }
-    .buyers-table td {
-        font-size: 0.7rem;
-    }
-    .new-buyer-btn,
-    .report-btn {
-        font-size: 0.8rem;
-        padding: 10px;
-    }
     .buyer-title {
-        font-size: 24px;
+        font-size: 1.5rem;
+    }
+    .search-input {
+        width: 100%;
+    }
+    .report-btn {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.8rem;
     }
 }
