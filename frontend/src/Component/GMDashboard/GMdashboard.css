@@ -67,8 +67,8 @@ body {
 /* Animated Background */
 
 .home-container-gm {
+    background: #06013b;
     min-height: 100vh;
-    background: var(--bg-main);
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
     position: relative;

@@ -52,7 +52,7 @@
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
-    background: var(--bg-main);
+    background: #06013b;
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
     min-height: 100vh;
@@ -61,6 +61,7 @@ body {
 
 body::before {
     content: '';
+    background: #06013b;
     position: fixed;
     top: 0;
     left: 0;
@@ -240,7 +241,7 @@ body::after {
 }
 
 .viewDB-filter-input option {
-    background: #2d3748;
+    background: #06013b;
     color: rgb(255, 255, 255);
     padding: 0.5rem;
 }
