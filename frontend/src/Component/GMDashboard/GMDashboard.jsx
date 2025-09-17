@@ -143,7 +143,7 @@ function GMDashboard() {
         setBuyerCount(0);
         setProductCount(0);
         setSupplierCount(0);
-        setEmployeeCount(48);
+        setEmployeeCount(5);
         setSummaryStats({
           totalRevenue: 546800,
           monthlySales: 78500,
