@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+:root {
+    --s-space: 10px;
+    --n-space: 30px;
+    --l-space: 50px;
+    --xl-space: 70px;
+    --xxl-space: 100px;
+    --xxxl-space: 150px;
+    --s-radius: 5px;
+    --n-radius: 10px;
+    --l-radius: 20px;
+    --btn-space: 10px 20px;
+    --m-color: #3055ac;
+    --m1-color: #233e7f;
+    --m3-color: #15254b;
+    --white-color: #dadada;
+    --black-color: #0d0d0d;
+    --s1-color: #740b0b;
+    --s2-color: #ffa800;
+    --s3-color: #0b3374;
+}
+
+
+/* General Reset */
+
+html {
+    scroll-padding-top: 25vh;
+}
+
+:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+::placeholder {
+    color: silver;
+    opacity: 1;
+}
+
+
+/* Navbar */
+
+.navbar {
+    color: white;
+    padding: 20px 0;
+    transition: all 0.5s ease;
+}
+
+.navbar-solid,
+.navbar-scroll {
+    background-color: var(--s3-color);
+}
+
+.navbar-sub {
+    background-color: var(--m-color);
+    padding: 20px 0;
+}
+
+.nav-logo {
+    height: 75px;
+    width: auto;
+}
+
+.navbar-nav {
+    gap: 20px;
+}
+
+.nav-link {
+    padding: 5px 15px !important;
+    border-radius: var(--s-radius);
+    transition: all 0.5s ease;
+}
+
+.nav-item:hover .nav-link {
+    background-color: var(--m3-color);
+    color: white;
+}
+
+.nav-item .active {
+    color: var(--s2-color) !important;
+    font-weight: 700;
+}
+
+
+/* Buttons */
+
+.jumbo-btn,
+.sector-btn,
+.calc-btn,
+.cont-subm,
+.hs-subm,
+.prod-buttons a {
+    padding: var(--btn-space);
+    border-radius: var(--n-radius);
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+
+/* Sections */
+
+.section {
+    padding: 100px 0;
+}
+
+.section-ttl {
+    font-size: 80px;
+    line-height: 80px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.sub-section-ttl {
+    font-size: 48px;
+    line-height: 48px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+
+/* Products */
+
+.product {
+    display: grid;
+    grid-template-rows: 200px auto;
+    border-radius: var(--n-radius);
+    background: var(--m-color);
+    transition: 0.5s;
+}
+
+.product:hover {
+    background: var(--s2-color);
+}
+
+.prod-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 1s;
+}
+
+.prod-ttl {
+    font-size: 26px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+
+/* Projects */
+
+.project {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    background: var(--m-color);
+    border-radius: var(--n-radius);
+    transition: 0.5s;
+}
+
+.project:hover {
+    background: var(--s2-color);
+}
+
+
+/* Footer */
+
+.footer {
+    background: var(--s3-color);
+    color: white;
+}
+
+.footer-logo {
+    height: 100px;
+}
+
+.footer-social {
+    width: 40px;
+    height: 40px;
+    background: white;
+    color: var(--m3-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.footer-social:hover {
+    background: var(--m1-color);
+    color: white;
+}
+
+
+/* Responsive */
+
+@media (max-width: 992px) {
+    .section-ttl {
+        font-size: 60px;
+        line-height: 60px;
+    }
+    .sub-section-ttl {
+        font-size: 38px;
+        line-height: 38px;
+    }
+}
+
+@media (max-width: 768px) {
+     :root {
+        --s-space: 8px;
+        --n-space: 25px;
+        --l-space: 35px;
+        --xl-space: 50px;
+        --xxl-space: 80px;
+        --xxxl-space: 120px;
+    }
+    .section-ttl {
+        font-size: 50px;
+        line-height: 50px;
+    }
+    .sub-section-ttl {
+        font-size: 28px;
+        line-height: 28px;
+    }
+    .jumbo {
+        height: auto;
+    }
+    .section {
+        padding: 50px 0;
+    }
+}
+
+@media (max-width: 576px) {
+     :root {
+        --s-space: 6px;
+        --n-space: 20px;
+        --l-space: 25px;
+        --xl-space: 30px;
+        --xxl-space: 50px;
+        --xxxl-space: 80px;
+    }
+    .section-ttl {
+        font-size: 36px;
+        line-height: 40px;
+    }
+    .sub-section-ttl {
+        font-size: 22px;
+        line-height: 28px;
+    }
+    .footer-logo {
+        height: 70px;
+    }
+}
