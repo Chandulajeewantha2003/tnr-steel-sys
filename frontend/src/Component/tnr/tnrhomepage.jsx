@@ -1,35 +1,96 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'swiper/css';                // ✅ fixed
-import 'swiper/css/navigation';     // ✅ if using navigation
-import 'swiper/css/pagination';     // ✅ if using pagination
-import 'swiper/css/scrollbar';      // ✅ if using scrollbar
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
-
 import '../tnr/css/main.css';
 import '../tnr/css/swiper.css';
+import 'vegas/dist/vegas.min.css';
 
 const TnrHome = () => {
-  const navigate = useNavigate();  // <-- added
+  const navigate = useNavigate();
+  const jumboRef = useRef(null);
+  const swiperRef = useRef(null);
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
-  }, []);
 
-  const userLogin = () => {
-    navigate('/login');  // <-- changed to navigate to login page
-  };
+    // Initialize Vegas.js for jumbo background
+    const initializeVegas = async () => {
+      try {
+        const $ = (await import('jquery')).default;
+        await import('vegas');
+
+        const checkJumbo = () => {
+          if (jumboRef.current && typeof $.fn.vegas === 'function') {
+            $(jumboRef.current).vegas({
+              slides: [
+                { src: '/media/bg/1.jpg' },
+                { src: '/media/bg/2.jpg' },
+                { src: 'https://via.placeholder.com/1920x1080?text=Slide+1' },
+                { src: 'https://via.placeholder.com/1920x1080?text=Slide+2' }
+              ],
+              animation: 'fade',
+              delay: 5000,
+              timer: false,
+              overlay: true,
+              cover: true,
+              preload: true,
+              preloadImage: true
+            });
+            console.log('Vegas.js initialized on #jumbo');
+          } else {
+            console.warn('Retrying Vegas.js init...');
+            setTimeout(checkJumbo, 500);
+          }
+        };
+
+        checkJumbo();
+      } catch (error) {
+        console.error('Vegas.js initialization failed:', error);
+      }
+    };
+
+    // Initialize Swiper manually if needed
+    const initializeSwiper = () => {
+      if (swiperRef.current && swiperRef.current.swiper) {
+        swiperRef.current.swiper.autoplay.start();
+        console.log('Swiper autoplay started');
+      } else {
+        console.warn('Retrying Swiper init...');
+        setTimeout(initializeSwiper, 500);
+      }
+    };
+
+    initializeVegas();
+    initializeSwiper();
+
+    // Cleanup
+    return () => {
+      if (jumboRef.current && typeof $.fn.vegas === 'function') {
+        $(jumboRef.current).vegas('destroy');
+        console.log('Vegas.js destroyed');
+      }
+      if (swiperRef.current && swiperRef.current.swiper) {
+        swiperRef.current.swiper.destroy();
+        console.log('Swiper destroyed');
+      }
+    };
+  }, []);
 
   return (
     <div>
-      <div className="container-fluid jumbo" id="jumbo">
+      <div className="container-fluid jumbo" id="jumbo" ref={jumboRef}>
         <div className="container h-100 pt-5">
           <div className="row h-100">
             <div className="col-md-5 v-center-box balanced">
               <img
-                src="media/logo.webp"
+                src="/media/logo.webp"
                 style={{ width: '280px', maxWidth: '80%' }}
                 alt="TNR"
                 data-aos="fade-down"
@@ -37,7 +98,7 @@ const TnrHome = () => {
               />
               <br />
               <img
-                src="media/intro.png"
+                src="/media/intro.png"
                 className="intro-ttl"
                 alt=""
                 data-aos="fade-up"
@@ -45,7 +106,7 @@ const TnrHome = () => {
               />
               <br />
               Sri Lanka’s leading provider of construction materials. From roofing to steel and cement bricks, we’re committed to delivering innovative solutions that meet the highest standards of quality and reliability. With over 25 years of experience, we are your trusted partner for projects big and small.
-              <button className="jumbo-btn" onClick={userLogin}>
+              <button className="jumbo-btn" onClick={() => navigate('/login')}>
                 User Login
               </button>
             </div>
@@ -59,7 +120,7 @@ const TnrHome = () => {
                 data-aos="fade-up"
                 data-aos-duration="3000"
               >
-                <source src="media/hl.webm" type="video/webm" />
+                <source src="/media/hl.webm" type="video/webm" />
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -140,7 +201,7 @@ const TnrHome = () => {
             ].map((text, index) => (
               <div className="col-6 col-md-3 why-box" key={index}>
                 <img
-                  src={`media/why${index + 1}.png`}
+                  src={`/media/why${index + 1}.png`}
                   className="why-tick"
                   alt=""
                   data-aos="fade-up"
@@ -177,7 +238,7 @@ const TnrHome = () => {
               <div className="col-12 col-sm-6 col-md-4 col-xl-3" key={index}>
                 <a className="product">
                   <div className="prod-img">
-                    <img src={`products/${prod.img}`} alt="" />
+                    <img src={`/products/${prod.img}`} alt="" />
                   </div>
                   <div className="prod-text">
                     <div className="prod-cat">{prod.cat}</div>
@@ -200,21 +261,34 @@ const TnrHome = () => {
           </div>
           <div className="row brands-grid">
             <div className="col-md-12">
-              <div className="swiper swiper-brands">
-                <div className="swiper-wrapper swiper-brands-wrapper">
-                  {['melwa.png', 'janatha.jpg', 'gtb.jpeg'].map((brand, i) => (
-                    <React.Fragment key={i}>
-                      <div className="swiper-slide">
-                        <img className="brands-logos" src={`media/brands/${brand}`} alt="" />
-                      </div>
-                      <div className="swiper-slide">
-                        <img className="brands-logos" src={`media/brands/${brand}`} alt="" />
-                      </div>
-                    </React.Fragment>
-                  ))}
-                </div>
-                <div className="swiper-pagination"></div>
-              </div>
+              <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                spaceBetween={20}
+                slidesPerView={3}
+                navigation
+                pagination={{ clickable: true }}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                loop
+                className="swiper-brands"
+                ref={swiperRef}
+                breakpoints={{
+                  320: { slidesPerView: 1 },
+                  576: { slidesPerView: 2 },
+                  768: { slidesPerView: 3 },
+                  992: { slidesPerView: 4 }
+                }}
+              >
+                {['melwa.png', 'janatha.jpg', 'gtb.jpeg'].map((brand, i) => (
+                  <SwiperSlide key={i}>
+                    <img
+                      className="brands-logos"
+                      src={`/media/brands/${brand}`}
+                      alt={`Brand ${i + 1}`}
+                      loading="lazy"
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
           </div>
         </div>
@@ -280,7 +354,7 @@ const TnrHome = () => {
         <div className="container section">
           <div className="row">
             <div className="col-md-12 footer-2">
-              <img src="media/logo.webp" className="footer-logo" alt="" />
+              <img src="/media/logo.webp" className="footer-logo" alt="" />
               <hr className="nav-hr" />
               <div className="footer-socials">
                 <a href="https://www.facebook.com/TNRsrilanka" target="_blank" rel="noreferrer" className="footer-social">
