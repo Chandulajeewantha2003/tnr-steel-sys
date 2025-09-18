@@ -278,7 +278,7 @@ const TnrHome = () => {
                   992: { slidesPerView: 4 }
                 }}
               >
-                {['melwa.png', 'janatha.jpg', 'gtb.jpeg'].map((brand, i) => (
+                {['melwa.png', 'janatha.jpg', 'gtb.jpeg','melwa.png', 'janatha.jpg', 'gtb.jpeg'].map((brand, i) => (
                   <SwiperSlide key={i}>
                     <img
                       className="brands-logos"
