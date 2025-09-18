@@ -2,22 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import "./App.css";
 
-// ✅ Protected route
-const ProtectedRoute = ({ element }) => {
-  const user = JSON.parse(sessionStorage.getItem("user"));
-  return user ? element : <Navigate to="/login" />;
-};
-
-// ✅ Import screens
+// ✅ Splash Logo
 import Logo from "./Component/Logo/Logo";
+
+// ✅ Screens
+import TnrHome from "./Component/tnr/tnrhomepage";
 import Login from "./Component/Login/Login";
-import Home from "@/Component/Home/Home";
-import AddStock from "@/Component/AddStock/AddStock";
-import IssueItems from "@/Component/IssueItems/IssueItems";
-import AddBuyers from "@/Component/AddBuyers/AddBuyers";
-import Buyers from "@/Component/Buyers/Buyers";
-import Sales from "@/Component/Sales/Sales";
-import Invoice from "@/Component/Invoice_DBuyers/Invoice";
+import Home from "./Component/Home/Home";
+import AddStock from "./Component/AddStock/AddStock";
+import IssueItems from "./Component/IssueItems/IssueItems";
+import AddBuyers from "./Component/AddBuyers/AddBuyers";
+import Buyers from "./Component/Buyers/Buyers";
+import Sales from "./Component/Sales/Sales";
+import Invoice from "./Component/Invoice_DBuyers/Invoice";
 import DirectBuyerReturns from "./Component/DirectBuyerReturns/DirectBuyerReturns";
 import AddSuppliers from "./Component/AddSupplier/AddSupplier";
 import HomeGM from "./Component/GMDashboard/GMDashboard";
@@ -66,6 +63,12 @@ import SalesRequestApproval from "./Component/SalesRequestApproval/SalesRequestA
 import ViewSalesRequests from "./Component/ViewSalesRequests/ViewSalesRequests";
 import StockRequestForm from "./Component/StockRequestForm/StockRequestForm";
 
+// ✅ Protected Route
+const ProtectedRoute = ({ element }) => {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  return user ? element : <Navigate to="/login" />;
+};
+
 function App() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -75,31 +78,34 @@ function App() {
       setLoading(false);
 
       const user = JSON.parse(sessionStorage.getItem("user"));
-      if (!user && window.location.pathname === "/") {
-        navigate("/login"); // redirect to login after splash
+      if (user) {
+        navigate("/mainhome"); // logged-in users go to main home
+      } else {
+        navigate("/tnrhomepage"); // others go to TnrHome
       }
-    }, 8000); // 5 seconds splash
+    }, 8000); // 8 seconds splash
 
     return () => clearTimeout(timer);
   }, [navigate]);
 
   if (loading) {
-    return <Logo />; // show logo splash
+    return <Logo />; // show splash screen
   }
 
   return (
     <Routes>
-      {/* Login and splash handled */}
+      {/* Public routes */}
+      <Route path="/tnrhomepage" element={<TnrHome />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
 
       {/* Protected routes */}
       <Route path="/mainhome" element={<ProtectedRoute element={<Home />} />} />
       <Route path="/addstock" element={<ProtectedRoute element={<AddStock />} />} />
-      <Route path="/pmdashboard" element={<ProtectedRoute element={<PMDashboard />} />} />
       <Route path="/issueitems" element={<ProtectedRoute element={<IssueItems />} />} />
       <Route path="/addbuyers" element={<ProtectedRoute element={<AddBuyers />} />} />
       <Route path="/viewbuyers" element={<ProtectedRoute element={<Buyers />} />} />
-      <Route path="/viewbuyers-gm" element={<ProtectedRoute element={<GMBuyers />} />} />
       <Route path="/viewsales" element={<ProtectedRoute element={<Sales />} />} />
       <Route path="/invoice" element={<ProtectedRoute element={<Invoice />} />} />
       <Route path="/directreturns" element={<ProtectedRoute element={<DirectBuyerReturns />} />} />
@@ -122,25 +128,21 @@ function App() {
       <Route path="/addattendance" element={<ProtectedRoute element={<AddAttendance />} />} />
       <Route path="/viewattendance" element={<ProtectedRoute element={<ViewAttendance />} />} />
       <Route path="/create-user" element={<ProtectedRoute element={<CreateUser />} />} />
-      <Route path="/Accessdashboard" element={<AccessControlDashboard />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/addshops" element={<AddShop />} />
-      <Route path="/manageshops" element={<ManageShops />} />
-      <Route path="/spissueitems" element={<SPIssueItem />} />
-      <Route path="/spreturns" element={<SPReturns />} />
-      <Route path="/spsales" element={<SPSales />} />
-      <Route path="/spviewreturns" element={<SPviewReturns />} />
-      <Route path="/salesdashboard" element={<SalesDashboard />} />
-      <Route path="/spviewproduct" element={<SPViewProduct />} />
-      <Route path="/addsuppliers" element={<AddSuppliers />} />
-      <Route path="/viewsalesstock" element={<ViewSalesStock />} />
-      <Route path="/spreturnInvoice" element={<SPReturnInvoice />} />
-      <Route path="/spInvoice" element={<SPInvoice />} />
-      <Route path="/all-stock-change-requests" element={<AllStockRequestsApproval />} />
-      <Route path="/sales-request" element={<StockRequestForm />} />
-      <Route path="/mystock-change-requests" element={<MyStockChangeRequests />} />
-      <Route path="/mystock-request/:stockId" element={<StockChangeRequestForm />} />
+      <Route path="/Accessdashboard" element={<ProtectedRoute element={<AccessControlDashboard />} />} />
+      <Route path="/salesdashboard" element={<ProtectedRoute element={<SalesDashboard />} />} />
+      <Route path="/addshops" element={<ProtectedRoute element={<AddShop />} />} />
+      <Route path="/manageshops" element={<ProtectedRoute element={<ManageShops />} />} />
+      <Route path="/spissueitems" element={<ProtectedRoute element={<SPIssueItem />} />} />
+      <Route path="/spreturns" element={<ProtectedRoute element={<SPReturns />} />} />
+      <Route path="/spsales" element={<ProtectedRoute element={<SPSales />} />} />
+      <Route path="/spviewreturns" element={<ProtectedRoute element={<SPviewReturns />} />} />
+      <Route path="/spviewproduct" element={<ProtectedRoute element={<SPViewProduct />} />} />
+      <Route path="/viewsalesstock" element={<ProtectedRoute element={<ViewSalesStock />} />} />
+      <Route path="/spreturnInvoice" element={<ProtectedRoute element={<SPReturnInvoice />} />} />
+      <Route path="/spInvoice" element={<ProtectedRoute element={<SPInvoice />} />} />
+      <Route path="/all-stock-change-requests" element={<ProtectedRoute element={<AllStockRequestsApproval />} />} />
+      <Route path="/mystock-change-requests" element={<ProtectedRoute element={<MyStockChangeRequests />} />} />
+      <Route path="/mystock-request/:stockId" element={<ProtectedRoute element={<StockChangeRequestForm />} />} />
       <Route path="/ingredient-request" element={<ProtectedRoute element={<IngredientRequestForm />} />} />
       <Route path="/ingredient-requests-approval" element={<ProtectedRoute element={<IngredientRequestsApproval />} />} />
       <Route path="/view-ingredient-requests" element={<ProtectedRoute element={<ViewIngredientRequests />} />} />
@@ -148,8 +150,8 @@ function App() {
       <Route path="/sales-requests-approval" element={<ProtectedRoute element={<SalesRequestApproval />} />} />
       <Route path="/viewsalesrequests" element={<ProtectedRoute element={<ViewSalesRequests />} />} />
 
-      {/* Fallback for unknown routes */}
-      <Route path="*" element={<Navigate to="/login" />} />
+      {/* Fallback */}
+      <Route path="*" element={<Navigate to="/tnrhomepage" />} />
     </Routes>
   );
 }
