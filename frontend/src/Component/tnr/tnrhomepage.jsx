@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import "aos/dist/aos.css";
-import AOS from "aos";
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'swiper/css';                // ✅ fixed
+import 'swiper/css/navigation';     // ✅ if using navigation
+import 'swiper/css/pagination';     // ✅ if using pagination
+import 'swiper/css/scrollbar';      // ✅ if using scrollbar
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 
-import "../tnr/css/main.css";
-import "../tnr/css/swiper.css";
-
+import '../tnr/css/main.css';
+import '../tnr/css/swiper.css';
 
 const TnrHome = () => {
   const navigate = useNavigate();  // <-- added
