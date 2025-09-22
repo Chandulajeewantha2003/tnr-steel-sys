@@ -4,18 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import HeadBar from "../HeadBar/HeadBar";
 import "./AddStock.css";
-import {
-  FaPlus,
-  FaMinus,
-  FaBoxOpen,
-  FaLeaf,
-  FaSpinner,
-  FaSearch,
-  FaCheck,
-  FaTimes,
-} from "react-icons/fa";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { motion } from "framer-motion";
 
 function AddStock() {
   const [selection, setSelection] = useState("addProducts");
@@ -97,6 +86,7 @@ function AddStock() {
           },
     ]);
     setSearchTerm("");
+    showToast(`Switched to ${event.target.value === "addProducts" ? "Add Products" : "Add Materials"}`, "success");
   };
 
   const handleItemChange = (index, value) => {
@@ -112,14 +102,12 @@ function AddStock() {
       total: product ? product.product_price * 1 : 0,
     };
     setRows(updatedRows);
-
-    // Provide feedback
-    toast.info(`Selected ${value}`, { autoClose: 1500 });
+    showToast(`Selected ${value}`, "success");
   };
 
   const handleQuantityChange = (index, value) => {
     const updatedRows = [...rows];
-    const newQuantity = parseInt(value, 10) || 1; // Default to 1 if invalid
+    const newQuantity = parseInt(value, 10) || 1;
     if (newQuantity >= 1) {
       updatedRows[index].quantity = newQuantity;
       updatedRows[index].total = newQuantity * updatedRows[index].price;
@@ -131,10 +119,8 @@ function AddStock() {
     const updatedRows = [...rows];
     updatedRows[index][field] = value;
     setRows(updatedRows);
-
-    // Provide feedback for important fields
     if (field === "supplier" && value) {
-      toast.info(`Selected supplier: ${value}`, { autoClose: 1500 });
+      showToast(`Selected supplier: ${value}`, "success");
     }
   };
 
@@ -151,7 +137,7 @@ function AddStock() {
             lotPrice: "",
           },
     ]);
-    toast.success("New row added!", { autoClose: 1500 });
+    showToast("New row added!", "success");
   };
 
   const removeRow = (index) => {
@@ -161,13 +147,12 @@ function AddStock() {
         selection === "addProducts"
           ? `Remove ${rowToRemove.selectedItem || "this item"}?`
           : `Remove ${rowToRemove.ingredientName || "this ingredient"}?`;
-
       if (window.confirm(confirmMessage)) {
         setRows(rows.filter((_, rowIndex) => rowIndex !== index));
-        toast.info("Row removed", { autoClose: 1500 });
+        showToast("Row removed", "success");
       }
     } else {
-      toast.warning("Cannot remove the last row", { autoClose: 2000 });
+      showToast("Cannot remove the last row", "error");
     }
   };
 
@@ -175,22 +160,27 @@ function AddStock() {
     if (selection === "addProducts") {
       return rows.some((row) => row.selectedItem && row.quantity > 0);
     } else {
-      return rows.some(
-        (row) => row.supplier && row.ingredientName && row.quantity
-      );
+      return rows.some((row) => row.supplier && row.ingredientName && row.quantity);
     }
   };
 
   const handleSubmit = () => {
     if (!validateForm()) {
-      toast.error(
+      showToast(
         selection === "addProducts"
           ? "Please select at least one product with a valid quantity."
-          : "Please add at least one ingredient with supplier and quantity."
+          : "Please add at least one ingredient with supplier and quantity.",
+        "error"
       );
+      const tableElement = document.querySelector(".table-container");
+      if (tableElement) {
+        tableElement.classList.add("shake");
+        setTimeout(() => {
+          tableElement.classList.remove("shake");
+        }, 500);
+      }
       return;
     }
-
     setShowConfirmation(true);
   };
 
@@ -199,7 +189,6 @@ function AddStock() {
     try {
       if (selection === "addProducts") {
         const filteredRows = rows.filter((row) => row.selectedItem);
-
         for (const row of filteredRows) {
           await axios.post("http://localhost:5000/api/stocks", {
             product_name: row.selectedItem,
@@ -207,10 +196,9 @@ function AddStock() {
             product_price: row.price || 0,
           });
         }
-        toast.success("Stock updated successfully!");
+        showToast("Stock updated successfully!", "success");
       } else {
         const filteredRows = rows.filter((row) => row.ingredientName);
-
         for (const row of filteredRows) {
           await axios.post("http://localhost:5000/api/ingredients", {
             supplier_name: row.supplier,
@@ -220,16 +208,12 @@ function AddStock() {
             lot_price: row.lotPrice,
           });
         }
-        toast.success("Ingredients added successfully!");
+        showToast("Ingredients added successfully!", "success");
       }
       setTimeout(() => navigate("/viewstock"), 2000);
     } catch (error) {
       console.error("Error:", error);
-      toast.error(
-        `Failed: ${
-          error.response ? error.response.data.message : error.message
-        }`
-      );
+      showToast(`Failed: ${error.response ? error.response.data.message : error.message}`, "error");
     } finally {
       setSubmitting(false);
       setShowConfirmation(false);
@@ -240,47 +224,56 @@ function AddStock() {
     setShowConfirmation(false);
   };
 
-  // Filter products or suppliers based on search term
+  const showToast = (message, type = "success") => {
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.classList.add("show");
+    }, 100);
+    setTimeout(() => {
+      toast.classList.remove("show");
+      setTimeout(() => {
+        document.body.removeChild(toast);
+      }, 300);
+    }, 3000);
+  };
+
   const filteredProducts = searchTerm
-    ? products.filter((p) =>
-        p.product_name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+    ? products.filter((p) => p.product_name.toLowerCase().includes(searchTerm.toLowerCase()))
     : products;
 
   const filteredSuppliers = searchTerm
-    ? suppliers.filter((s) =>
-        s.supplier_name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+    ? suppliers.filter((s) => s.supplier_name.toLowerCase().includes(searchTerm.toLowerCase()))
     : suppliers;
 
-  // Calculate total value for all products
-  const totalValue =
-    selection === "addProducts"
-      ? rows.reduce((sum, row) => sum + row.total, 0)
-      : 0;
+  const totalValue = selection === "addProducts" ? rows.reduce((sum, row) => sum + row.total, 0) : 0;
 
   return (
     <div className="add-stock-container">
-      <ToastContainer position="top-right" autoClose={3000} />
       <HeadBar />
       <Nav />
-
       <div className="add-stock-content">
         <div className="add-stock-header">
-          <h2 className="title-stock">
+          <motion.h2
+            className="title-stock"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             {selection === "addProducts" ? (
               <>
-                <FaBoxOpen className="header-icon" /> Add Products Stock
+                <i className="fas fa-box-open header-icon"></i> Add Products Stock
               </>
             ) : (
               <>
-                <FaLeaf className="header-icon" /> Add Materials
+                <i className="fas fa-leaf header-icon"></i> Add Materials
               </>
             )}
-          </h2>
-
+          </motion.h2>
           <div className="selection-container">
-            <label htmlFor="stockType">Select Stock Type: </label>
+            <label htmlFor="stockType">Select Stock Type <span className="required-star">*</span></label>
             <select
               id="stockType"
               className="select-type"
@@ -294,23 +287,35 @@ function AddStock() {
         </div>
 
         {loading ? (
-          <div className="loading-spinner">
-            <FaSpinner className="spin-icon" /> Loading stock data...
-          </div>
+          <motion.div
+            className="loading-spinner"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <i className="fas fa-spinner spin-icon"></i> Loading stock data...
+          </motion.div>
         ) : error ? (
-          <div className="error-message">{error}</div>
+          <motion.div
+            className="error-message"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {error}
+          </motion.div>
         ) : (
           <>
             <div className="search-container">
-              <div className="search-input-wrapper">
-                <FaSearch className="search-icon" />
+              <div className="input-container-sup">
+                <i className="fas fa-search search-icon"></i>
                 <input
                   type="text"
                   className="search-input"
                   placeholder={
                     selection === "addProducts"
                       ? "Search products..."
-                      : "Search suppliers or ingredients..."
+                      : "Search suppliers or materials..."
                   }
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -321,11 +326,10 @@ function AddStock() {
                     onClick={() => setSearchTerm("")}
                     aria-label="Clear search"
                   >
-                    <FaTimes />
+                    <i className="fas fa-times"></i>
                   </button>
                 )}
               </div>
-
               <div className="items-count">
                 {selection === "addProducts"
                   ? `${filteredProducts.length} products available`
@@ -333,7 +337,12 @@ function AddStock() {
               </div>
             </div>
 
-            <div className="table-container">
+            <motion.div
+              className="table-container"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3 }}
+            >
               <table className="issue-items-table">
                 <thead>
                   <tr>
@@ -360,31 +369,31 @@ function AddStock() {
                 </thead>
                 <tbody>
                   {rows.map((row, index) => (
-                    <tr
+                    <motion.tr
                       key={index}
-                      className={`data-row ${
-                        row.selectedItem || row.ingredientName
-                          ? "selected-row"
-                          : ""
-                      }`}
+                      className={`data-row ${row.selectedItem || row.ingredientName ? "selected-row" : ""}`}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2, delay: index * 0.05 }}
                     >
                       {selection === "addProducts" ? (
                         <>
                           <td>
-                            <select
-                              className="select-item"
-                              value={row.selectedItem}
-                              onChange={(e) =>
-                                handleItemChange(index, e.target.value)
-                              }
-                            >
-                              <option value="">Select Item</option>
-                              {filteredProducts.map((item, i) => (
-                                <option key={i} value={item.product_name}>
-                                  {item.product_name}
-                                </option>
-                              ))}
-                            </select>
+                            <div className="input-container-sup">
+                              <i className="fas fa-box input-icon"></i>
+                              <select
+                                className="select-item"
+                                value={row.selectedItem}
+                                onChange={(e) => handleItemChange(index, e.target.value)}
+                              >
+                                <option value="">Select Item</option>
+                                {filteredProducts.map((item, i) => (
+                                  <option key={i} value={item.product_name}>
+                                    {item.product_name}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
                           </td>
                           <td className="stock-value">
                             {row.currentStock > 0 ? row.currentStock : "-"}
@@ -397,31 +406,24 @@ function AddStock() {
                               <button
                                 className="quantity-btn decrease"
                                 onClick={() =>
-                                  handleQuantityChange(
-                                    index,
-                                    Math.max(1, row.quantity - 1)
-                                  )
+                                  handleQuantityChange(index, Math.max(1, row.quantity - 1))
                                 }
                                 disabled={row.quantity <= 1}
                               >
-                                -
+                                <i className="fas fa-minus"></i>
                               </button>
                               <input
                                 className="quantity-input"
                                 type="number"
                                 value={row.quantity}
-                                onChange={(e) =>
-                                  handleQuantityChange(index, e.target.value)
-                                }
+                                onChange={(e) => handleQuantityChange(index, e.target.value)}
                                 min="1"
                               />
                               <button
                                 className="quantity-btn increase"
-                                onClick={() =>
-                                  handleQuantityChange(index, row.quantity + 1)
-                                }
+                                onClick={() => handleQuantityChange(index, row.quantity + 1)}
                               >
-                                +
+                                <i className="fas fa-plus"></i>
                               </button>
                             </div>
                           </td>
@@ -432,73 +434,67 @@ function AddStock() {
                       ) : (
                         <>
                           <td>
-                            <select
-                              className="select-item"
-                              value={row.supplier}
-                              onChange={(e) =>
-                                handleIngredientChange(
-                                  index,
-                                  "supplier",
-                                  e.target.value
-                                )
-                              }
-                            >
-                              <option value="">Select Supplier</option>
-                              {filteredSuppliers.map((sup, i) => (
-                                <option key={i} value={sup.supplier_name}>
-                                  {sup.supplier_name}
-                                </option>
-                              ))}
-                            </select>
+                            <div className="input-container-sup">
+                              <i className="fas fa-user input-icon"></i>
+                              <select
+                                className="select-item"
+                                value={row.supplier}
+                                onChange={(e) =>
+                                  handleIngredientChange(index, "supplier", e.target.value)
+                                }
+                              >
+                                <option value="">Select Supplier</option>
+                                {filteredSuppliers.map((sup, i) => (
+                                  <option key={i} value={sup.supplier_name}>
+                                    {sup.supplier_name}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
                           </td>
                           <td>
-                            <input
-                              className="text-input"
-                              type="text"
-                              value={row.invoiceId}
-                              placeholder="Invoice #"
-                              onChange={(e) =>
-                                handleIngredientChange(
-                                  index,
-                                  "invoiceId",
-                                  e.target.value
-                                )
-                              }
-                            />
+                            <div className="input-container-sup">
+                              <i className="fas fa-file-invoice input-icon"></i>
+                              <input
+                                className="text-input"
+                                type="text"
+                                value={row.invoiceId}
+                                placeholder="Invoice #"
+                                onChange={(e) =>
+                                  handleIngredientChange(index, "invoiceId", e.target.value)
+                                }
+                              />
+                            </div>
                           </td>
                           <td>
-                            <input
-                              className="text-input"
-                              type="text"
-                              placeholder="Materials name"
-                              value={row.ingredientName}
-                              onChange={(e) =>
-                                handleIngredientChange(
-                                  index,
-                                  "ingredientName",
-                                  e.target.value
-                                )
-                              }
-                            />
+                            <div className="input-container-sup">
+                              <i className="fas fa-leaf input-icon"></i>
+                              <input
+                                className="text-input"
+                                type="text"
+                                placeholder="Materials name"
+                                value={row.ingredientName}
+                                onChange={(e) =>
+                                  handleIngredientChange(index, "ingredientName", e.target.value)
+                                }
+                              />
+                            </div>
                           </td>
                           <td>
                             <div className="quantity-control">
                               <button
                                 className="quantity-btn decrease"
                                 onClick={() => {
-                                  const currentValue =
-                                    parseInt(row.quantity) || 0;
+                                  const currentValue = parseInt(row.quantity) || 0;
                                   handleIngredientChange(
                                     index,
                                     "quantity",
                                     Math.max(1, currentValue - 1).toString()
                                   );
                                 }}
-                                disabled={
-                                  !row.quantity || parseInt(row.quantity) <= 1
-                                }
+                                disabled={!row.quantity || parseInt(row.quantity) <= 1}
                               >
-                                -
+                                <i className="fas fa-minus"></i>
                               </button>
                               <input
                                 className="quantity-input"
@@ -506,43 +502,30 @@ function AddStock() {
                                 placeholder="Qty"
                                 value={row.quantity}
                                 onChange={(e) =>
-                                  handleIngredientChange(
-                                    index,
-                                    "quantity",
-                                    e.target.value
-                                  )
+                                  handleIngredientChange(index, "quantity", e.target.value)
                                 }
                               />
                               <button
                                 className="quantity-btn increase"
                                 onClick={() => {
-                                  const currentValue =
-                                    parseInt(row.quantity) || 0;
-                                  handleIngredientChange(
-                                    index,
-                                    "quantity",
-                                    (currentValue + 1).toString()
-                                  );
-                                }}
-                              >
-                                +
+                                  const currentValue = parseInt(row.quantity) || 0;
+                                  handleIngredientChange(index, "quantity", (currentValue + 1).toString());
+                                }
+                                }>
+                                <i className="fas fa-plus"></i>
                               </button>
                             </div>
                           </td>
                           <td>
-                            <div className="price-input-wrapper">
-                              <span className="currency-symbol">$</span>
+                            <div className="input-container-sup">
+                              <i className="fas fa-dollar-sign input-icon"></i>
                               <input
-                                className="stock-qty-input"
+                                className="text-input"
                                 type="number"
                                 placeholder="Price"
                                 value={row.lotPrice}
                                 onChange={(e) =>
-                                  handleIngredientChange(
-                                    index,
-                                    "lotPrice",
-                                    e.target.value
-                                  )
+                                  handleIngredientChange(index, "lotPrice", e.target.value)
                                 }
                               />
                             </div>
@@ -555,10 +538,10 @@ function AddStock() {
                           onClick={() => removeRow(index)}
                           title="Remove row"
                         >
-                          <FaMinus />
+                          <i className="fas fa-minus"></i>
                         </button>
                       </td>
-                    </tr>
+                    </motion.tr>
                   ))}
                 </tbody>
                 {selection === "addProducts" && totalValue > 0 && (
@@ -573,53 +556,53 @@ function AddStock() {
                   </tfoot>
                 )}
               </table>
-            </div>
+            </motion.div>
 
-            <div className="button-container">
+            <motion.div
+              className="button-container"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
               <button
-                className="add-row-btn-stock"
+                className="btn-primary add-row-btn-stock"
                 onClick={addNewRow}
                 title="Add new row"
               >
-                <FaPlus />
+                <i className="fas fa-plus"></i> Add Row
               </button>
               <button
-                className={`addstock-btn ${
-                  validateForm() ? "active" : "disabled"
-                }`}
+                className={`btn-submit ${validateForm() ? "" : "disabled"}`}
                 onClick={handleSubmit}
                 disabled={!validateForm() || submitting}
               >
                 {submitting ? (
-                  <>
-                    <FaSpinner className="spin-icon" /> Processing...
-                  </>
-                ) : selection === "addProducts" ? (
-                  "Add Stock"
+                  <div className="loader"></div>
                 ) : (
-                  "Add Ingredients"
+                  <>
+                    {selection === "addProducts" ? "Add Stock" : "Add Materials"} <i className="fas fa-check"></i>
+                  </>
                 )}
               </button>
-            </div>
+            </motion.div>
 
-            {/* Summary section */}
             {rows.some((row) => row.selectedItem || row.ingredientName) && (
-              <div className="summary-panel">
+              <motion.div
+                className="summary-panel"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
                 <h3>Summary</h3>
                 <div className="summary-content">
                   {selection === "addProducts" ? (
                     <>
                       <p>
-                        <strong>Products to add:</strong>{" "}
-                        {rows.filter((r) => r.selectedItem).length}
+                        <strong>Products to add:</strong> {rows.filter((r) => r.selectedItem).length}
                       </p>
                       <p>
                         <strong>Total items:</strong>{" "}
-                        {rows.reduce(
-                          (sum, row) =>
-                            sum + (row.selectedItem ? row.quantity : 0),
-                          0
-                        )}
+                        {rows.reduce((sum, row) => sum + (row.selectedItem ? row.quantity : 0), 0)}
                       </p>
                       <p>
                         <strong>Total value:</strong> ${totalValue.toFixed(2)}
@@ -628,101 +611,81 @@ function AddStock() {
                   ) : (
                     <>
                       <p>
-                        <strong>Ingredients to add:</strong>{" "}
+                        <strong>Materials to add:</strong>{" "}
                         {rows.filter((r) => r.ingredientName).length}
                       </p>
                       <p>
                         <strong>Suppliers:</strong>{" "}
-                        {
-                          new Set(
-                            rows
-                              .filter((r) => r.supplier)
-                              .map((r) => r.supplier)
-                          ).size
-                        }
+                        {new Set(rows.filter((r) => r.supplier).map((r) => r.supplier)).size}
                       </p>
                     </>
                   )}
                 </div>
-              </div>
+              </motion.div>
             )}
           </>
         )}
 
-        {/* Confirmation Dialog */}
         {showConfirmation && (
-          <div className="confirmation-overlay">
-            <div className="confirmation-dialog">
+          <motion.div
+            className="confirmation-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div
+              className="confirmation-dialog"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
               <h3>
-                Confirm{" "}
-                {selection === "addProducts"
-                  ? "Stock Addition"
-                  : "Ingredient Addition"}
+                Confirm {selection === "addProducts" ? "Stock Addition" : "Material Addition"}
               </h3>
               <p>Are you sure you want to proceed?</p>
-
               <div className="confirmation-summary">
                 {selection === "addProducts" ? (
                   <>
-                    <p>
-                      Adding {rows.filter((r) => r.selectedItem).length}{" "}
-                      products
-                    </p>
+                    <p>Adding {rows.filter((r) => r.selectedItem).length} products</p>
                     <p>
                       Total items:{" "}
-                      {rows.reduce(
-                        (sum, row) =>
-                          sum + (row.selectedItem ? row.quantity : 0),
-                        0
-                      )}
+                      {rows.reduce((sum, row) => sum + (row.selectedItem ? row.quantity : 0), 0)}
                     </p>
                     <p>Total value: ${totalValue.toFixed(2)}</p>
                   </>
                 ) : (
                   <>
+                    <p>Adding {rows.filter((r) => r.ingredientName).length} materials</p>
                     <p>
-                      Adding {rows.filter((r) => r.ingredientName).length}{" "}
-                      ingredients
-                    </p>
-                    <p>
-                      From{" "}
-                      {
-                        new Set(
-                          rows.filter((r) => r.supplier).map((r) => r.supplier)
-                        ).size
-                      }{" "}
-                      suppliers
+                      From {new Set(rows.filter((r) => r.supplier).map((r) => r.supplier)).size} suppliers
                     </p>
                   </>
                 )}
               </div>
-
               <div className="confirmation-actions">
                 <button
-                  className="confirm-btn"
+                  className="btn-submit"
                   onClick={confirmSubmit}
                   disabled={submitting}
                 >
                   {submitting ? (
-                    <>
-                      <FaSpinner className="spin-icon" /> Processing...
-                    </>
+                    <div className="loader"></div>
                   ) : (
                     <>
-                      <FaCheck /> Confirm
+                      <i className="fas fa-check"></i> Confirm
                     </>
                   )}
                 </button>
                 <button
-                  className="cancel-btn"
+                  className="btn-secondary"
                   onClick={cancelSubmit}
                   disabled={submitting}
                 >
-                  <FaTimes /> Cancel
+                  <i className="fas fa-times"></i> Cancel
                 </button>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         )}
       </div>
     </div>

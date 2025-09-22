@@ -19,16 +19,21 @@
     --radius: 16px;
     --transition: 0.3s ease;
     --text-primary: #ffffff;
-    --text-muted: rgba(255, 255, 255, 0.6);
+    --text-muted: rgba(255, 255, 255, 0.7);
     --font-main: 'Inter', 'Segoe UI', sans-serif;
+    --focus-outline: #80bdff;
+    --gradient-accent: linear-gradient(135deg, #a855f7, #ec4899);
 }
 
 body {
     font-family: var(--font-main);
     background: #0e0c2c;
     color: var(--text-primary);
+    margin: 0;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
-
 
 /* ==========================
    📐 Layout
@@ -39,6 +44,7 @@ body {
     background: #06013b;
     overflow-x: hidden;
     position: relative;
+    background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
 }
 
 .main-content-st {
@@ -46,6 +52,7 @@ body {
     padding: 2rem;
     z-index: 1;
     position: relative;
+    transition: margin-left var(--transition);
 }
 
 .dashboard-header {
@@ -54,19 +61,37 @@ body {
     background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #ffffff 50%, #e0e0e0 75%, #ffffff 100%);
     background-size: 300% 300%;
     -webkit-background-clip: text;
+    background-clip: text; /* Added for compatibility (fixes line 89 warning) */
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: textShine 3s ease-in-out infinite;
     text-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
     margin: 0;
     position: relative;
+    letter-spacing: 0.02em;
+}
+
+@keyframes textShine {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .dash-title-st {
     font-size: 2.5rem;
     font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text; /* Added for compatibility (fixes line 234 warning) */
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
-
 
 /* ==========================
    ⏳ Timeframe Buttons
@@ -79,6 +104,11 @@ body {
     border-radius: var(--radius);
     overflow: hidden;
     backdrop-filter: blur(16px);
+    transition: box-shadow var(--transition);
+}
+
+.timeframe-selector:hover {
+    box-shadow: var(--shadow-sm);
 }
 
 .timeframe-btn {
@@ -90,6 +120,8 @@ body {
     cursor: pointer;
     font-weight: 600;
     transition: var(--transition);
+    position: relative;
+    outline: none;
 }
 
 .timeframe-btn:hover,
@@ -99,6 +131,29 @@ body {
     box-shadow: var(--shadow-md);
 }
 
+.timeframe-btn:focus {
+    outline: 2px solid var(--focus-outline);
+    outline-offset: 2px;
+}
+
+.timeframe-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient-accent);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform var(--transition);
+}
+
+.timeframe-btn:hover::after,
+.timeframe-btn.active::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
 
 /* ==========================
    📊 Stats Cards
@@ -121,13 +176,32 @@ body {
     gap: 1.25rem;
     box-shadow: var(--shadow-sm);
     backdrop-filter: blur(16px);
-    transition: var(--transition);
+    transition: var(--transition), transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .stat-card:hover {
     background: var(--bg-card-hover);
-    transform: translateY(-4px);
+    transform: translateY(-4px) scale(1.02);
     box-shadow: var(--shadow-lg);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-accent);
+    opacity: 0;
+    transition: opacity var(--transition);
+    z-index: -1;
+}
+
+.stat-card:hover::before {
+    opacity: 0.1;
 }
 
 .stat-icon {
@@ -140,6 +214,11 @@ body {
     justify-content: center;
     font-size: 1.75rem;
     color: #fff;
+    transition: transform var(--transition);
+}
+
+.stat-card:hover .stat-icon {
+    transform: rotate(10deg) scale(1.1);
 }
 
 .stat-info h3 {
@@ -153,8 +232,11 @@ body {
     font-size: 2.2rem;
     font-weight: 800;
     margin: 0.25rem 0 0;
+    background: var(--gradient-success);
+    -webkit-background-clip: text;
+    background-clip: text; /* Added for compatibility (fixes line 317 warning) */
+    -webkit-text-fill-color: transparent;
 }
-
 
 /* ==========================
    🧭 Navigation Cards / Buttons
@@ -175,16 +257,38 @@ body {
     border: 1px solid var(--glass-border);
     border-radius: var(--radius);
     backdrop-filter: blur(16px);
-    transition: var(--transition);
+    transition: var(--transition), transform 0.4s ease;
     text-decoration: none;
     color: inherit;
     box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
 }
 
 .dashboard-btn-st:hover {
     background: var(--bg-card-hover);
-    transform: translateY(-4px);
+    transform: translateY(-4px) scale(1.02);
     box-shadow: var(--shadow-md);
+}
+
+.dashboard-btn-st:focus {
+    outline: 2px solid var(--focus-outline);
+    outline-offset: 2px;
+}
+
+.dashboard-btn-st::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.dashboard-btn-st:hover::before {
+    left: 100%;
 }
 
 .dash-btn-icon-st {
@@ -196,11 +300,12 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 1.6rem;
-    transition: var(--transition);
+    transition: var(--transition), transform 0.4s ease;
 }
 
 .dashboard-btn-st:hover .dash-btn-icon-st {
-    transform: rotate(12deg) scale(1.1);
+    transform: rotate(12deg) scale(1.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-content {
@@ -211,6 +316,10 @@ body {
 .dash-btn-text-st {
     font-size: 1.2rem;
     font-weight: 700;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text; /* Added for compatibility (fixes line 375 warning) */
+    -webkit-text-fill-color: transparent;
 }
 
 .btn-description {
@@ -221,14 +330,13 @@ body {
 .btn-arrow {
     font-size: 1.5rem;
     color: var(--text-muted);
-    transition: var(--transition);
+    transition: var(--transition), transform 0.4s ease;
 }
 
 .dashboard-btn-st:hover .btn-arrow {
-    transform: translateX(6px);
+    transform: translateX(8px) scale(1.1);
     color: var(--text-primary);
 }
-
 
 /* ==========================
    📈 Charts
@@ -248,12 +356,14 @@ body {
     padding: 2rem;
     backdrop-filter: blur(16px);
     box-shadow: var(--shadow-sm);
-    transition: var(--transition);
+    transition: var(--transition), transform 0.4s ease;
+    position: relative;
 }
 
 .chart-card:hover {
     box-shadow: var(--shadow-md);
     background: var(--bg-card-hover);
+    transform: translateY(-2px);
 }
 
 .chart-header {
@@ -265,6 +375,10 @@ body {
 .chart-header h3 {
     font-size: 1.4rem;
     margin: 0;
+    background: var(--gradient-info);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .chart-description {
@@ -280,8 +394,9 @@ body {
     height: 320px;
     border-radius: var(--radius);
     overflow: hidden;
+    position: relative;
+    background: rgba(0, 0, 0, 0.05);
 }
-
 
 /* ==========================
    🌀 Spinner
@@ -293,6 +408,9 @@ body {
     align-items: center;
     justify-content: center;
     padding: 5rem;
+    background: var(--bg-glass);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
 }
 
 .spinner {
@@ -340,15 +458,15 @@ body {
 }
 
 @keyframes pulse {
-    0%,
-    100% {
+    0%, 100% {
         transform: scale(1) translate(-50%, -50%);
+        opacity: 0.8;
     }
     50% {
-        transform: scale(1.15) translate(-50%, -50%);
+        transform: scale(1.25) translate(-50%, -50%);
+        opacity: 1;
     }
 }
-
 
 /* ==========================
    📱 Responsive
@@ -381,5 +499,51 @@ body {
     }
     .btn-arrow {
         align-self: flex-end;
+    }
+}
+
+/* ==========================
+   ♿ Accessibility Enhancements
+   ========================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .stat-card,
+    .dashboard-btn-st,
+    .chart-card,
+    .timeframe-btn,
+    .dash-btn-icon-st,
+    .btn-arrow {
+        transition: none;
+    }
+    @keyframes textShine {
+        0%, 100% {
+            background-position: 0% 50%;
+        }
+    }
+    @keyframes spin {
+        to {
+            transform: none;
+        }
+    }
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1) translate(-50%, -50%);
+        }
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --text-primary: #ffffff;
+        --text-muted: #e0e0e0;
+        --bg-glass: rgba(255, 255, 255, 0.2);
+        --bg-card: rgba(255, 255, 255, 0.15);
+        --glass-border: rgba(255, 255, 255, 0.5);
+    }
+    .timeframe-btn,
+    .stat-info h3,
+    .btn-description {
+        color: var(--text-primary);
     }
 }
