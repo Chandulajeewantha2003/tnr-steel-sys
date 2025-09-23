@@ -377,7 +377,7 @@ function SalesDashboard() {
 
       <div className="salesdash-main-content">
         <div className="salesdash-header">
-          <h2 className="salesdash-title">Sales Management Dashboard</h2>
+          <h2 className="salesdash-title">Sales Christel Management Dashboard</h2>
 
           <div className="salesdash-timeframe-selector">
             <button
