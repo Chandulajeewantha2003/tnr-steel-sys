@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import axios from "axios";
 import Buyer from "../Buyer/Buyer";
-import "../Buyer/Buyer.css";
+import "../Buyers/Buyers.css";
 import { Link } from "react-router-dom";
 import jsPDF from "jspdf";
 import HeadBar from "../HeadBar/HeadBar";
@@ -128,7 +128,7 @@ function Buyers() {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
       <Nav />
       <HeadBar />
       <div className="viewDB-buyers-container">
@@ -213,7 +213,7 @@ function Buyers() {
           >
             Previous
           </button>
-          <span className="viewDB-pagedetails">
+          <span className="viewDB-pagedetails" style={{ color: '#f4f3f7ff'}}>
             Page {currentPage} of {totalPages}
           </span>
           <button

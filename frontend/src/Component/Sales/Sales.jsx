@@ -184,7 +184,7 @@ function Sales() {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
       <Nav />
       <HeadBar />
       <div className="dbIssue-sales-container">
@@ -206,49 +206,52 @@ function Sales() {
           <div className="dbIssue-filter-container">
             <div className="dbIssue-filter-group">
               <label>Date Range:</label>
-              <div className="dbIssue-date-inputs">
-                <input
-                  type="date"
-                  value={dateRange.start}
-                  onChange={(e) =>
-                    setDateRange({ ...dateRange, start: e.target.value })
-                  }
-                  className="dbIssue-date-input"
-                />
-                <span>to</span>
-                <input
-                  type="date"
-                  value={dateRange.end}
-                  onChange={(e) =>
-                    setDateRange({ ...dateRange, end: e.target.value })
-                  }
-                  className="dbIssue-date-input"
-                />
+              <div className="dbIssue-input-wrapper">
+                <div className="dbIssue-date-inputs">
+                  <input
+                    type="date"
+                    value={dateRange.start}
+                    onChange={(e) =>
+                      setDateRange({ ...dateRange, start: e.target.value })
+                    }
+                    className="dbIssue-date-input"
+                  />
+                  <span>to</span>
+                  <input
+                    type="date"
+                    value={dateRange.end}
+                    onChange={(e) =>
+                      setDateRange({ ...dateRange, end: e.target.value })
+                    }
+                    className="dbIssue-date-input"
+                  />
+                </div>
               </div>
             </div>
 
             <div className="dbIssue-filter-group">
-              <label>Price Range:</label>
-              <div className="dbIssue-price-inputs">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  value={priceRange.min}
-                  onChange={(e) =>
-                    setPriceRange({ ...priceRange, min: e.target.value })
-                  }
-                  className="dbIssue-price-input"
-                />
-                <span>to</span>
-                <input
-                  type="number"
-                  placeholder="Max"
-                  value={priceRange.max}
-                  onChange={(e) =>
-                    setPriceRange({ ...priceRange, max: e.target.value })
-                  }
-                  className="dbIssue-price-input"
-                />
+              <div className="dbIssue-input-wrapper">
+                <div className="dbIssue-price-inputs">
+                  <input
+                    type="number"
+                    placeholder="Min"
+                    value={priceRange.min}
+                    onChange={(e) =>
+                      setPriceRange({ ...priceRange, min: e.target.value })
+                    }
+                    className="dbIssue-price-input"
+                  />
+                  <span>to</span>
+                  <input
+                    type="number"
+                    placeholder="Max"
+                    value={priceRange.max}
+                    onChange={(e) =>
+                      setPriceRange({ ...priceRange, max: e.target.value })
+                    }
+                    className="dbIssue-price-input"
+                  />
+                </div>
               </div>
             </div>
 
@@ -476,7 +479,7 @@ function Sales() {
                         <td>{item.quantity}</td>
                         <td>${item.price.toFixed(2)}</td>
                         <td>${item.total.toFixed(2)}</td>
-                      </tr>
+                    </tr>
                     ))}
                   </tbody>
                   <tfoot>

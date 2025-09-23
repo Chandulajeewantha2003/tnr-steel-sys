@@ -1,9 +1,14 @@
-/* Main container */
+/* Enhanced Sales.css aligned with DirectBuyerReturns.css */
+
 .dbIssue-sales-container {
   max-width: 1200px;
   margin: 20px auto;
   padding: 0 20px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  padding: 1.5rem;
+  flex: 1;
 }
 
 /* Header section */
@@ -11,22 +16,37 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e7ff;
 }
 
 .dbIssue-sales-title {
-  color: #17304c;
-  font-size: 24px;
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  color: #3a4374;
   margin: 0;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.dbIssue-sales-title:hover {
+  color: #6366f1;
 }
 
 /* Advanced filters section */
 .dbIssue-advanced-filters {
-  background-color: #f8f9fa;
-  border-radius: 8px;
+  background-color: #fff;
+  border-radius: 12px;
   padding: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.dbIssue-advanced-filters:hover {
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
 }
 
 .dbIssue-search-container {
@@ -35,97 +55,114 @@
 
 .dbIssue-search-input {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: border-color 0.3s;
-  background-color: white;
+  padding: 10px 40px 10px 35px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .dbIssue-search-input:focus {
-  border-color: #3498db;
   outline: none;
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.dbIssue-search-input::placeholder {
+  color: #a0aec0;
 }
 
 .dbIssue-filter-container {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .dbIssue-filter-group {
   flex: 1;
   min-width: 200px;
+  margin-bottom: 10px; /* Added to separate groups */
 }
 
 .dbIssue-filter-group label {
   display: block;
-  margin-bottom: 6px;
-  font-size: 13px;
+  margin-bottom: 10px; /* Increased spacing below label */
+  font-size: 0.9rem;
   font-weight: 500;
   color: #555;
+}
+
+.dbIssue-input-wrapper {
+  width: 100%; /* Ensure wrapper takes full width */
+  padding-right: 20px; /* Extra padding to accommodate calendar icon */
 }
 
 .dbIssue-date-inputs,
 .dbIssue-price-inputs {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 15px; /* Increased gap for better spacing */
+  width: 100%;
 }
 
 .dbIssue-date-input,
 .dbIssue-price-input {
   flex: 1;
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  background-color: white;
+  padding: 10px 15px; /* Increased padding to give more room */
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  box-sizing: border-box; /* Ensure padding doesn’t affect width */
+  max-width: 45%; /* Limit width to prevent overflow */
 }
 
 .dbIssue-date-input:focus,
 .dbIssue-price-input:focus {
-  border-color: #3498db;
   outline: none;
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
 .dbIssue-filter-select {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: white;
-  font-size: 14px;
+  padding: 10px 40px 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 0.95rem;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .dbIssue-filter-select:focus {
-  border-color: #3498db;
   outline: none;
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
 .dbIssue-reset-btn {
-  padding: 10px 16px;
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #333;
+  padding: 10px 20px;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #64748b;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .dbIssue-reset-btn:hover {
-  background-color: #e5e5e5;
+  background-color: #e2e8f0;
+  color: #475569;
 }
 
 /* Results summary section */
@@ -133,9 +170,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-  font-size: 14px;
-  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #718096;
+  font-weight: 500;
 }
 
 .dbIssue-items-per-page {
@@ -145,19 +183,33 @@
 }
 
 .dbIssue-items-per-page select {
-  padding: 4px 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: 5px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.dbIssue-items-per-page select:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
 }
 
 /* Table styles */
 .dbIssue-table-container {
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dbIssue-table-container:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
 
 .dbIssue-sales-table {
@@ -167,39 +219,61 @@
 }
 
 .dbIssue-sales-table th {
-  background-color: #f8f9fa;
-  color: #17304c;
+  background-color: #f0f1fe;
+  color: #3a4374;
   text-align: left;
-  padding: 14px 16px;
+  padding: 14px 20px;
   font-weight: 600;
-  border-bottom: 2px solid #e9ecef;
-  position: sticky;
-  top: 0;
-}
-
-.dbIssue-sortable-header {
+  border-bottom: 2px solid #e0e7ff;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  user-select: none;
-  position: relative;
   transition: background-color 0.2s;
 }
 
 .dbIssue-sortable-header:hover {
-  background-color: #edf2f7;
+  background-color: #e6efff;
 }
 
 .dbIssue-sales-table td {
-  padding: 12px 16px;
-  border-bottom: 1px solid #e9ecef;
-  color: #17304c;
+  padding: 14px 20px;
+  border-bottom: 1px solid #f0f4f8;
+  color: #2d3748;
+  vertical-align: middle;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+/* Column widths */
+.dbIssue-sales-table th:nth-child(1),
+.dbIssue-sales-table td:nth-child(1) {
+  width: 25%; /* Invoice ID */
+}
+.dbIssue-sales-table th:nth-child(2),
+.dbIssue-sales-table td:nth-child(2) {
+  width: 20%; /* BuyerID */
+}
+.dbIssue-sales-table th:nth-child(3),
+.dbIssue-sales-table td:nth-child(3) {
+  width: 25%; /* Date */
+}
+.dbIssue-sales-table th:nth-child(4),
+.dbIssue-sales-table td:nth-child(4) {
+  width: 20%; /* Total Amount */
+}
+.dbIssue-sales-table th:nth-child(5),
+.dbIssue-sales-table td:nth-child(5) {
+  width: 10%; /* Action */
 }
 
 .dbIssue-amount-cell {
   font-weight: 500;
+  color: #3182ce;
 }
 
 .dbIssue-hovered-row {
-  background-color: #f9fbfd;
+  background-color: #f8fafc;
 }
 
 .dbIssue-hovered-row td {
@@ -207,25 +281,27 @@
 }
 
 .dbIssue-view-btn {
-  padding: 6px 12px;
-  background-color: #17304c;
-  color: white;
+  background-color: #f0f5ff;
+  color: #3182ce;
   border: none;
+  padding: 6px 12px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 13px;
-  transition: background-color 0.2s;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
 }
 
 .dbIssue-view-btn:hover {
-  background-color: #234569;
+  background-color: #3182ce;
+  color: white;
+  transform: scale(1.05);
 }
 
 .dbIssue-no-results {
   padding: 40px 20px;
   text-align: center;
-  color: #666;
-  font-size: 16px;
+  color: #718096;
+  font-size: 1rem;
 }
 
 /* Pagination styles */
@@ -234,21 +310,23 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 0;
 }
 
 .dbIssue-pagination-btn {
   padding: 8px 16px;
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  background-color: #f0f1fe;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
+  font-size: 0.95rem;
+  color: #3a4374;
+  transition: all 0.2s ease;
 }
 
 .dbIssue-pagination-btn:hover:not([disabled]) {
-  background-color: #e9ecef;
+  background-color: #e6efff;
+  transform: translateY(-1px);
 }
 
 .dbIssue-pagination-btn:disabled {
@@ -269,21 +347,21 @@
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid #e2e8f0;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
 }
 
 .dbIssue-page-number:hover {
-  background-color: #f0f0f0;
+  background-color: #f0f1fe;
 }
 
 .dbIssue-page-number.dbIssue-active {
-  background-color: #17304c;
+  background-color: #6366f1;
   color: white;
-  border-color: #17304c;
+  border-color: #6366f1;
 }
 
 .dbIssue-ellipsis {
@@ -292,7 +370,7 @@
 
 /* Report controls */
 .dbIssue-report-controls {
-  margin: 20px 0;
+  margin: 1.5rem 0;
 }
 
 .dbIssue-report-btn-container {
@@ -302,26 +380,30 @@
 }
 
 .dbIssue-report-btn {
-  padding: 10px 18px;
-  background-color: #17304c;
+  background-color: #6366f1;
   color: white;
   border: none;
-  border-radius: 4px;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.25);
+  transition: all 0.3s ease;
 }
 
 .dbIssue-report-btn:hover {
-  background-color: #234569;
+  background-color: #4f46e5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.35);
 }
 
 .dbIssue-report-btn.dbIssue-excel-btn {
-  background-color: #217346;
+  background-color: #38a169;
 }
 
 .dbIssue-report-btn.dbIssue-excel-btn:hover {
-  background-color: #1e6e41;
+  background-color: #2f855a;
 }
 
 /* Modal styles */
@@ -331,26 +413,27 @@
   left: 0;
   right: 0;
   bottom: 0;
-  color: #17304c;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 2000;
+  backdrop-filter: blur(3px);
 }
 
 .dbIssue-modal-content {
-  background-color: white;
-  border-radius: 8px;
-  width: 100%;
+  background-color: #fff;
+  border-radius: 12px;
+  width: 90%;
   max-width: 800px;
-  max-height: 90vh;
+  max-height: 85vh;
   overflow-y: auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  animation: modal-appear 0.3s ease-out;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  animation: fadeIn 0.3s ease;
+  padding: 20px;
 }
 
-@keyframes modal-appear {
+@keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -366,12 +449,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .dbIssue-modal-header h3 {
   margin: 0;
-  color: #17304c;
+  color: #3a4374;
+  font-size: 1.4rem;
 }
 
 .dbIssue-close-modal {
@@ -379,16 +463,16 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #666;
+  color: #718096;
   transition: color 0.2s;
 }
 
 .dbIssue-close-modal:hover {
-  color: #333;
+  color: #475569;
 }
 
 .dbIssue-invoice-details {
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .dbIssue-invoice-header {
@@ -409,6 +493,12 @@
 .dbIssue-buyer-info p {
   margin: 6px 0;
   line-height: 1.6;
+  color: #4a5568;
+}
+
+.dbIssue-invoice-info strong,
+.dbIssue-buyer-info strong {
+  color: #2d3748;
 }
 
 .dbIssue-items-table {
@@ -418,17 +508,17 @@
 }
 
 .dbIssue-items-table th {
-  background-color: #f8f9fa;
-  color: #17304c;
+  background-color: #f0f1fe;
+  color: #3a4374;
   text-align: left;
   padding: 12px;
   font-weight: 600;
-  border-bottom: 2px solid #e9ecef;
+  border-bottom: 2px solid #e0e7ff;
 }
 
 .dbIssue-items-table td {
   padding: 12px;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid #f0f4f8;
 }
 
 .dbIssue-items-table tfoot {
@@ -437,11 +527,12 @@
 
 .dbIssue-total-label {
   text-align: right;
+  color: #2d3748;
 }
 
 .dbIssue-total-amount {
   font-weight: 700;
-  color: #17304c;
+  color: #3182ce;
 }
 
 .dbIssue-modal-actions {
@@ -454,19 +545,20 @@
 .dbIssue-modal-btn {
   padding: 10px 18px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
 }
 
 .dbIssue-modal-btn.dbIssue-cancel-btn {
-  background-color: #f1f1f1;
-  color: #333;
+  background-color: #f1f5f9;
+  color: #64748b;
 }
 
 .dbIssue-modal-btn.dbIssue-cancel-btn:hover {
-  background-color: #e5e5e5;
+  background-color: #e2e8f0;
+  color: #475569;
 }
 
 /* Responsive adjustments */

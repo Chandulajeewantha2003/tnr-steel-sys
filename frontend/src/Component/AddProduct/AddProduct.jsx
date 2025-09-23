@@ -140,7 +140,7 @@ function AddProducts() {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
       <Nav />
       <HeadBar />
       <div className="viewDB-buyers-container">
@@ -151,7 +151,7 @@ function AddProducts() {
           </button>
         </div>
 
-        <div className="viewDB-table-container">
+        <div className="viewDB-table-container" style={{  minWidth: '160vh' }}>
           <table className="viewDB-buyers-table">
             <thead>
               <tr>

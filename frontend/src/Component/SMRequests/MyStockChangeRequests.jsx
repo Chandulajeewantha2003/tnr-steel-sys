@@ -108,7 +108,7 @@ function MyStockChangeRequests() {
   };
 
   return (
-    <>
+    <div style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
       <Nav />
       <HeadBar />
       <div className="dbIssue-sales-container">
@@ -305,7 +305,7 @@ function MyStockChangeRequests() {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
 

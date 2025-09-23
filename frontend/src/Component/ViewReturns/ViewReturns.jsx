@@ -159,12 +159,12 @@ function ViewReturns() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
       <Nav />
       <HeadBar />
       <div className="dbreturns-returns-container">
         <div className="dbreturns-header">
-          <h2 className="dbreturns-returns-title">Returns Records</h2>
+          <h2 className="dbreturns-returns-title" style={{ color: '#fff',textShadow:'0 0 10px rgba(142, 84, 233, 0.5), 0 0 20px rgba(142, 84, 233, 0.3)',animation:'animation: glow 2s ease-in-out infinite;'}}>Returns Records</h2>
         </div>
 
         <div className="dbreturns-advanced-filters">
@@ -262,7 +262,10 @@ function ViewReturns() {
           </div>
         </div>
 
-        <div className="dbreturns-table-container">
+        <div
+          className="dbreturns-table-container"
+          style={{ width: "100%", backgroundColor: "white", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)", marginBottom: "20px"}}
+        >
           <table className="dbreturns-returns-table">
             <thead>
               <tr>
