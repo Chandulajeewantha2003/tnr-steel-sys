@@ -703,6 +703,7 @@ function Home() {
               </div>
               <div className="btn-content">
                 <label className="dash-btn-text-st">Stocks</label>
+                <br />
                 <span className="btn-description">Manage your Stocks</span>
               </div>
               <div className="btn-arrow">
@@ -716,7 +717,7 @@ function Home() {
                 <i className="bi bi-people-fill"></i>
               </div>
               <div className="btn-content">
-                <label className="dash-btn-text-st">Buyers</label>
+                <label className="dash-btn-text-st">Buyers</label><br />
                 <span className="btn-description">View Buyer information</span>
               </div>
               <span className="count-badge">{buyerCount}</span>
@@ -731,7 +732,7 @@ function Home() {
                 <i className="bi bi-cash-stack"></i>
               </div>
               <div className="btn-content">
-                <label className="dash-btn-text-st">Sales</label>
+                <label className="dash-btn-text-st">Sales</label><br />
                 <span className="btn-description">View daily transactions</span>
               </div>
               <div className="btn-arrow">
