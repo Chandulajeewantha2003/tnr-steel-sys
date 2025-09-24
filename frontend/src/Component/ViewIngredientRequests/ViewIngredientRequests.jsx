@@ -130,7 +130,7 @@ function ViewIngredientRequests() {
   };
 
   return (
-    <div className="view-ingredient-requests-container">
+    <div className="view-ingredient-requests-container" style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
       <HeadBar />
       <div className="view-ingredient-requests-layout">
         <div className="view-ingredient-requests-sidebar">
@@ -189,21 +189,21 @@ function ViewIngredientRequests() {
                 <p>Loading requests...</p>
               </div>
             ) : (
-              <div className="view-ingredient-requests-table-container">
+              <div className="view-ingredient-requests-table-container" style={{ width: "100%", backgroundColor: "white", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)", marginBottom: "20px" }}>
                 {error && <p className="view-ingredient-requests-error-message">{error}</p>}
                 {success && <p className="view-ingredient-requests-success-message">{success}</p>}
                 {filteredRequests.length === 0 ? (
                   <p className="view-ingredient-requests-no-data">No ingredient requests found.</p>
                 ) : (
-                  <table className="view-ingredient-requests-table">
+                  <table className="view-ingredient-requests-table" style={{ width: "100%", minWidth: "100%" }}>
                     <thead>
                       <tr>
-                        <th>Request ID</th>
-                        <th>Material Name</th>
-                        <th>Requested Quantity</th>
-                        <th>Status</th>
-                        <th>Requested At</th>
-                        <th>Actions</th>
+                        <th style={{ backgroundColor: "#3498db", width: "15%" }}>Request ID</th>
+                        <th style={{ backgroundColor: "#3498db", width: "20%" }}>Material Name</th>
+                        <th style={{ backgroundColor: "#3498db", width: "15%" }}>Requested Quantity</th>
+                        <th style={{ backgroundColor: "#3498db", width: "15%" }}>Status</th>
+                        <th style={{ backgroundColor: "#3498db", width: "20%" }}>Requested At</th>
+                        <th style={{ backgroundColor: "#3498db", width: "15%" }}>Actions</th>
                       </tr>
                     </thead>
                     <tbody>

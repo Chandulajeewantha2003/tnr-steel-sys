@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #DADADA;
+  background: #06013b; /* Match ViewReturns background */
 }
 
 .view-ingredient-requests-layout {
@@ -14,10 +14,11 @@
 }
 
 .view-ingredient-requests-sidebar {
-  width: 100px;
-  min-height: calc(100vh - 60px);
-  background: #DADADA;
+  width: 100px; /* Fixed width like Nav */
+  min-height: calc(100vh - 60px); /* Full height minus HeadBar */
+  background: #06013b; /* Match container background for consistency */
   color: white;
+  padding: 20px 0; /* Add padding for PMNav content */
 }
 
 .view-ingredient-requests-main-content {
@@ -27,13 +28,13 @@
 
 .view-ingredient-requests-content-wrapper {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1200px; /* Match ViewReturns max-width */
   margin: 0 auto;
 }
 
 .view-ingredient-requests-title {
   font-size: 1.8rem;
-  color: #2c3e50;
+  color: #2c3e50; /* Match ViewReturns title color */
   text-align: center;
   margin-bottom: 20px;
   font-family: 'Noto Sans', sans-serif;
@@ -91,7 +92,7 @@
   justify-content: center;
   height: 40px;
   padding: 0 15px;
-  background-color: #3498db;
+  background-color: #17304c; /* Match ViewReturns button theme */
   color: white;
   border: none;
   border-radius: 8px;
@@ -106,7 +107,7 @@
 }
 
 .sort-button:hover {
-  background-color: #2980b9;
+  background-color: #234569; /* Match ViewReturns hover theme */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -135,13 +136,13 @@
 }
 
 .view-ingredient-requests-table th {
-  background: #3498db;
+  background: #17304c; /* Match ViewReturns header color */
   color: white;
   font-weight: 600;
 }
 
 .view-ingredient-requests-table tr:hover {
-  background: #f5f5f5;
+  background: #f9fbfd; /* Match ViewReturns hover color */
 }
 
 .status-pending {
@@ -165,35 +166,35 @@
 }
 
 .download-btn {
-  padding: 8px 16px;
+  padding: 6px 12px; /* Match ViewReturns button padding */
   border: none;
   border-radius: 4px;
   font-size: 0.9rem;
   font-family: 'Roboto', sans-serif;
   cursor: pointer;
-  background: #2ecc71;
+  background: #17304c; /* Match ViewReturns button color */
   color: white;
-  transition: background 0.3s ease;
+  transition: background 0.2s; /* Match ViewReturns transition */
 }
 
 .download-btn:hover {
-  background: #27ae60;
+  background: #234569; /* Match ViewReturns hover color */
 }
 
 .delete-btn {
-  padding: 8px 16px;
+  padding: 6px 12px; /* Match ViewReturns button padding */
   border: none;
   border-radius: 4px;
   font-size: 0.9rem;
   font-family: 'Roboto', sans-serif;
   cursor: pointer;
-  background: #e74c3c;
+  background: #e74c3c; /* Keep original delete color */
   color: white;
-  transition: background 0.3s ease;
+  transition: background 0.2s; /* Match ViewReturns transition */
 }
 
 .delete-btn:hover {
-  background: #c0392b;
+  background: #c0392b; /* Keep original hover color */
 }
 
 /* Delete Modal Styles */
@@ -233,36 +234,37 @@
 .delete-modal-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 12px; /* Match ViewReturns gap */
   margin-top: 20px;
 }
 
 .delete-modal-cancel {
-  padding: 8px 16px;
-  border: 1px solid #bdc3c7;
-  border-radius: 4px;
-  background: white;
-  color: #34495e;
+  padding: 10px 18px; /* Match ViewReturns modal button padding */
+  border: 1px solid #e2e8f0; /* Match ViewReturns border */
+  border-radius: 8px; /* Match ViewReturns radius */
+  background: #f1f5f9; /* Match ViewReturns cancel background */
+  color: #64748b; /* Match ViewReturns cancel color */
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .delete-modal-cancel:hover {
-  background: #f5f5f5;
+  background: #e2e8f0; /* Match ViewReturns hover background */
+  color: #475569; /* Match ViewReturns hover color */
 }
 
 .delete-modal-confirm {
-  padding: 8px 16px;
+  padding: 10px 18px; /* Match ViewReturns modal button padding */
   border: none;
-  border-radius: 4px;
-  background: #e74c3c;
+  border-radius: 8px; /* Match ViewReturns radius */
+  background: #e74c3c; /* Keep original color */
   color: white;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .delete-modal-confirm:hover {
-  background: #c0392b;
+  background: #c0392b; /* Keep original hover color */
 }
 
 .view-ingredient-requests-error-message {
@@ -300,7 +302,7 @@
 .view-ingredient-requests-spinner {
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-  border-top: 4px solid #3498db;
+  border-top: 4px solid #17304c; /* Match header color */
   width: 40px;
   height: 40px;
   animation: spin 1s linear infinite;

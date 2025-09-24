@@ -15,47 +15,59 @@
 }
 
 .pm-sidenav {
-  width: 80px;
-  background-color: #ffffff;
-  height: 82vh;
-  margin-top: 2%;
-  margin-left: 2%;
-  padding: 20px;
-  border-radius: 10px;
+  width: 90px;
+  background: rgba(79, 70, 229, 0.3); /* Adjusted for transparency and blur base, blended with #06013b */
+  height: 100vh;
+  margin-top: 0;
+  margin-left: 0;
+  padding: 100px 0 40px 0;
+  border-radius: 0;
   display: flex;
   flex-direction: column;
-  color: #5d4037;
+  color: #f4f4f5;
   position: fixed;
-  top: 60px;
+  top: 0;
   left: 0;
   font-family: "Noto Sans", sans-serif;
-  transition: transform 0.3s ease-in-out;
+  transition: width 0.3s ease;
   transform: translateX(0);
-  overflow-y: auto;
+  overflow: hidden;
+  backdrop-filter: blur(10px); /* Add blur effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
 }
 
 .pm-sidenav.pm-sidenav-open {
-  transform: translateX(-260px);
+  transform: translateX(0);
+  width: 240px;
 }
 
 .pm-center-icon-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #37474f;
+  color: #ffffff;
   width: 60px;
   height: 60px;
-  background-color: #ffffff;
+  background: none;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
   cursor: pointer;
   margin: 0 auto;
+  padding: 12px 20px;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .pm-nav-label {
-  color: #37474f;
-  font-weight: bold;
-  font-size: small;
+  color: #f4f4f5;
+  font-weight: 500;
+  font-size: 15px;
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+.pm-sidenav.pm-sidenav-open .pm-nav-label {
+  opacity: 1;
 }
 
 .pm-profile-icon-btn {
@@ -73,17 +85,22 @@
 
 .pm-center-icon-btn svg {
   display: block;
+  width: 32px; /* Increased icon size */
+  height: 32px; /* Increased icon size */
 }
 
 .pm-nav-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .pm-nav-item {
-  margin: 5px 0;
-  text-align: center;
+  margin: 8px 0;
+  text-align: left;
 }
 
 .pm-nav-item a {
@@ -91,11 +108,10 @@
 }
 
 .pm-nav-divider {
-  border: 0;
+  border: none;
   height: 1px;
-  background-color: #cccccc;
-  opacity: 0.5;
-  margin: 5px 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 8px 0;
 }
 
 .pm-nav-link {
@@ -107,10 +123,10 @@
 }
 
 .pm-center-icon-btn.pm-btn-active {
-  background-color: rgba(154, 195, 221, 0.2);
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(154, 195, 221, 0.7);
-  transition: all 0.3s ease-in-out;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  transition: all 0.3s ease;
 }
 
 @keyframes pm-shadow-pulse {
@@ -126,19 +142,21 @@
 }
 
 .pm-center-icon-btn:hover {
-  background-color: rgba(154, 195, 221, 0.2);
-  border-radius: 50%;
-  box-shadow: 0 0 15px #9ac3dd;
-  transition: all 0.3s ease-in-out;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: none;
+  transform: translateX(4px);
+  transition: all 0.3s ease;
 }
 
 .pm-center-icon-btn.pm-btn-active {
-  animation: pm-shadow-pulse 1.5s infinite;
+  animation: none;
 }
 
 @media (max-width: 768px) {
   .pm-sidenav {
-    transform: translateX(-220px);
+    transform: translateX(0);
+    width: 240px;
   }
 
   .pm-sidenav.pm-sidenav-open {
@@ -146,13 +164,13 @@
   }
 
   .pm-sidenav {
-    width: 200px;
+    width: 240px;
   }
 }
 
 @media (max-width: 480px) {
   .pm-sidenav {
-    width: 180px;
+    width: 240px;
   }
 
   .pm-nav-item a {
