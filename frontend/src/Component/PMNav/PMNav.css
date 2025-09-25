@@ -1,30 +1,40 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
 
+:root {
+  --pm-primary: #4f46e5;
+  --pm-secondary: #9ac3dd;
+  --pm-bg: #ffffff;
+  --pm-text: #37474f;
+  --pm-hover-bg: rgba(154, 195, 221, 0.2);
+  --pm-active-shadow: 0 0 15px rgba(154, 195, 221, 0.7);
+  --pm-divider: #cccccc;
+}
+
 .pm-username-display {
   position: fixed;
   top: 50px;
   right: 20px;
   background-color: #efefef;
-  padding: 10px;
-  border-radius: 5px;
-  color: #37474f;
+  padding: 10px 16px;
+  border-radius: 6px;
+  color: var(--pm-text);
   font-family: "Noto Sans", sans-serif;
   font-size: 14px;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .pm-sidenav {
-  width: 80px;
-  background-color: #ffffff;
+  width: 90px;
+  background-color: var(--pm-bg);
   height: 82vh;
   margin-top: 2%;
   margin-left: 2%;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 20px 10px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
-  color: #5d4037;
+  color: var(--pm-text);
   position: fixed;
   top: 60px;
   left: 0;
@@ -32,6 +42,7 @@
   transition: transform 0.3s ease-in-out;
   transform: translateX(0);
   overflow-y: auto;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
 }
 
 .pm-sidenav.pm-sidenav-open {
@@ -42,37 +53,47 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #37474f;
+  color: var(--pm-text);
   width: 60px;
   height: 60px;
-  background-color: #ffffff;
+  background-color: var(--pm-bg);
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
   cursor: pointer;
   margin: 0 auto;
-}
-
-.pm-nav-label {
-  color: #37474f;
-  font-weight: bold;
-  font-size: small;
-}
-
-.pm-profile-icon-btn {
-  color: #37474f;
-  background-color: #efefef;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  position: fixed;
-  top: 15px;
-  right: 20px;
-  padding: 5px;
-  z-index: 1000;
+  transition: all 0.3s ease-in-out;
 }
 
 .pm-center-icon-btn svg {
   display: block;
+}
+
+.pm-nav-label {
+  color: var(--pm-text);
+  font-weight: 600;
+  font-size: 13px;
+  margin-top: 6px;
+  display: block;
+  text-align: center;
+}
+
+.pm-profile-icon-btn {
+  color: var(--pm-text);
+  background-color: #efefef;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  padding: 8px;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.pm-profile-icon-btn:hover {
+  background-color: var(--pm-hover-bg);
 }
 
 .pm-nav-list {
@@ -82,7 +103,7 @@
 }
 
 .pm-nav-item {
-  margin: 5px 0;
+  margin: 14px 0;
   text-align: center;
 }
 
@@ -93,9 +114,9 @@
 .pm-nav-divider {
   border: 0;
   height: 1px;
-  background-color: #cccccc;
+  background-color: var(--pm-divider);
   opacity: 0.5;
-  margin: 5px 0;
+  margin: 12px 0;
 }
 
 .pm-nav-link {
@@ -107,10 +128,10 @@
 }
 
 .pm-center-icon-btn.pm-btn-active {
-  background-color: rgba(154, 195, 221, 0.2);
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(154, 195, 221, 0.7);
-  transition: all 0.3s ease-in-out;
+  background-color: var(--pm-hover-bg);
+  border-radius: 12px;
+  box-shadow: var(--pm-active-shadow);
+  animation: pm-shadow-pulse 1.5s infinite;
 }
 
 @keyframes pm-shadow-pulse {
@@ -126,14 +147,9 @@
 }
 
 .pm-center-icon-btn:hover {
-  background-color: rgba(154, 195, 221, 0.2);
-  border-radius: 50%;
-  box-shadow: 0 0 15px #9ac3dd;
-  transition: all 0.3s ease-in-out;
-}
-
-.pm-center-icon-btn.pm-btn-active {
-  animation: pm-shadow-pulse 1.5s infinite;
+  background-color: var(--pm-hover-bg);
+  border-radius: 12px;
+  box-shadow: var(--pm-active-shadow);
 }
 
 @media (max-width: 768px) {
@@ -156,6 +172,6 @@
   }
 
   .pm-nav-item a {
-    font-size: 14px;
+    font-size: 12px;
   }
 }
