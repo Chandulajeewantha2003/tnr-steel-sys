@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import HRNav from "../HRNav/HRNav";
+import GMNav from "../GMNav/GMNav";
 import HeadBar from "../HeadBar/HeadBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./CreateUser.css";
 
-function CreateUser() {
+function GMCreateUser() {
   const [formData, setFormData] = useState({
     employeeName: "",
     accessLevel: "",
@@ -79,14 +79,14 @@ function CreateUser() {
   };
 
   return (
-    <div className="create-user-container">
-      <HRNav />
+    <div className="gm-create-user-container">
+      <GMNav />
       <HeadBar />
-      <div className="user-content">
-        <h2 className="user-title">Create Employee Access</h2>
-        {error && <p className="error-text">{error}</p>}
-        <form onSubmit={handleSubmit} className="user-form">
-          <div className="form-group">
+      <div className="gm-user-content">
+        <h2 className="gm-user-title">Create Employee Access</h2>
+        {error && <p className="gm-error-text">{error}</p>}
+        <form onSubmit={handleSubmit} className="gm-user-form">
+          <div className="gm-form-group">
             <label>Employee Name</label>
             <input
               type="text"
@@ -94,18 +94,18 @@ function CreateUser() {
               value={formData.employeeName}
               onChange={handleChange}
               required
-              className="text-input"
+              className="gm-text-input"
             />
           </div>
 
-          <div className="form-group">
+          <div className="gm-form-group">
             <label>Access Level</label>
             <select
               name="accessLevel"
               value={formData.accessLevel}
               onChange={handleChange}
               required
-              className="select-input"
+              className="gm-select-input"
             >
               <option value="">Select Access Level</option>
               <option value="Executive">Executive</option>
@@ -116,7 +116,7 @@ function CreateUser() {
             </select>
           </div>
 
-          <div className="form-group">
+          <div className="gm-form-group">
             <label>Username</label>
             <input
               type="text"
@@ -124,11 +124,11 @@ function CreateUser() {
               value={formData.username}
               onChange={handleChange}
               required
-              className="text-input"
+              className="gm-text-input"
             />
           </div>
 
-          <div className="form-group">
+          <div className="gm-form-group">
             <label>NIC Number</label>
             <input
               type="text"
@@ -136,12 +136,12 @@ function CreateUser() {
               value={formData.nicNo}
               onChange={handleChange}
               required
-              className="text-input"
+              className="gm-text-input"
               placeholder="e.g., 123456789V or 200012345678"
             />
           </div>
 
-          <div className="form-group">
+          <div className="gm-form-group">
             <label>Mobile Number</label>
             <input
               type="text"
@@ -149,12 +149,12 @@ function CreateUser() {
               value={formData.mobileNo}
               onChange={handleChange}
               required
-              className="text-input"
+              className="gm-text-input"
               placeholder="e.g., 0712345678"
             />
           </div>
 
-          <div className="form-group">
+          <div className="gm-form-group">
             <label>Email Address</label>
             <input
               type="email"
@@ -162,12 +162,12 @@ function CreateUser() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="text-input"
+              className="gm-text-input"
               placeholder="e.g., user@example.com"
             />
           </div>
 
-          <div className="form-group">
+          <div className="gm-form-group">
             <label>Password</label>
             <input
               type="password"
@@ -175,11 +175,11 @@ function CreateUser() {
               value={formData.password}
               onChange={handleChange}
               required
-              className="text-input"
+              className="gm-text-input"
             />
           </div>
 
-          <div className="form-group">
+          <div className="gm-form-group">
             <label>Re-enter Password</label>
             <input
               type="password"
@@ -187,11 +187,11 @@ function CreateUser() {
               value={formData.reenterPassword}
               onChange={handleChange}
               required
-              className="text-input"
+              className="gm-text-input"
             />
           </div>
 
-          <button type="submit" className="submit-btn">
+          <button type="submit" className="gm-submit-btn">
             Create User
           </button>
         </form>
@@ -200,4 +200,4 @@ function CreateUser() {
   );
 }
 
-export default CreateUser;
+export default GMCreateUser;
