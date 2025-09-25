@@ -210,7 +210,7 @@ function ViewAttendance() {
   return (
     <>
       <HeadBar />
-      <div className="view-attendance-container">
+      <div className="view-attendance-container" style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
         <HRNav />
         <div className="attendance-content">
           <h2 className="attendance-title">View Attendance</h2>

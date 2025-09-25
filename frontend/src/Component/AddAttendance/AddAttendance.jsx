@@ -131,7 +131,7 @@ function AddAttendance() {
   };
 
   return (
-    <div className="add-attendance-container">
+    <div className="add-attendance-container" style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
       <div className="hrnav-wrapper">
         <HRNav />
       </div>

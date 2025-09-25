@@ -98,7 +98,7 @@ function ViewEmployees() {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
       <HRNav />
       <HeadBar />
       <div className="HRViewStockContainer">

@@ -136,18 +136,13 @@ function HRDashboard() {
   };
 
   return (
-    <div className="hrdashboard-home-container">
-      <div className="headbar-wrapper">
+    <div className="hrdashboard-home-container" >
+      <div className="headbar-wrapper" >
         <HeadBar />
+        <HRNav />
       </div>
-      <div className="hrdashboard-layout">
-        <div className="hrdashboard-sidebar">
-          <div className="hrnav-wrapper">
-            <HRNav />
-          </div>
-        </div>
-        <div className="hrdashboard-main-content">
-          <div className="hrdashboard-content-wrapper hrdashboard-content">
+        <div className="hrdashboard-main-content" style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
+          <div className="hrdashboard-content-wrapper hrdashboard-content" style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
             <header className="hrdashboard-header">
               <h1 className="hrdashboard-title">HR Dashboard</h1>
               <p className="hrdashboard-date">
@@ -390,7 +385,7 @@ function HRDashboard() {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }
 

@@ -294,7 +294,7 @@ const AddEmployee = () => {
   return (
     <>
       <HeadBar />
-      <div className="form-container-buyers">
+      <div className="form-container-buyers" style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
         <HRNav />
         <div className="form-content">
           <div className="form-box">

@@ -71,7 +71,7 @@
 
 .hrdashboard-main-content {
     flex-grow: 1;
-    padding: 30px;
+    padding: px;
     overflow-y: auto;
 }
 
@@ -85,7 +85,9 @@
 .hrdashboard-graph-container,
 .hrdashboard-birthday-box {
     margin: 0;
-    padding: 10px;
+    margin-top:1%;
+    margin-left: 7%;
+    margin-bottom:0%;
     box-sizing: border-box;
 }
 
@@ -105,10 +107,13 @@
 }
 
 .hrdashboard-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--gray-900, #1f2937);
-    /* Darker for emphasis */
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text; /* Added for compatibility (fixes line 234 warning) */
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .hrdashboard-date {
@@ -245,7 +250,7 @@
 .hrdashboard-content-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 20px;
+    gap: 10px;
 }
 
 .hrdashboard-graph-container {

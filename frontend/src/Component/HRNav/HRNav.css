@@ -22,42 +22,48 @@ html {
 }
 
 .sidenav-hr {
-  width: 80px;
-  background-color: #ffff;
-  height: calc(100vh - 60px);
-  margin-top: 1cm;
-  margin-left: 2%;
-  padding: 20px;
-  border-radius: 10px;
+  width: 70x; /* Narrower default width */
+  background: linear-gradient(135deg, #4f46e5, #6d28d9); /* Match stockNav-sidenav background */
+  height: 100vh; /* Match stockNav-sidenav height */
+  margin-top: 0; /* Remove margin */
+  margin-left: 0; /* Remove margin */
+  padding: 100px 0 40px 0; /* Match stockNav-sidenav padding */
+  border-radius: 0; /* Remove radius */
   display: flex;
   flex-direction: column;
-  color: #5d4037;
+  color: #f4f4f5; /* Match stockNav-sidenav text color */
   position: fixed;
-  top: 60px;
-  left: 0;
+  top: 0; /* Match stockNav-sidenav top */
+  left: 0; /* Match stockNav-sidenav left */
   font-family: "Noto Sans", sans-serif;
-  transition: transform 0.3s ease-in-out;
-  transform: translateX(-260px); /* Hidden by default */
-  overflow-y: auto;
-  z-index: 999;
+  transition: width 0.3s ease; /* Match stockNav-sidenav transition */
+  transform: translateX(0); /* Reset transform for consistency */
+  overflow: hidden; /* Default hidden overflow */
+  z-index: 100; /* Match stockNav-sidenav z-index */
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2); /* Match stockNav-sidenav shadow */
 }
 
 .sidenav-hr.open {
-  transform: translateX(0); /* Visible when open */
+  transform: translateX(0); /* Keep open state */
+  width: 125px; /* Reduced expanded width */
+  overflow-y: auto; /* Add scroll for too many buttons */
+  max-height: 100vh; /* Ensure it doesn't exceed viewport height */
 }
 
 .center-icon-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #37474f;
-  width: 60px;
-  height: 60px;
-  background-color: #ffff;
+  color: #ffffff; /* Match stockNav-sidenav icon color */
+  width: 50px; /* Reduced button width to fit narrower sidebar */
+  height: 50px; /* Reduced button height to fit narrower sidebar */
+  background: none; /* Remove background */
   border: none;
-  border-radius: 5px;
+  border-radius: 10px; /* Adjusted radius for smaller size */
   cursor: pointer;
   margin: 0 auto;
+  padding: 10px 15px; /* Adjusted padding for smaller size */
+  transition: background 0.3s ease, transform 0.3s ease; /* Match stockNav-home-a transitions */
 }
 
 .center-icon-btn svg {
@@ -65,17 +71,18 @@ html {
 }
 
 .center-icon-btn:hover {
-  background-color: rgba(154, 195, 221, 0.2);
-  border-radius: 50%;
-  box-shadow: 0 0 15px #9ac3dd;
-  transition: all 0.3s ease-in-out;
+  background: rgba(255, 255, 255, 0.05); /* Match stockNav-home-a hover */
+  border-radius: 10px; /* Match adjusted radius */
+  box-shadow: none; /* Remove PMNav shadow */
+  transform: translateX(4px); /* Match stockNav-home-a hover effect */
+  transition: all 0.3s ease; /* Match stockNav-home-a transition */
 }
 
 .center-icon-btn.active {
-  background-color: rgba(154, 195, 221, 0.2);
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(154, 195, 221, 0.7);
-  animation: shadowPulse 1.5s infinite;
+  background: rgba(255, 255, 255, 0.15); /* Match stockNav-active background */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Match stockNav-active shadow */
+  border-radius: 10px; /* Match adjusted radius */
+  animation: none; /* Disable PMNav pulse */
 }
 
 @keyframes shadowPulse {
@@ -91,23 +98,29 @@ html {
 }
 
 .nav-label {
-  color: #37474f;
-  font-weight: bold;
-  font-size: small;
-  text-align: center;
+  color: #f4f4f5; /* Match stockNav-nav-label color */
+  font-weight: 500; /* Match stockNav-nav-label weight */
+  font-size: 14px; /* Slightly reduced for narrower width */
+  opacity: 0; /* Match stockNav-nav-label hidden by default */
+  white-space: nowrap; /* Match stockNav-nav-label */
+  transition: opacity 0.3s ease; /* Match stockNav-nav-label transition */
+}
+
+.sidenav-hr.open .nav-label {
+  opacity: 1; /* Show label when expanded, match stockNav-open */
 }
 
 .home-a {
   text-decoration: none;
-  color: #37474f;
-  font-size: 16px;
+  color: #f4f4f5; /* Match stockNav-home-a color */
+  font-size: 14px; /* Reduced for narrower width */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .home-a.active {
-  color: #007bff;
+  color: #f4f4f5; /* Match stockNav-active text color */
   font-weight: bold;
 }
 
@@ -115,19 +128,21 @@ html {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Reduced gap for narrower layout */
 }
 
 .sidenav-hr ul li {
-  margin: 5px 0;
-  text-align: center;
+  margin: 10px 0; /* Adjusted margin for narrower layout */
+  text-align: left; /* Match stockNav-home-a alignment */
 }
 
 .nav-hr {
-  border: 0;
+  border: none;
   height: 1px;
-  background-color: #37474f;
-  opacity: 0.5;
-  margin: 5px 0;
+  background-color: rgba(255, 255, 255, 0.1); /* Match stockNav-nav-hr */
+  margin: 8px 0; /* Match stockNav-nav-hr margin */
 }
 
 .profile-icon-btn {
@@ -144,18 +159,18 @@ html {
 }
 
 main {
-  margin-left: 0; /* Adjust based on whether sidebar is visible */
+  margin-left: 0;
   padding: 20px;
 }
 
 @media (max-width: 768px) {
   .sidenav-hr {
-    width: 200px;
-    transform: translateX(-220px); /* Hidden by default */
+    transform: translateX(0); /* Disable slide-out, match stockNav-sidenav */
+    width: 180px; /* Match expanded width */
   }
 
   .sidenav-hr.open {
-    transform: translateX(0); /* Visible when open */
+    transform: translateX(0); /* Ensure no slide, match stockNav-sidenav */
   }
 
   main {
@@ -165,10 +180,10 @@ main {
 
 @media (max-width: 480px) {
   .sidenav-hr {
-    width: 180px;
+    width: 180px; /* Match expanded width */
   }
 
   .home-a {
-    font-size: 14px;
+    font-size: 12px; /* Further reduced for smaller screens */
   }
 }
