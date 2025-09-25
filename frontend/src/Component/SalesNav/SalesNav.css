@@ -1,188 +1,160 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
-* {
-    box-sizing: border-box;
+
+:root {
+  --nav-width: 90px;
+  --nav-expanded-width: 240px;
+  --nav-font: "Noto Sans", sans-serif;
+  --transition-fast: 0.3s ease-in-out;
+
+  /* Colors */
+  --nav-bg: rgba(79, 70, 229, 0.3);
+  --nav-text: #f4f4f5;
+  --nav-text-active: #ffffff;
+  --nav-hover-bg: rgba(255, 255, 255, 0.05);
+  --nav-active-bg: rgba(255, 255, 255, 0.15);
 }
 
-body,
-html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: "Noto Sans", sans-serif;
-    color: #111827;
-}
-
-
-/* ======================
-   Username Display
-   ====================== */
-
+/* Username Display */
 .salesNav-username-display {
-    position: fixed;
-    top: 15px;
-    right: 20px;
-    background: #1f2937;
-    color: #f9fafb;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    animation: fadeIn 0.3s ease-in-out;
-    z-index: 1000;
+  position: fixed;
+  top: 50px;
+  right: 20px;
+  background-color: #efefef;
+  color: #37474f;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: var(--nav-font);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-6px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-/* ======================
-   Sidebar Container
-   ====================== */
-
+/* Sidebar Container */
 .salesNav-sidenav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 90px;
-    /* collapsed */
-    background: linear-gradient(180deg, #111827, #1f2937);
-    padding: 1rem 0.5rem;
-    border-radius: 0 20px 20px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: width 0.3s ease-in-out;
-    overflow-x: hidden;
-    z-index: 999;
+  width: var(--nav-width);
+  height: 100vh;
+  background: var(--nav-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 100px 0 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--nav-text);
+  font-family: var(--nav-font);
+  transition: width var(--transition-fast);
+  transform: translateX(0);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 999;
 }
 
 .salesNav-sidenav.salesNav-open {
-    width: 240px;
-    /* expanded */
+  width: var(--nav-expanded-width);
 }
 
-
-/* ======================
-   List + Items
-   ====================== */
-
+/* Nav List */
 .salesNav-sidenav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
 }
 
 .salesNav-sidenav li {
-    margin: 6px 0;
+  margin: 8px 0;
 }
 
+/* Links */
 .salesNav-home-a {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 12px 18px;
-    color: #9ca3af;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    border-radius: 12px;
-    transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--nav-text);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  transition: background var(--transition-fast), transform var(--transition-fast);
 }
 
 .salesNav-home-a:hover {
-    background: rgba(59, 130, 246, 0.15);
-    color: #3b82f6;
-    transform: translateX(6px);
+  background: var(--nav-hover-bg);
+  transform: translateX(4px);
 }
 
+.salesNav-home-a.salesNav-active {
+  background: var(--nav-active-bg);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  color: var(--nav-text-active);
+}
 
-/* ======================
-   Icon Buttons
-   ====================== */
-
+/* Icon Buttons */
 .salesNav-center-icon-btn {
-    border: none;
-    outline: none;
-    background: transparent;
-    cursor: pointer;
-    color: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease-in-out, color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background: none;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 0 auto;
+  padding: 12px 20px;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  color: var(--nav-text);
+}
+
+.salesNav-center-icon-btn svg {
+  width: 32px;
+  height: 32px;
 }
 
 .salesNav-center-icon-btn:hover {
-    transform: scale(1.15);
-    color: #3b82f6;
-}
-
-
-/* ======================
-   Active State
-   ====================== */
-
-.salesNav-active {
-    background: linear-gradient(90deg, #2563eb, #1d4ed8);
-    color: #ffffff !important;
-    box-shadow: 0 3px 12px rgba(37, 99, 235, 0.4);
+  background: var(--nav-hover-bg);
+  transform: translateX(4px);
 }
 
 .salesNav-center-icon-btn.salesNav-active {
-    color: #fff;
+  background: var(--nav-active-bg);
+  color: var(--nav-text-active);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-
-/* ======================
-   Labels (show only when expanded)
-   ====================== */
-
+/* Labels (show only when expanded) */
 .salesNav-nav-label {
-    opacity: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    flex-grow: 1;
+  color: var(--nav-text);
+  font-weight: 500;
+  font-size: 15px;
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity var(--transition-fast);
 }
 
 .salesNav-sidenav.salesNav-open .salesNav-nav-label {
-    opacity: 1;
-    transform: translateX(0);
+  opacity: 1;
 }
-
 
 /* Divider */
-
 .salesNav-nav-hr {
-    border: 0;
-    border-top: 1px solid rgba(75, 85, 99, 0.4);
-    margin: 10px 16px;
+  border: none;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 8px 0;
 }
 
-
-/* ======================
-   Responsive
-   ====================== */
-
+/* Responsive */
 @media (max-width: 768px) {
-    .salesNav-sidenav {
-        transform: translateX(-100%);
-    }
-    .salesNav-sidenav.salesNav-open {
-        transform: translateX(0);
-    }
-    .salesNav-sidenav {
-        width: 220px;
-    }
+  .salesNav-sidenav {
+    width: var(--nav-expanded-width);
+  }
 }

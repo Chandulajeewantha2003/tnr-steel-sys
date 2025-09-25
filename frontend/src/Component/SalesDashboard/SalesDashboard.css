@@ -1,260 +1,185 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap");
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+/* Ultra Beautiful Sales Dashboard CSS - Premium Design */
 
-/* Main Container */
 
+/* Root Variables - Vibrant Sales Theme */
+:root {
+  /* Gradients */
+  --primary-gradient: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
+  --secondary-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+  --success-gradient: linear-gradient(135deg, #42e695 0%, #3bb2b8 100%);
+  --warning-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  --danger-gradient: linear-gradient(135deg, #f00000 0%, #dc281e 100%);
+  --info-gradient: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+
+  /* Backgrounds */
+  --bg-main: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);
+  --bg-glass: rgba(255, 255, 255, 0.1);
+  --bg-glass-hover: rgba(255, 255, 255, 0.2);
+  --bg-card: rgba(255, 255, 255, 0.08);
+  --bg-card-hover: rgba(255, 255, 255, 0.15);
+
+  /* Text */
+  --text-primary: #fff;
+  --text-secondary: rgba(255, 255, 255, 0.9);
+  --text-muted: rgba(255, 255, 255, 0.7);
+
+  /* Glass effects */
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  --glass-backdrop: blur(20px);
+
+  /* Shadows */
+  --shadow-glow: 0 0 20px rgba(91, 134, 229, 0.4);
+  --shadow-glow-hover: 0 0 40px rgba(91, 134, 229, 0.7);
+
+  /* Border radius */
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  /* Transitions */
+  --transition-fast: all 0.2s ease-in-out;
+  --transition-medium: all 0.3s ease-in-out;
+  --transition-slow: all 0.5s ease-in-out;
+}
+
+/* Container */
 .salesdash-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #f5f7fa;
-    background-image: linear-gradient( to bottom right, rgba(245, 247, 250, 0.8), rgba(235, 242, 250, 0.8));
-    font-family: "Noto Sans", sans-serif;
+  background: var(--bg-main);
+  min-height: 100vh;
+  width: 100%;
+  background-size: 400% 400%;
+  animation: gradientShift 18s ease infinite;
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .salesdash-main-content {
-    padding: 20px;
-    margin-left: 120px;
-    flex: 1;
-    min-height: 100vh;
+  padding: 2rem;
+  margin-left: 120px;
+  position: relative;
+  z-index: 2;
 }
 
-
 /* Dashboard Header */
-
 .salesdash-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
 }
 
 .salesdash-title {
-    color: #2c3e50;
-    font-size: 24px;
-    font-weight: 700;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 5px;
-    letter-spacing: 0.5px;
-    margin: 0;
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff, #ddd, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShine 4s linear infinite;
 }
 
-.salesdash-title::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, #3498db, #2ecc71);
-    transition: width 0.3s ease;
+@keyframes textShine {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.salesdash-title:hover::after {
-    width: 100%;
-}
-
+/* Timeframe Selector */
 .salesdash-timeframe-selector {
-    display: flex;
-    background-color: #e9ecef;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  background: var(--bg-glass);
+  border-radius: var(--radius-xl);
+  backdrop-filter: var(--glass-backdrop);
+  border: 1px solid var(--glass-border);
+  padding: 6px;
+  box-shadow: var(--glass-shadow);
 }
 
 .salesdash-timeframe-btn {
-    padding: 8px 16px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    position: relative;
-    overflow: hidden;
+  padding: 0.8rem 1.6rem;
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: var(--transition-medium);
+  text-transform: uppercase;
 }
 
-.salesdash-timeframe-btn::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background-color: rgba(0, 123, 255, 0.1);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.4s ease, height 0.4s ease;
-    z-index: 0;
-}
-
-.salesdash-timeframe-btn:hover::before {
-    width: 150px;
-    height: 150px;
-}
-
-.salesdash-timeframe-btn span {
-    position: relative;
-    z-index: 1;
+.salesdash-timeframe-btn:hover {
+  color: var(--text-primary);
+  transform: scale(1.05);
 }
 
 .salesdash-timeframe-btn.active {
-    background-color: #007bff;
-    color: white;
-    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+  background: var(--primary-gradient);
+  color: white;
+  box-shadow: var(--shadow-glow);
+  transform: scale(1.1);
 }
 
-
-/* Stats Cards */
-
+/*Stats Cards Row*/
 .salesdash-stats-cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards in one row */
+  gap: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .salesdash-stat-card {
-    background-color: white;
-    border-radius: 10px;
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.salesdash-stat-card::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient( circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
-    transform: rotate(0deg);
-    opacity: 0;
-    transition: transform 0.6s ease, opacity 0.6s ease;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-backdrop);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition-slow);
+  position: relative;
+  cursor: pointer;
 }
 
 .salesdash-stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-}
-
-.salesdash-stat-card:hover::before {
-    opacity: 1;
-    transform: rotate(180deg);
+  background: var(--bg-card-hover);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-glow-hover);
 }
 
 .salesdash-stat-icon {
-    font-size: 24px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 16px;
-    color: white;
-    transition: transform 0.3s ease;
-}
-
-.salesdash-stat-card:hover .salesdash-stat-icon {
-    transform: scale(1.1) rotate(10deg);
-}
-
-.salesdash-stat-card:nth-child(1) .salesdash-stat-icon {
-    background-color: #3498db;
-    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.5);
-    animation: salesdash-pulse-blue 2s infinite;
-}
-
-.salesdash-stat-card:nth-child(2) .salesdash-stat-icon {
-    background-color: #2ecc71;
-    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.5);
-    animation: salesdash-pulse-green 2s infinite;
-}
-
-.salesdash-stat-card:nth-child(3) .salesdash-stat-icon {
-    background-color: #f39c12;
-    box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.5);
-    animation: salesdash-pulse-orange 2s infinite;
-}
-
-.salesdash-stat-card:nth-child(4) .salesdash-stat-icon {
-    background-color: #e74c3c;
-    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.5);
-    animation: salesdash-pulse-red 2s infinite;
-}
-
-@keyframes salesdash-pulse-blue {
-    0% {
-        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.5);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
-    }
-}
-
-@keyframes salesdash-pulse-green {
-    0% {
-        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.5);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
-    }
-}
-
-@keyframes salesdash-pulse-orange {
-    0% {
-        box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.5);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(243, 156, 18, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(243, 156, 18, 0);
-    }
-}
-
-@keyframes salesdash-pulse-red {
-    0% {
-        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.5);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
-    }
+  width: 70px;
+  height: 70px;
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background: var(--primary-gradient);
+  color: white;
+  box-shadow: var(--shadow-glow);
 }
 
 .salesdash-stat-info h3 {
-    font-size: 14px;
-    color: #7f8c8d;
-    margin: 0 0 8px 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
 }
 
 .salesdash-stat-info p {
-    font-size: 20px;
-    font-weight: 600;
-    color: #2c3e50;
-    margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
-
-
 /* Dashboard Buttons */
 
 .salesdash-buttons {
@@ -448,13 +373,10 @@
     background-color: #e74c3c;
     box-shadow: 0 2px 8px rgba(231, 76, 60, 0.4);
 }
-
-
-/* Chart Grid */
-
+/* Chart Grid - Blue Themed, structured like white version */
 .salesdash-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
     gap: 24px;
     max-width: 1200px;
     margin-left: auto;
@@ -462,14 +384,14 @@
 }
 
 .salesdash-chart-card {
-    background-color: white;
-    border-radius: 15px;
+    background: var(--bg-card); /* blue theme background */
+    border-radius: var(--radius-2xl);
     padding: 24px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--glass-shadow); /* blue-themed shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    height: 450px;
+    height: 450px; /* default chart height */
 }
 
 .salesdash-chart-card.compact {
@@ -478,7 +400,7 @@
 
 .salesdash-chart-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 40px rgba(91, 134, 229, 0.7); /* blue glow on hover */
 }
 
 .salesdash-chart-header {
@@ -491,7 +413,7 @@
 .salesdash-chart-header h3 {
     font-size: 18px;
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--text-secondary); /* blue theme text color */
     margin: 0;
 }
 
@@ -507,15 +429,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f8f9fa;
+    background-color: var(--bg-card-hover); /* blue theme button bg */
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: #7f8c8d;
+    color: var(--text-secondary);
 }
 
 .salesdash-refresh-btn:hover {
-    background-color: #e9ecef;
+    background-color: var(--bg-card-hover);
     color: #3498db;
     transform: rotate(180deg);
 }
@@ -523,7 +445,7 @@
 .salesdash-chart-description {
     margin: 0 0 15px 0;
     font-size: 14px;
-    color: #7f8c8d;
+    color: var(--text-secondary);
 }
 
 .salesdash-chart-container {
@@ -535,9 +457,7 @@
     justify-content: center;
 }
 
-
 /* Loading and Empty States */
-
 .salesdash-loading-spinner {
     display: flex;
     flex-direction: column;
@@ -549,7 +469,7 @@
 .salesdash-spinner {
     width: 40px;
     height: 40px;
-    border: 3px solid rgba(0, 123, 255, 0.1);
+    border: 3px solid rgba(91, 134, 229, 0.1);
     border-radius: 50%;
     border-top-color: #3498db;
     animation: spin 1s ease-in-out infinite;
@@ -563,7 +483,7 @@
 }
 
 .salesdash-loading-spinner p {
-    color: #7f8c8d;
+    color: var(--text-secondary);
     font-size: 14px;
 }
 
@@ -573,7 +493,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    color: #7f8c8d;
+    color: var(--text-secondary);
     text-align: center;
 }
 
@@ -588,9 +508,7 @@
     font-size: 14px;
 }
 
-
 /* Responsive Styles */
-
 @media (max-width: 1200px) {
     .salesdash-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -635,3 +553,5 @@
         height: 90px;
     }
 }
+
+
