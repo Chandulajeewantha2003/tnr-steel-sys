@@ -238,7 +238,7 @@ function PMDashboard() {
                   <i className="bi bi-box-seam"></i>
                 </div>
                 <div className="pm-stat-info">
-                  <h3>Total Ingredients</h3>
+                  <h3>Total Materials</h3>
                   <p>{stats.totalIngredients}</p>
                 </div>
               </div>
@@ -290,7 +290,7 @@ function PMDashboard() {
                 </div>
                 <div className="pm-button-text">
                   <h3>View Requests</h3>
-                  <p>Check and manage ingredient requests</p>
+                  <p>Check and manage Material requests</p>
                 </div>
               </Link>
 
@@ -327,8 +327,8 @@ function PMDashboard() {
                   </svg>
                 </div>
                 <div className="pm-button-text">
-                  <h3>Request Ingredient</h3>
-                  <p>Create new ingredient requests</p>
+                  <h3>Request Material</h3>
+                  <p>Create new Material requests</p>
                 </div>
               </Link>
             </div>

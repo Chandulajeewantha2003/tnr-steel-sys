@@ -248,4 +248,66 @@
   .indirectissue-summary-content {
     grid-template-columns: 1fr;
   }
+<<<<<<< HEAD
+=======
+}
+
+/* Print styles */
+@media print {
+  .indirectissue-items-container {
+    background-color: white;
+  }
+
+  .indirectissue-table-container,
+  .indirectissue-summary-panel {
+    box-shadow: none;
+    border: 1px solid #e2e8f0;
+  }
+
+  .indirectissue-add-row-btn,
+  .indirectissue-remove-row-btn,
+  .indirectissue-checkout-btn,
+  .indirectissue-clear-search,
+  .indirectissue-quantity-btn {
+    display: none;
+  }
+
+  .indirectissue-search-container {
+    display: none;
+  }
+}
+
+/* Transitions and animations */
+.indirectissue-row-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.indirectissue-row-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.indirectissue-row-exit {
+  opacity: 1;
+}
+
+.indirectissue-row-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Focus styles for accessibility */
+.indirectissue-select-buyer:focus-visible,
+.indirectissue-select-item:focus-visible,
+.indirectissue-quantity-input:focus-visible,
+.indirectissue-add-row-btn:focus-visible,
+.indirectissue-checkout-btn:focus-visible,
+.indirectissue-remove-row-btn:focus-visible,
+.indirectissue-quantity-btn:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+>>>>>>> 319d91674ed84232062a230f9b11f5e465a62329
 }

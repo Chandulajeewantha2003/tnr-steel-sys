@@ -154,7 +154,20 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+<<<<<<< HEAD
   .salesNav-sidenav {
     width: var(--nav-expanded-width);
   }
 }
+=======
+    .salesNav-sidenav {
+        transform: translateX(-100%);
+    }
+    .salesNav-sidenav.salesNav-open {
+        transform: translateX(0);
+    }
+    .salesNav-sidenav {
+        width: 220px;
+    }
+}
+>>>>>>> 319d91674ed84232062a230f9b11f5e465a62329
