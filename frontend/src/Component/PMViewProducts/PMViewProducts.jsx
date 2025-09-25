@@ -67,7 +67,7 @@ function PMViewProducts() {
   );
 
   return (
-    <div className="pm-view-products-container">
+    <div className="pm-view-products-container" >
       <HeadBar />
       <PMNav />
       

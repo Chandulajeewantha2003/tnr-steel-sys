@@ -189,7 +189,7 @@ function ViewIngredientRequests() {
                 <p>Loading requests...</p>
               </div>
             ) : (
-              <div className="view-ingredient-requests-table-container" style={{ width: "100%", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)", marginBottom: "20px" }}>
+              <div className="view-ingredient-requests-table-container" style={{ width: "100%", backgroundColor: "white", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)", marginBottom: "20px" }}>
                 {error && <p className="view-ingredient-requests-error-message">{error}</p>}
                 {success && <p className="view-ingredient-requests-success-message">{success}</p>}
                 {filteredRequests.length === 0 ? (
@@ -212,7 +212,7 @@ function ViewIngredientRequests() {
                           <td>{request._id}</td>
                           <td>{request.ingredient_id?.ingredient_name}</td>
                           <td>{request.request_quantity}</td>
-                          <td className={`status-${request.status.toLowerCase()}`}>
+                          <td className={`status-${request.status.toLowerCase()}`} style={{ textAlign:"center",fontWeight:"bold" }} >
                             {request.status.charAt(0).toUpperCase() + request.status.slice(1)}
                           </td>
                           <td>{new Date(request.createdAt).toLocaleDateString()}</td>
