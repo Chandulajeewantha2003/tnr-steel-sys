@@ -109,7 +109,7 @@ function PMViewProducts() {
                     <tr key={product._id}>
                       <td>{product._id}</td>
                       <td>{product.product_name}</td>
-                      <td className={`stock-quantity ${product.available_stock < 10 ? 'low-stock' : ''}`}>
+                      <td className={`stock-quantity ${product.available_stock < 10 ?  'low-stock' : ''}`}>
                         {product.available_stock}
                         {product.available_stock < 10 && (
                           <span className="low-stock-warning">Low Stock</span>
