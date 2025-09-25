@@ -248,8 +248,7 @@
   .indirectissue-summary-content {
     grid-template-columns: 1fr;
   }
-<<<<<<< HEAD
-=======
+
 }
 
 /* Print styles */
@@ -309,5 +308,4 @@
 .indirectissue-quantity-btn:focus-visible {
   outline: 2px solid #6366f1;
   outline-offset: 2px;
->>>>>>> 319d91674ed84232062a230f9b11f5e465a62329
 }
