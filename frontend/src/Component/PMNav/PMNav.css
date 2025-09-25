@@ -1,5 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
 
+:root {
+  --pm-primary: #4f46e5;
+  --pm-secondary: #9ac3dd;
+  --pm-bg: #ffffff;
+  --pm-text: #37474f;
+  --pm-hover-bg: rgba(154, 195, 221, 0.2);
+  --pm-active-shadow: 0 0 15px rgba(154, 195, 221, 0.7);
+  --pm-divider: #cccccc;
+}
+
 .pm-username-display {
   position: fixed;
   top: 50px;
@@ -16,12 +26,12 @@
 
 .pm-sidenav {
   width: 90px;
-  background:linear-gradient(135deg, #4f46e5, #6d28d9);/* Adjusted for transparency and blur base, blended with #06013b */
-  height: 100vh;
-  margin-top: 0;
-  margin-left: 0;
-  padding: 100px 0 40px 0;
-  border-radius: 0;
+  background-color: var(--pm-bg);
+  height: 82vh;
+  margin-top: 2%;
+  margin-left: 2%;
+  padding: 20px 10px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   color: #f4f4f5;
