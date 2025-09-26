@@ -3,9 +3,7 @@
 .VS-main-container {
   display: flex;
   flex-direction: column;
-  background-color: #06013b;
   min-height: 100vh;
-  
 }
 
 .VS-container {
