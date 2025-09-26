@@ -93,7 +93,6 @@
   background: var(--primary-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* 🔥 Removed neon glow animation */
 }
 
 .pm-dashboard-date {
@@ -106,7 +105,7 @@
 /* Stats Cards */
 .pm-stats-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* ✅ Force 4 in one row */
+  grid-template-columns: repeat(4, 1fr); 
   gap: 2rem;
   margin-bottom: 3rem;
 }
