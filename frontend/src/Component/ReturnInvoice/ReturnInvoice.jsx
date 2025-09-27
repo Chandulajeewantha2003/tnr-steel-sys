@@ -103,7 +103,7 @@ function ReturnInvoice() {
         <div className="directbuyerreturninvoice-header">
           <div className="directbuyerreturninvoice-header-top">
             <img
-              src="/images/logo.png"
+              src="/logo.png"
               alt="Logo"
               className="directbuyerreturninvoice-logo"
             />
