@@ -43,6 +43,16 @@
   --transition-slow: all 0.5s ease-in-out;
 }
 
+body {
+    font-family: var(--font-main);
+    background: #0e0c2c;
+    color: var(--text-primary);
+    margin: 0;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 /* Container */
 .salesdash-container {
   background: var(--bg-main);
@@ -62,19 +72,37 @@
 }
 
 .salesdash-main-content {
-  padding: 2rem;
-  margin-left: 120px;
-  position: relative;
-  z-index: 2;
+  min-height: 100vh;
+    background: #06013b;
+    overflow-x: hidden;
+    position: relative;
+    background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+}
+
+.sales-main-content-st{
+    margin-left: 100px;
+    padding: 2rem;
+    z-index: 1;
+    position: relative;
+    transition: margin-left var(--transition);
 }
 
 /* Dashboard Header */
 .salesdash-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2.5rem;
-  padding-bottom: 1rem;
+  font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #ffffff 50%, #e0e0e0 75%, #ffffff 100%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text; /* Added for compatibility (fixes line 89 warning) */
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textShine 3s ease-in-out infinite;
+    text-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+    margin: 0;
+    position: relative;
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
 }
 
 .salesdash-title {
@@ -95,24 +123,32 @@
 /* Timeframe Selector */
 .salesdash-timeframe-selector {
   display: flex;
-  background: var(--bg-glass);
-  border-radius: var(--radius-xl);
-  backdrop-filter: var(--glass-backdrop);
-  border: 1px solid var(--glass-border);
-  padding: 6px;
-  box-shadow: var(--glass-shadow);
+    background: #1e1b3d; /* Solid dark background */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius);
+    overflow: hidden;
+    backdrop-filter: none;
+    box-shadow: var(--shadow-sm); 
 }
 
 .salesdash-timeframe-btn {
-  padding: 0.8rem 1.6rem;
-  border: none;
-  background: transparent;
-  font-weight: 600;
-  color: var(--text-muted);
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  transition: var(--transition-medium);
-  text-transform: uppercase;
+  flex: 1;
+    padding: 0.75rem 1.5rem;
+    
+    /* Set a contrasting, solid background for the inactive button */
+    background: #1e1b3d; 
+    
+    /* 🔴 THE CRITICAL FIX: Ensure text is fully white and not transparently filled */
+    color: var(--text-primary); /* Sets text color to solid white */
+    -webkit-text-fill-color: var(--text-primary); /* Overrides transparent text-fill */
+    
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    position: relative;
+    outline: none;
+    backdrop-filter: none;
 }
 
 .salesdash-timeframe-btn:hover {
@@ -130,24 +166,24 @@
 /*Stats Cards Row*/
 .salesdash-stats-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 cards in one row */
-  gap: 2rem;
-  margin-bottom: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .salesdash-stat-card {
   background: var(--bg-card);
-  backdrop-filter: var(--glass-backdrop);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-2xl);
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  box-shadow: var(--glass-shadow);
-  transition: var(--transition-slow);
-  position: relative;
-  cursor: pointer;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(16px);
+    transition: var(--transition), transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .salesdash-stat-card:hover {
@@ -185,10 +221,10 @@
 .salesdash-buttons {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 45px;
     margin-bottom: 30px;
     max-width: 1200px;
-    margin-left: auto;
+    margin-left: 40px;
     margin-right: auto;
 }
 
@@ -377,9 +413,9 @@
 .salesdash-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
-    gap: 24px;
+    gap: 40px;
     max-width: 1200px;
-    margin-left: auto;
+    margin-left: 45px;
     margin-right: auto;
 }
 

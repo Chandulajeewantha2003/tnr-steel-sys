@@ -143,8 +143,9 @@ function ManageShops() {
 
   return (
     <div className="manageshops-container">
-      <HeadBar />
       <SalesNav />
+      <HeadBar />
+      
       <div className="manageshops-main-content">
         <div className="manageshops-header">
           <h2 className="manageshops-title">Manage Shops (Indirect Buyers)</h2>

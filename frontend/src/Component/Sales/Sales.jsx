@@ -184,37 +184,37 @@ function Sales() {
   };
 
   return (
-    <div style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: "#06013b", minHeight: "100vh" }}>
       <Nav />
       <HeadBar />
-      <div className="dbIssue-sales-container">
-        <div className="dbIssue-header">
-          <h2 className="dbIssue-sales-title">Sales Records</h2>
+      <div className="sales-xyz-container">
+        <div className="sales-xyz-header">
+          <h2 className="sales-xyz-title">Sales Records</h2>
         </div>
 
-        <div className="dbIssue-advanced-filters">
-          <div className="dbIssue-search-container">
+        <div className="sales-xyz-advanced-filters">
+          <div className="sales-xyz-search-container">
             <input
               type="search"
               placeholder="Search any field..."
-              className="dbIssue-search-input"
+              className="sales-xyz-search-input"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
 
-          <div className="dbIssue-filter-container">
-            <div className="dbIssue-filter-group">
-              <label>Date Range:</label>
-              <div className="dbIssue-input-wrapper">
-                <div className="dbIssue-date-inputs">
+          <div className="sales-xyz-filter-container">
+            <div className="sales-xyz-filter-group">
+              
+              <div className="sales-xyz-input-wrapper">
+                <div className="sales-xyz-date-inputs">
                   <input
                     type="date"
                     value={dateRange.start}
                     onChange={(e) =>
                       setDateRange({ ...dateRange, start: e.target.value })
                     }
-                    className="dbIssue-date-input"
+                    className="sales-xyz-date-input"
                   />
                   <span>to</span>
                   <input
@@ -223,15 +223,15 @@ function Sales() {
                     onChange={(e) =>
                       setDateRange({ ...dateRange, end: e.target.value })
                     }
-                    className="dbIssue-date-input"
+                    className="sales-xyz-date-input"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="dbIssue-filter-group">
-              <div className="dbIssue-input-wrapper">
-                <div className="dbIssue-price-inputs">
+            <div className="sales-xyz-filter-group">
+              <div className="sales-xyz-input-wrapper">
+                <div className="sales-xyz-price-inputs">
                   <input
                     type="number"
                     placeholder="Min"
@@ -239,7 +239,7 @@ function Sales() {
                     onChange={(e) =>
                       setPriceRange({ ...priceRange, min: e.target.value })
                     }
-                    className="dbIssue-price-input"
+                    className="sales-xyz-price-input"
                   />
                   <span>to</span>
                   <input
@@ -249,15 +249,15 @@ function Sales() {
                     onChange={(e) =>
                       setPriceRange({ ...priceRange, max: e.target.value })
                     }
-                    className="dbIssue-price-input"
+                    className="sales-xyz-price-input"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="dbIssue-filter-group">
+            <div className="sales-xyz-filter-group">
               <select
-                className="dbIssue-filter-select"
+                className="sales-xyz-filter-select"
                 value={filterOption}
                 onChange={(e) => setFilterOption(e.target.value)}
               >
@@ -269,17 +269,17 @@ function Sales() {
               </select>
             </div>
 
-            <button onClick={resetFilters} className="dbIssue-reset-btn">
+            <button onClick={resetFilters} className="sales-xyz-reset-btn">
               Reset Filters
             </button>
           </div>
         </div>
 
-        <div className="dbIssue-results-summary">
+        <div className="sales-xyz-results-summary">
           <span>
             Showing {currentItems.length} of {filteredSales.length} sales
           </span>
-          <div className="dbIssue-items-per-page">
+          <div className="sales-xyz-items-per-page">
             <span>Show</span>
             <select
               value={itemsPerPage}
@@ -294,31 +294,31 @@ function Sales() {
           </div>
         </div>
 
-        <div className="dbIssue-table-container">
-          <table className="dbIssue-sales-table">
+        <div className="sales-xyz-table-container">
+          <table className="sales-xyz-sales-table">
             <thead>
               <tr>
                 <th
                   onClick={() => handleSort("invoiceId")}
-                  className="dbIssue-sortable-header"
+                  className="sales-xyz-sortable-header"
                 >
                   Invoice ID{getSortIndicator("invoiceId")}
                 </th>
                 <th
                   onClick={() => handleSort("buyerId")}
-                  className="dbIssue-sortable-header"
+                  className="sales-xyz-sortable-header"
                 >
                   BuyerID{getSortIndicator("buyerId")}
                 </th>
                 <th
                   onClick={() => handleSort("date")}
-                  className="dbIssue-sortable-header"
+                  className="sales-xyz-sortable-header"
                 >
                   Date{getSortIndicator("date")}
                 </th>
                 <th
                   onClick={() => handleSort("totalAmount")}
-                  className="dbIssue-sortable-header"
+                  className="sales-xyz-sortable-header"
                 >
                   Total Amount{getSortIndicator("totalAmount")}
                 </th>
@@ -330,7 +330,7 @@ function Sales() {
                 <tr
                   key={sale.invoiceId}
                   className={
-                    hoveredRow === sale.invoiceId ? "dbIssue-hovered-row" : ""
+                    hoveredRow === sale.invoiceId ? "sales-xyz-hovered-row" : ""
                   }
                   onMouseEnter={() => setHoveredRow(sale.invoiceId)}
                   onMouseLeave={() => setHoveredRow(null)}
@@ -338,13 +338,13 @@ function Sales() {
                   <td>{sale.invoiceId}</td>
                   <td>{sale.buyerId}</td>
                   <td>{new Date(sale.date).toLocaleString()}</td>
-                  <td className="dbIssue-amount-cell">
+                  <td className="sales-xyz-amount-cell">
                     ${sale.totalAmount.toFixed(2)}
                   </td>
                   <td>
                     <button
                       onClick={() => viewDetails(sale.invoiceId)}
-                      className="dbIssue-view-btn"
+                      className="sales-xyz-view-btn"
                     >
                       View
                     </button>
@@ -355,23 +355,23 @@ function Sales() {
           </table>
 
           {filteredSales.length === 0 && (
-            <div className="dbIssue-no-results">
+            <div className="sales-xyz-no-results">
               No sales records match your filters. Try adjusting your search
               criteria.
             </div>
           )}
         </div>
 
-        <div className="dbIssue-pagination-controls">
+        <div className="sales-xyz-pagination-controls">
           <button
             onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
-            className="dbIssue-pagination-btn"
+            className="sales-xyz-pagination-btn"
           >
             Previous
           </button>
 
-          <div className="dbIssue-page-numbers">
+          <div className="sales-xyz-page-numbers">
             {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
               let pageToShow;
               if (totalPages <= 5) {
@@ -387,8 +387,8 @@ function Sales() {
                 <button
                   key={pageToShow}
                   onClick={() => paginate(pageToShow)}
-                  className={`dbIssue-page-number ${
-                    currentPage === pageToShow ? "dbIssue-active" : ""
+                  className={`sales-xyz-page-number ${
+                    currentPage === pageToShow ? "sales-xyz-active" : ""
                   }`}
                 >
                   {pageToShow}
@@ -397,11 +397,11 @@ function Sales() {
             })}
             {totalPages > 5 && currentPage < totalPages - 2 && (
               <>
-                <span className="dbIssue-ellipsis">...</span>
+                <span className="sales-xyz-ellipsis">...</span>
                 <button
                   onClick={() => paginate(totalPages)}
-                  className={`dbIssue-page-number ${
-                    currentPage === totalPages ? "dbIssue-active" : ""
+                  className={`sales-xyz-page-number ${
+                    currentPage === totalPages ? "sales-xyz-active" : ""
                   }`}
                 >
                   {totalPages}
@@ -413,36 +413,36 @@ function Sales() {
           <button
             onClick={() => paginate(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="dbIssue-pagination-btn"
+            className="sales-xyz-pagination-btn"
           >
             Next
           </button>
         </div>
 
-        <div className="dbIssue-report-controls">
-          <div className="dbIssue-report-btn-container">
-            <button onClick={generatePDF} className="dbIssue-report-btn">
+        <div className="sales-xyz-report-controls">
+          <div className="sales-xyz-report-btn-container">
+            <button onClick={generatePDF} className="sales-xyz-report-btn">
               Download PDF Report
             </button>
           </div>
         </div>
 
         {showModal && selectedSale && (
-          <div className="dbIssue-modal">
-            <div className="dbIssue-modal-content">
-              <div className="dbIssue-modal-header">
+          <div className="sales-xyz-modal">
+            <div className="sales-xyz-modal-content">
+              <div className="sales-xyz-modal-header">
                 <h3>Invoice Details</h3>
                 <button
                   onClick={() => setShowModal(false)}
-                  className="dbIssue-close-modal"
+                  className="sales-xyz-close-modal"
                 >
                   ×
                 </button>
               </div>
 
-              <div className="dbIssue-invoice-details">
-                <div className="dbIssue-invoice-header">
-                  <div className="dbIssue-invoice-info">
+              <div className="sales-xyz-invoice-details">
+                <div className="sales-xyz-invoice-header">
+                  <div className="sales-xyz-invoice-info">
                     <p>
                       <strong>Invoice ID:</strong> {selectedSale.invoiceId}
                     </p>
@@ -451,7 +451,7 @@ function Sales() {
                       {new Date(selectedSale.date).toLocaleString()}
                     </p>
                   </div>
-                  <div className="dbIssue-buyer-info">
+                  <div className="sales-xyz-buyer-info">
                     <p>
                       <strong>Buyer ID:</strong> {selectedSale.buyerId}
                     </p>
@@ -463,7 +463,7 @@ function Sales() {
                 </div>
 
                 <h4>Items</h4>
-                <table className="dbIssue-items-table">
+                <table className="sales-xyz-items-table">
                   <thead>
                     <tr>
                       <th>Item Name</th>
@@ -479,25 +479,25 @@ function Sales() {
                         <td>{item.quantity}</td>
                         <td>${item.price.toFixed(2)}</td>
                         <td>${item.total.toFixed(2)}</td>
-                    </tr>
+                      </tr>
                     ))}
                   </tbody>
                   <tfoot>
                     <tr>
-                      <td colSpan="3" className="dbIssue-total-label">
+                      <td colSpan="3" className="sales-xyz-total-label">
                         Total
                       </td>
-                      <td className="dbIssue-total-amount">
+                      <td className="sales-xyz-total-amount">
                         ${selectedSale.totalAmount.toFixed(2)}
                       </td>
                     </tr>
                   </tfoot>
                 </table>
 
-                <div className="dbIssue-modal-actions">
+                <div className="sales-xyz-modal-actions">
                   <button
                     onClick={() => setShowModal(false)}
-                    className="dbIssue-modal-btn dbIssue-cancel-btn"
+                    className="sales-xyz-modal-btn sales-xyz-cancel-btn"
                   >
                     Close
                   </button>

@@ -140,19 +140,19 @@ function AddProducts() {
   };
 
   return (
-    <div style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: "#06013b", minHeight: "100vh" }}>
       <Nav />
       <HeadBar />
-      <div className="viewDB-buyers-container">
-        <div className="viewDB-header">
-          <h2 className="viewDB-buyer-title">Products List</h2>
-          <button className="viewDB-new-buyer-btn" onClick={handleOpenModal}>
+      <div className="prod-xyz-container">
+        <div className="prod-xyz-header">
+          <h2 className="prod-xyz-title">Products List</h2>
+          <button className="prod-xyz-new-btn" onClick={handleOpenModal}>
             + New Product
           </button>
         </div>
 
-        <div className="viewDB-table-container" style={{  minWidth: '160vh' }}>
-          <table className="viewDB-buyers-table">
+        <div className="prod-xyz-table-container" style={{ minWidth: "160vh" }}>
+          <table className="prod-xyz-table">
             <thead>
               <tr>
                 <th>Product ID</th>
@@ -169,15 +169,15 @@ function AddProducts() {
                     <td>{product.product_name}</td>
                     <td>{product.product_price}</td>
                     <td>
-                      <div className="viewDB-action-icons">
+                      <div className="prod-xyz-action-icons">
                         <button
-                          className="viewDB-action"
+                          className="prod-xyz-action"
                           onClick={() => handleUpdate(product._id)}
                         >
                           <i className="bi bi-pencil-square"></i>
                         </button>
                         <button
-                          className="viewDB-action"
+                          className="prod-xyz-action"
                           onClick={() => handleDelete(product._id)}
                         >
                           <i className="bi bi-trash"></i>
@@ -201,17 +201,17 @@ function AddProducts() {
       {/* Add Product Modal */}
       {isModalOpen && (
         <div
-          className="viewDB-popup-overlay"
+          className="prod-xyz-overlay"
           onClick={handleCloseModal}
         >
           <div
-            className="viewDB-popup-content"
+            className="prod-xyz-content"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="viewDB-form-title-dbuyers-popup">Add New Product</h2>
+            <h2 className="prod-xyz-form-title">Add New Product</h2>
             <form onSubmit={handleSubmit}>
-              <div className="viewDB-form-group-dbuyers-popup">
-                <label className="viewDB-lable-popup" htmlFor="name">
+              <div className="prod-xyz-form-group">
+                <label className="prod-xyz-label" htmlFor="name">
                   Product Name
                 </label>
                 <input
@@ -226,8 +226,8 @@ function AddProducts() {
                   required
                 />
               </div>
-              <div className="viewDB-form-group-dbuyers-popup">
-                <label className="viewDB-lable-popup" htmlFor="price">
+              <div className="prod-xyz-form-group">
+                <label className="prod-xyz-label" htmlFor="price">
                   Product Price
                 </label>
                 <input
@@ -244,16 +244,16 @@ function AddProducts() {
                   step="0.01"
                 />
               </div>
-              <div className="viewDB-popup-buttons">
+              <div className="prod-xyz-buttons">
                 <button
                   type="submit"
-                  className="viewDB-save-btn-dbuyers-popup"
+                  className="prod-xyz-save-btn"
                 >
                   Add
                 </button>
                 <button
                   type="button"
-                  className="viewDB-cancel-btn-popup"
+                  className="prod-xyz-cancel-btn"
                   onClick={handleCloseModal}
                 >
                   Cancel
@@ -267,17 +267,17 @@ function AddProducts() {
       {/* Update Product Modal */}
       {isUpdateModalOpen && (
         <div
-          className="viewDB-popup-overlay"
+          className="prod-xyz-overlay"
           onClick={() => setIsUpdateModalOpen(false)}
         >
           <div
-            className="viewDB-popup-content"
+            className="prod-xyz-content"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="viewDB-form-title-dbuyers-popup">Update Product</h2>
+            <h2 className="prod-xyz-form-title">Update Product</h2>
             <form onSubmit={handleUpdateSubmit}>
-              <div className="viewDB-form-group-dbuyers-popup">
-                <label className="viewDB-lable-popup" htmlFor="name">
+              <div className="prod-xyz-form-group">
+                <label className="prod-xyz-label" htmlFor="name">
                   Product Name
                 </label>
                 <input
@@ -295,8 +295,8 @@ function AddProducts() {
                   required
                 />
               </div>
-              <div className="viewDB-form-group-dbuyers-popup">
-                <label className="viewDB-lable-popup" htmlFor="price">
+              <div className="prod-xyz-form-group">
+                <label className="prod-xyz-label" htmlFor="price">
                   Product Price
                 </label>
                 <input
@@ -316,16 +316,16 @@ function AddProducts() {
                   step="0.01"
                 />
               </div>
-              <div className="viewDB-popup-buttons">
+              <div className="prod-xyz-buttons">
                 <button
                   type="submit"
-                  className="viewDB-save-btn-dbuyers-popup"
+                  className="prod-xyz-save-btn"
                 >
                   Update
                 </button>
                 <button
                   type="button"
-                  className="viewDB-cancel-btn-popup"
+                  className="prod-xyz-cancel-btn"
                   onClick={() => setIsUpdateModalOpen(false)}
                 >
                   Cancel

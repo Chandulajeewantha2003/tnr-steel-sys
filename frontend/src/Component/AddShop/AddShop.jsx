@@ -440,8 +440,9 @@ function AddShop() {
 
   return (
     <div className="addshop-container">
-      <HeadBar />
       <SalesNav />
+      <HeadBar />
+      
       <div className="addshop-content-wrapper">
         <div className="addshop-form-card">
           {!showSuccess ? (

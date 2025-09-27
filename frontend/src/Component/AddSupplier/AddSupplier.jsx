@@ -29,20 +29,15 @@ const AddSupplier = () => {
 
   const [errors, setErrors] = useState({});
 
-  // Handle input change with visual feedback
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setInputs((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-
-    // Validate the field as user types
     validateField(name, value);
   };
 
-  // Handle field blur for validation
   const handleBlur = (e) => {
     setTouched({
       ...touched,
@@ -51,10 +46,8 @@ const AddSupplier = () => {
     validateField(e.target.name, e.target.value);
   };
 
-  // Validate individual field
   const validateField = (field, value) => {
     let newErrors = { ...errors };
-
     switch (field) {
       case "supplier_name":
         if (!value.trim()) {
@@ -95,11 +88,9 @@ const AddSupplier = () => {
       default:
         break;
     }
-
     setErrors(newErrors);
   };
 
-  // Validation for the entire form
   const validateForm = () => {
     setTouched({
       supplier_name: true,
@@ -107,7 +98,6 @@ const AddSupplier = () => {
       supplier_phone: true,
       supplier_email: true,
     });
-
     let formErrors = {};
     let isValid = true;
 
@@ -147,10 +137,8 @@ const AddSupplier = () => {
     return isValid;
   };
 
-  // Validate current step
   const validateStep = (step) => {
     let isValid = true;
-
     if (step === 1) {
       if (!inputs.supplier_name.trim()) {
         setErrors((prev) => ({
@@ -167,7 +155,6 @@ const AddSupplier = () => {
         setTouched((prev) => ({ ...prev, supplier_name: true }));
         isValid = false;
       }
-
       if (!inputs.supplier_phone) {
         setErrors((prev) => ({
           ...prev,
@@ -184,51 +171,43 @@ const AddSupplier = () => {
         isValid = false;
       }
     }
-
     return isValid;
   };
 
-  // Handle next step
   const handleNextStep = () => {
     if (validateStep(currentStep)) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      const formElement = document.querySelector(".form-step-content");
+      const formElement = document.querySelector('.add-suppliers-form-step-content');
       if (formElement) {
-        formElement.classList.add("shake");
+        formElement.classList.add('add-suppliers-shake');
         setTimeout(() => {
-          formElement.classList.remove("shake");
+          formElement.classList.remove('add-suppliers-shake');
         }, 500);
       }
     }
   };
 
-  // Handle previous step
   const handlePrevStep = () => {
     setCurrentStep((prev) => prev - 1);
   };
 
-  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validateForm()) {
-      const formElement = document.querySelector(".form-step-content");
+      const formElement = document.querySelector('.add-suppliers-form-step-content');
       if (formElement) {
-        formElement.classList.add("shake");
+        formElement.classList.add('add-suppliers-shake');
         setTimeout(() => {
-          formElement.classList.remove("shake");
+          formElement.classList.remove('add-suppliers-shake');
         }, 500);
       }
       return;
     }
-
     setLoading(true);
-
     try {
       await sendRequest();
       setSuccess(true);
-
       setTimeout(() => {
         history("/viewsuppliers");
       }, 2000);
@@ -239,18 +218,14 @@ const AddSupplier = () => {
     }
   };
 
-  // Show toast notification
   const showToast = (message, type = "success") => {
     const toast = document.createElement("div");
-    toast.className = `toast ${type}`;
+    toast.className = `add-suppliers-toast ${type}`;
     toast.textContent = message;
-
     document.body.appendChild(toast);
-
     setTimeout(() => {
       toast.classList.add("show");
     }, 100);
-
     setTimeout(() => {
       toast.classList.remove("show");
       setTimeout(() => {
@@ -259,7 +234,6 @@ const AddSupplier = () => {
     }, 3000);
   };
 
-  // Send request to backend
   const sendRequest = async () => {
     await axios
       .post("http://localhost:5000/api/suppliers", {
@@ -271,7 +245,6 @@ const AddSupplier = () => {
       .then((res) => res.data);
   };
 
-  // Reset form
   const handleReset = () => {
     setInputs({
       supplier_name: "",
@@ -289,78 +262,60 @@ const AddSupplier = () => {
     setCurrentStep(1);
   };
 
-  // Get input field status class
   const getFieldClass = (fieldName) => {
     if (!touched[fieldName]) return "";
-    return errors[fieldName] ? "input-error" : "input-valid";
+    return errors[fieldName] ? "add-suppliers-input-error" : "add-suppliers-input-valid";
   };
 
   return (
-    <div className="add-buyers-container">
+    <div className="add-suppliers-container">
       <HeadBar />
       <GMNav />
-      <div className="content-wrapper">
+      <div className="add-suppliers-content-wrapper">
         <motion.div
-          className="form-card"
+          className="add-suppliers-form-card"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="form-header">
-            <h2 className="form-title">Add New Supplier</h2>
-            <div className="progress-bar-container">
-              <div className="progress-steps">
+          <div className="add-suppliers-form-header">
+            <h2 className="add-suppliers-form-title">Add New Supplier</h2>
+            <div className="add-suppliers-progress-bar-container">
+              <div className="add-suppliers-progress-steps">
                 {Array.from({ length: totalSteps }, (_, i) => (
                   <div
                     key={i}
-                    className={`step ${i + 1 <= currentStep ? "active" : ""} ${
+                    className={`add-suppliers-step ${i + 1 <= currentStep ? "active" : ""} ${
                       i + 1 < currentStep ? "completed" : ""
                     }`}
                   >
                     {i + 1 < currentStep ? (
-                      <span className="step-check">✓</span>
+                      <span className="add-suppliers-step-check">✓</span>
                     ) : (
-                      <span className="step-number">{i + 1}</span>
+                      <span className="add-suppliers-step-number">{i + 1}</span>
                     )}
                   </div>
                 ))}
               </div>
-              <div className="progress-line">
+              <div className="add-suppliers-progress-line">
                 <div
-                  className="progress-line-inner"
-                  style={{
-                    width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%`,
-                  }}
+                  className="add-suppliers-progress-line-inner"
+                  style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }}
                 ></div>
               </div>
             </div>
           </div>
-
           {success ? (
             <motion.div
-              className="success-container"
+              className="add-suppliers-success-container"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="success-icon">
-                <svg
-                  className="checkmark"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 52 52"
-                >
-                  <circle
-                    className="checkmark-circle"
-                    cx="26"
-                    cy="26"
-                    r="25"
-                    fill="none"
-                  />
-                  <path
-                    className="checkmark-check"
-                    fill="none"
-                    d="M14.1 27.2l7.1 7.2 16.7-16.8"
-                  />
+              <div className="add-suppliers-success-icon">
+                <svg className="add-suppliers-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                  <circle className="add-suppliers-checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+                  <path className="add-suppliers-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
                 </svg>
               </div>
               <h3>Supplier Added Successfully!</h3>
@@ -368,9 +323,9 @@ const AddSupplier = () => {
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className={loading ? "loading" : ""}>
-              <div className="form-step-wrapper">
+              <div className="add-suppliers-form-step-wrapper">
                 <motion.div
-                  className="form-step-content"
+                  className="add-suppliers-form-step-content"
                   key={`step-${currentStep}`}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -379,17 +334,16 @@ const AddSupplier = () => {
                 >
                   {currentStep === 1 && (
                     <>
-                      <div className="step-title">
+                      <div className="add-suppliers-step-title">
                         <h3>Basic Information</h3>
                         <p>Enter the supplier's name and contact information</p>
                       </div>
-
-                      <div className="form-group">
+                      <div className="add-suppliers-form-group">
                         <label htmlFor="supplier_name">
                           Supplier Name
-                          <span className="required-star">*</span>
+                          <span className="add-suppliers-required-star">*</span>
                         </label>
-                        <div className="input-container-sup">
+                        <div className="add-suppliers-input-container">
                           <input
                             id="supplier_name"
                             type="text"
@@ -401,12 +355,12 @@ const AddSupplier = () => {
                             className={getFieldClass("supplier_name")}
                             disabled={loading}
                           />
-                          <div className="input-icon">
+                          <div className="add-suppliers-input-icon">
                             <i className="fas fa-user"></i>
                           </div>
                           {touched.supplier_name && errors.supplier_name && (
                             <motion.div
-                              className="error-message"
+                              className="add-suppliers-error-message"
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.2 }}
@@ -416,13 +370,12 @@ const AddSupplier = () => {
                           )}
                         </div>
                       </div>
-
-                      <div className="form-group">
+                      <div className="add-suppliers-form-group">
                         <label htmlFor="supplier_phone">
                           Contact Number
-                          <span className="required-star">*</span>
+                          <span className="add-suppliers-required-star">*</span>
                         </label>
-                        <div className="input-container-sup">
+                        <div className="add-suppliers-input-container">
                           <input
                             id="supplier_phone"
                             type="tel"
@@ -435,12 +388,12 @@ const AddSupplier = () => {
                             disabled={loading}
                             maxLength={10}
                           />
-                          <div className="input-icon">
+                          <div className="add-suppliers-input-icon">
                             <i className="fas fa-phone"></i>
                           </div>
                           {touched.supplier_phone && errors.supplier_phone && (
                             <motion.div
-                              className="error-message"
+                              className="add-suppliers-error-message"
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.2 }}
@@ -452,20 +405,18 @@ const AddSupplier = () => {
                       </div>
                     </>
                   )}
-
                   {currentStep === 2 && (
                     <>
-                      <div className="step-title">
+                      <div className="add-suppliers-step-title">
                         <h3>Additional Details</h3>
                         <p>Enter the supplier's address and email</p>
                       </div>
-
-                      <div className="form-group">
+                      <div className="add-suppliers-form-group">
                         <label htmlFor="supplier_address">
                           Address
-                          <span className="required-star">*</span>
+                          <span className="add-suppliers-required-star">*</span>
                         </label>
-                        <div className="input-container-sup">
+                        <div className="add-suppliers-input-container">
                           <textarea
                             id="supplier_address"
                             name="supplier_address"
@@ -473,35 +424,31 @@ const AddSupplier = () => {
                             onBlur={handleBlur}
                             value={inputs.supplier_address}
                             placeholder="Enter Supplier Address"
-                            className={`textarea ${getFieldClass(
-                              "supplier_address"
-                            )}`}
+                            className={`textarea ${getFieldClass("supplier_address")}`}
                             disabled={loading}
                             rows={3}
                           />
-                          <div className="input-icon textarea-icon">
+                          <div className="add-suppliers-input-icon add-suppliers-textarea-icon">
                             <i className="fas fa-map-marker-alt"></i>
                           </div>
-                          {touched.supplier_address &&
-                            errors.supplier_address && (
-                              <motion.div
-                                className="error-message"
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                {errors.supplier_address}
-                              </motion.div>
-                            )}
+                          {touched.supplier_address && errors.supplier_address && (
+                            <motion.div
+                              className="add-suppliers-error-message"
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {errors.supplier_address}
+                            </motion.div>
+                          )}
                         </div>
                       </div>
-
-                      <div className="form-group">
+                      <div className="add-suppliers-form-group">
                         <label htmlFor="supplier_email">
                           Email Address
-                          <span className="required-star">*</span>
+                          <span className="add-suppliers-required-star">*</span>
                         </label>
-                        <div className="input-container-sup">
+                        <div className="add-suppliers-input-container">
                           <input
                             id="supplier_email"
                             type="email"
@@ -513,12 +460,12 @@ const AddSupplier = () => {
                             className={getFieldClass("supplier_email")}
                             disabled={loading}
                           />
-                          <div className="input-icon">
+                          <div className="add-suppliers-input-icon">
                             <i className="fas fa-envelope"></i>
                           </div>
                           {touched.supplier_email && errors.supplier_email && (
                             <motion.div
-                              className="error-message"
+                              className="add-suppliers-error-message"
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.2 }}
@@ -532,50 +479,45 @@ const AddSupplier = () => {
                   )}
                 </motion.div>
               </div>
-
-              <div className="form-actions">
+              <div className="add-suppliers-form-actions">
                 {currentStep > 1 && (
                   <button
                     type="button"
-                    className="btn-secondary"
+                    className="add-suppliers-btn-secondary"
                     onClick={handlePrevStep}
                     disabled={loading}
                   >
                     <i className="fas fa-arrow-left"></i> Back
                   </button>
                 )}
-
                 {currentStep < totalSteps ? (
                   <button
                     type="button"
-                    className="btn-primary"
+                    className="add-suppliers-btn-primary"
                     onClick={handleNextStep}
                     disabled={loading}
                   >
                     Next <i className="fas fa-arrow-right"></i>
                   </button>
                 ) : (
-                  <div className="final-buttons">
+                  <div className="add-suppliers-final-buttons">
                     <button
                       type="button"
-                      className="btn-outlined"
+                      className="add-suppliers-btn-outlined"
                       onClick={handleReset}
                       disabled={loading}
                     >
                       Reset
                     </button>
-
                     <button
                       type="submit"
-                      className="btn-submit"
+                      className="add-suppliers-btn-submit"
                       disabled={loading}
                     >
                       {loading ? (
-                        <div className="loader"></div>
+                        <div className="add-suppliers-loader"></div>
                       ) : (
-                        <>
-                          Submit <i className="fas fa-check"></i>
-                        </>
+                        <>Submit <i className="fas fa-check"></i></>
                       )}
                     </button>
                   </div>

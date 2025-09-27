@@ -42,14 +42,14 @@ function GMViewStock() {
     <div>
       <GMNav />
       <HeadBar />
-      <div className="viewDB-buyers-container" >
-        <div className="viewDB-header">
-          <h2 className="viewDB-buyer-title">View Stock</h2>
+      <div className="gm-stock-xyz-container">
+        <div className="gm-stock-xyz-header">
+          <h2 className="gm-stock-xyz-title">View Stock</h2>
         </div>
 
-        <div className="viewDB-advanced-filters">
+        <div className="gm-stock-xyz-advanced-filters">
           <select
-            className="viewDB-filter-input"
+            className="gm-stock-xyz-filter-input"
             value={selection}
             onChange={(e) => setSelection(e.target.value)}
           >
@@ -58,11 +58,11 @@ function GMViewStock() {
           </select>
         </div>
 
-        {loading && <div className="viewDB-loading">Loading data...</div>}
-        {error && <div className="viewDB-error">{error}</div>}
+        {loading && <div className="gm-stock-xyz-loading">Loading data...</div>}
+        {error && <div className="gm-stock-xyz-error">{error}</div>}
 
-        <div className="viewDB-table-container">
-          <table className="viewDB-buyers-table">
+        <div className="gm-stock-xyz-table-container">
+          <table className="gm-stock-xyz-table">
             <thead>
               <tr>
                 {selection === "ingredients" ? (

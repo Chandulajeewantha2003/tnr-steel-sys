@@ -173,9 +173,9 @@ function SPReturns() {
 
   return (
     <div className="spreturns-items-container">
-      <HeadBar />
       <SalesNav />
-
+      <HeadBar />
+      
       <div className="spreturns-items-content">
         <div className="spreturns-items-header">
           <h2 className="spreturns-title">

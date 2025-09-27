@@ -130,11 +130,10 @@ function ViewSalesRequests() {
 
   return (
     <div className="view-sales-requests-container">
+      <SalesNav />
       <HeadBar />
       <div className="view-sales-requests-layout">
-        <div className="view-sales-requests-sidebar">
-          <SalesNav />
-        </div>
+
         <div className="view-sales-requests-main-content">
           <div className="view-sales-requests-content-wrapper">
             <h2 className="view-sales-requests-title">Sales Requests</h2>

@@ -128,32 +128,32 @@ function Buyers() {
   };
 
   return (
-    <div style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: "#06013b", minHeight: "100vh" }}>
       <Nav />
       <HeadBar />
-      <div className="viewDB-buyers-container">
-        <div className="viewDB-header">
-          <h2 className="viewDB-buyer-title">Buyers' List</h2>
+      <div className="buy-xyz-container">
+        <div className="buy-xyz-header">
+          <h2 className="buy-xyz-title">Buyers' List</h2>
           <Link to="/addbuyers">
-            <button className="viewDB-new-buyer-btn">+ New Buyer</button>
+            <button className="buy-xyz-new-btn">+ New Buyer</button>
           </Link>
         </div>
 
-        <div className="viewDB-advanced-filters">
+        <div className="buy-xyz-advanced-filters">
           <input
             type="search"
             placeholder="Search Here"
-            className="viewDB-search-input"
+            className="buy-xyz-search-input"
             value={searchQuery}
             onChange={handleSearch}
           />
         </div>
 
-        <div className="viewDB-results-summary">
+        <div className="buy-xyz-results-summary">
           <span>
             Showing {currentBuyers.length} of {filteredBuyers.length} buyers
           </span>
-          <div className="viewDB-items-per-page">
+          <div className="buy-xyz-items-per-page">
             <span>Show</span>
             <select
               value={itemsPerPage}
@@ -168,8 +168,8 @@ function Buyers() {
           </div>
         </div>
 
-        <div className="viewDB-table-container">
-          <table className="viewDB-buyers-table">
+        <div className="buy-xyz-table-container">
+          <table className="buy-xyz-table">
             <thead>
               <tr>
                 <th onClick={() => handleSort("_id")}>
@@ -206,14 +206,14 @@ function Buyers() {
           </table>
         </div>
 
-        <div className="viewDB-pagination-controls">
+        <div className="buy-xyz-pagination-controls">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           >
             Previous
           </button>
-          <span className="viewDB-pagedetails" style={{ color: '#f4f3f7ff'}}>
+          <span className="buy-xyz-pagedetails" style={{ color: "#f4f3f7ff" }}>
             Page {currentPage} of {totalPages}
           </span>
           <button
@@ -224,8 +224,8 @@ function Buyers() {
           </button>
         </div>
 
-        <div className="viewDB-report-btn-container">
-          <button onClick={generatePDF} className="viewDB-report-btn">
+        <div className="buy-xyz-report-btn-container">
+          <button onClick={generatePDF} className="buy-xyz-report-btn">
             Download Report
           </button>
         </div>

@@ -3,7 +3,7 @@
 /* Main container */
 .addshop-container {
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background: linear-gradient(135deg, #06013b 0%, #1a1a40 100%);
   font-family: "Poppins", sans-serif;
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import "../AddSupplier/AddSupplier.css";
+import "./UpdateSupplier.css";
 import Nav from "../Nav/Nav";
 import HeadBar from "../HeadBar/HeadBar";
 import { motion } from "framer-motion";
@@ -211,11 +211,11 @@ function UpdateSupplier() {
     if (validateStep(currentStep)) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      const formElement = document.querySelector(".form-step-content");
+      const formElement = document.querySelector(".upd-sup-xyz-form-step-content");
       if (formElement) {
-        formElement.classList.add("shake");
+        formElement.classList.add("upd-sup-xyz-shake");
         setTimeout(() => {
-          formElement.classList.remove("shake");
+          formElement.classList.remove("upd-sup-xyz-shake");
         }, 500);
       }
     }
@@ -231,11 +231,11 @@ function UpdateSupplier() {
     e.preventDefault();
 
     if (!validateForm()) {
-      const formElement = document.querySelector(".form-step-content");
+      const formElement = document.querySelector(".upd-sup-xyz-form-step-content");
       if (formElement) {
-        formElement.classList.add("shake");
+        formElement.classList.add("upd-sup-xyz-shake");
         setTimeout(() => {
-          formElement.classList.remove("shake");
+          formElement.classList.remove("upd-sup-xyz-shake");
         }, 500);
       }
       return;
@@ -260,7 +260,7 @@ function UpdateSupplier() {
   // Show toast notification
   const showToast = (message, type = "success") => {
     const toast = document.createElement("div");
-    toast.className = `toast ${type}`;
+    toast.className = `upd-sup-xyz-toast ${type}`;
     toast.textContent = message;
 
     document.body.appendChild(toast);
@@ -308,42 +308,42 @@ function UpdateSupplier() {
   // Get input field status class
   const getFieldClass = (fieldName) => {
     if (!touched[fieldName]) return "";
-    return errors[fieldName] ? "input-error" : "input-valid";
+    return errors[fieldName] ? "upd-sup-xyz-input-error" : "upd-sup-xyz-input-valid";
   };
 
   return (
-    <div className="add-buyers-container">
+    <div className="upd-sup-xyz-buyers-container">
       <HeadBar />
       <Nav />
-      <div className="content-wrapper">
+      <div className="upd-sup-xyz-content-wrapper">
         <motion.div
-          className="form-card"
+          className="upd-sup-xyz-form-card"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="form-header">
-            <h2 className="form-title">Update Supplier</h2>
-            <div className="progress-bar-container">
-              <div className="progress-steps">
+          <div className="upd-sup-xyz-form-header">
+            <h2 className="upd-sup-xyz-form-title">Update Supplier</h2>
+            <div className="upd-sup-xyz-progress-bar-container">
+              <div className="upd-sup-xyz-progress-steps">
                 {Array.from({ length: totalSteps }, (_, i) => (
                   <div
                     key={i}
-                    className={`step ${i + 1 <= currentStep ? "active" : ""} ${
+                    className={`upd-sup-xyz-step ${i + 1 <= currentStep ? "active" : ""} ${
                       i + 1 < currentStep ? "completed" : ""
                     }`}
                   >
                     {i + 1 < currentStep ? (
-                      <span className="step-check">✓</span>
+                      <span className="upd-sup-xyz-step-check">✓</span>
                     ) : (
-                      <span className="step-number">{i + 1}</span>
+                      <span className="upd-sup-xyz-step-number">{i + 1}</span>
                     )}
                   </div>
                 ))}
               </div>
-              <div className="progress-line">
+              <div className="upd-sup-xyz-progress-line">
                 <div
-                  className="progress-line-inner"
+                  className="upd-sup-xyz-progress-line-inner"
                   style={{
                     width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%`,
                   }}
@@ -354,26 +354,26 @@ function UpdateSupplier() {
 
           {success ? (
             <motion.div
-              className="success-container"
+              className="upd-sup-xyz-success-container"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="success-icon">
+              <div className="upd-sup-xyz-success-icon">
                 <svg
-                  className="checkmark"
+                  className="upd-sup-xyz-checkmark"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 52 52"
                 >
                   <circle
-                    className="checkmark-circle"
+                    className="upd-sup-xyz-checkmark-circle"
                     cx="26"
                     cy="26"
                     r="25"
                     fill="none"
                   />
                   <path
-                    className="checkmark-check"
+                    className="upd-sup-xyz-checkmark-check"
                     fill="none"
                     d="M14.1 27.2l7.1 7.2 16.7-16.8"
                   />
@@ -384,9 +384,9 @@ function UpdateSupplier() {
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className={loading ? "loading" : ""}>
-              <div className="form-step-wrapper">
+              <div className="upd-sup-xyz-form-step-wrapper">
                 <motion.div
-                  className="form-step-content"
+                  className="upd-sup-xyz-form-step-content"
                   key={`step-${currentStep}`}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -395,19 +395,19 @@ function UpdateSupplier() {
                 >
                   {currentStep === 1 && (
                     <>
-                      <div className="step-title">
+                      <div className="upd-sup-xyz-step-title">
                         <h3>Basic Information</h3>
                         <p>
                           Update the supplier's name and contact information
                         </p>
                       </div>
 
-                      <div className="form-group">
+                      <div className="upd-sup-xyz-form-group">
                         <label htmlFor="supplier_name">
                           Supplier Name
-                          <span className="required-star">*</span>
+                          <span className="upd-sup-xyz-required-star">*</span>
                         </label>
-                        <div className="input-container">
+                        <div className="upd-sup-xyz-input-container">
                           <input
                             id="supplier_name"
                             type="text"
@@ -419,12 +419,12 @@ function UpdateSupplier() {
                             className={getFieldClass("supplier_name")}
                             disabled={loading}
                           />
-                          <div className="input-icon">
+                          <div className="upd-sup-xyz-input-icon">
                             <i className="fas fa-user"></i>
                           </div>
                           {touched.supplier_name && errors.supplier_name && (
                             <motion.div
-                              className="error-message"
+                              className="upd-sup-xyz-error-message"
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.2 }}
@@ -435,12 +435,12 @@ function UpdateSupplier() {
                         </div>
                       </div>
 
-                      <div className="form-group">
+                      <div className="upd-sup-xyz-form-group">
                         <label htmlFor="supplier_phone">
                           Contact Number
-                          <span className="required-star">*</span>
+                          <span className="upd-sup-xyz-required-star">*</span>
                         </label>
-                        <div className="input-container">
+                        <div className="upd-sup-xyz-input-container">
                           <input
                             id="supplier_phone"
                             type="tel"
@@ -453,12 +453,12 @@ function UpdateSupplier() {
                             disabled={loading}
                             maxLength={10}
                           />
-                          <div className="input-icon">
+                          <div className="upd-sup-xyz-input-icon">
                             <i className="fas fa-phone"></i>
                           </div>
                           {touched.supplier_phone && errors.supplier_phone && (
                             <motion.div
-                              className="error-message"
+                              className="upd-sup-xyz-error-message"
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.2 }}
@@ -473,17 +473,17 @@ function UpdateSupplier() {
 
                   {currentStep === 2 && (
                     <>
-                      <div className="step-title">
+                      <div className="upd-sup-xyz-step-title">
                         <h3>Additional Details</h3>
                         <p>Update the supplier's address and email</p>
                       </div>
 
-                      <div className="form-group">
+                      <div className="upd-sup-xyz-form-group">
                         <label htmlFor="supplier_address">
                           Address
-                          <span className="required-star">*</span>
+                          <span className="upd-sup-xyz-required-star">*</span>
                         </label>
-                        <div className="input-container">
+                        <div className="upd-sup-xyz-input-container">
                           <textarea
                             id="supplier_address"
                             name="supplier_address"
@@ -497,13 +497,13 @@ function UpdateSupplier() {
                             disabled={loading}
                             rows={3}
                           />
-                          <div className="input-icon textarea-icon">
+                          <div className="upd-sup-xyz-input-icon upd-sup-xyz-textarea-icon">
                             <i className="fas fa-map-marker-alt"></i>
                           </div>
                           {touched.supplier_address &&
                             errors.supplier_address && (
                               <motion.div
-                                className="error-message"
+                                className="upd-sup-xyz-error-message"
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.2 }}
@@ -514,12 +514,12 @@ function UpdateSupplier() {
                         </div>
                       </div>
 
-                      <div className="form-group">
+                      <div className="upd-sup-xyz-form-group">
                         <label htmlFor="supplier_email">
                           Email Address
-                          <span className="required-star">*</span>
+                          <span className="upd-sup-xyz-required-star">*</span>
                         </label>
-                        <div className="input-container">
+                        <div className="upd-sup-xyz-input-container">
                           <input
                             id="supplier_email"
                             type="email"
@@ -531,12 +531,12 @@ function UpdateSupplier() {
                             className={getFieldClass("supplier_email")}
                             disabled={loading}
                           />
-                          <div className="input-icon">
+                          <div className="upd-sup-xyz-input-icon">
                             <i className="fas fa-envelope"></i>
                           </div>
                           {touched.supplier_email && errors.supplier_email && (
                             <motion.div
-                              className="error-message"
+                              className="upd-sup-xyz-error-message"
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.2 }}
@@ -551,11 +551,11 @@ function UpdateSupplier() {
                 </motion.div>
               </div>
 
-              <div className="form-actions">
+              <div className="upd-sup-xyz-form-actions">
                 {currentStep > 1 && (
                   <button
                     type="button"
-                    className="btn-secondary"
+                    className="upd-sup-xyz-btn-secondary"
                     onClick={handlePrevStep}
                     disabled={loading}
                   >
@@ -566,17 +566,17 @@ function UpdateSupplier() {
                 {currentStep < totalSteps ? (
                   <button
                     type="button"
-                    className="btn-primary"
+                    className="upd-sup-xyz-btn-primary"
                     onClick={handleNextStep}
                     disabled={loading}
                   >
                     Next <i className="fas fa-arrow-right"></i>
                   </button>
                 ) : (
-                  <div className="final-buttons">
+                  <div className="upd-sup-xyz-final-buttons">
                     <button
                       type="button"
-                      className="btn-outlined"
+                      className="upd-sup-xyz-btn-outlined"
                       onClick={handleReset}
                       disabled={loading}
                     >
@@ -585,11 +585,11 @@ function UpdateSupplier() {
 
                     <button
                       type="submit"
-                      className="btn-submit"
+                      className="upd-sup-xyz-btn-submit"
                       disabled={loading}
                     >
                       {loading ? (
-                        <div className="loader"></div>
+                        <div className="upd-sup-xyz-loader"></div>
                       ) : (
                         <>
                           Save <i className="fas fa-check"></i>

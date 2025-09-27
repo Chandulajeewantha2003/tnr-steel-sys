@@ -3,7 +3,7 @@ import GMNav from "../GMNav/GMNav";
 import HeadBar from "../HeadBar/HeadBar";
 import axios from "axios";
 import Supplier from "../Supplier/Supplier.jsx";
-import "../Supplier/Supplier.css";
+import "./Suppliers.css";
 import { Link } from "react-router-dom";
 import jsPDF from "jspdf";
 
@@ -99,30 +99,30 @@ function Suppliers() {
     <div>
       <GMNav />
       <HeadBar />
-      <div className="viewDB-buyers-container">
-        <div className="viewDB-header">
-          <h2 className="viewDB-buyer-title">Suppliers List</h2>
+      <div className="sup-xyz-buyers-container">
+        <div className="sup-xyz-header">
+          <h2 className="sup-xyz-buyer-title">Suppliers List</h2>
           <Link to="/addsuppliers">
-            <button className="viewDB-new-buyer-btn">+ New Supplier</button>
+            <button className="sup-xyz-new-buyer-btn">+ New Supplier</button>
           </Link>
         </div>
 
-        <div className="viewDB-advanced-filters">
+        <div className="sup-xyz-advanced-filters">
           <input
             type="search"
             placeholder="Search Here"
-            className="viewDB-search-input"
+            className="sup-xyz-search-input"
             value={searchQuery}
             onChange={handleSearch}
           />
         </div>
 
-        <div className="viewDB-results-summary">
+        <div className="sup-xyz-results-summary">
           <span>
             Showing {currentSuppliers.length} of {filteredSuppliers.length}{" "}
             suppliers
           </span>
-          <div className="viewDB-items-per-page">
+          <div className="sup-xyz-items-per-page">
             <span>Show</span>
             <select
               value={itemsPerPage}
@@ -137,8 +137,8 @@ function Suppliers() {
           </div>
         </div>
 
-        <div className="viewDB-table-container">
-          <table className="viewDB-buyers-table">
+        <div className="sup-xyz-table-container">
+          <table className="sup-xyz-buyers-table">
             <thead>
               <tr>
                 <th>Supplier ID</th>
@@ -169,14 +169,14 @@ function Suppliers() {
           </table>
         </div>
 
-        <div className="viewDB-pagination-controls">
+        <div className="sup-xyz-pagination-controls">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           >
             Previous
           </button>
-          <span className="viewDB-pagedetails">
+          <span className="sup-xyz-pagedetails">
             Page {currentPage} of {totalPages}
           </span>
           <button
@@ -187,8 +187,8 @@ function Suppliers() {
           </button>
         </div>
 
-        <div className="viewDB-report-btn-container">
-          <button onClick={generatePDF} className="viewDB-report-btn">
+        <div className="sup-xyz-report-btn-container">
+          <button onClick={generatePDF} className="sup-xyz-report-btn">
             Download Report
           </button>
         </div>

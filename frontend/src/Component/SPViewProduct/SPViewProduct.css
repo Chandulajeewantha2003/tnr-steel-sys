@@ -18,7 +18,8 @@
 /* ===== PRODUCTS LIST PAGE STYLES ===== */
 .viewDB-buyers-container {
   max-width: 1450px;
-  margin: 20px auto;
+  margin-top: 20px ;
+  margin-left: 78px;
   padding: 0 20px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -60,9 +61,9 @@
 }
 
 .viewDB-buyers-table {
-  width: 100%;
+  width: 95%;
   border-collapse: collapse;
-  table-layout: fixed;
+  
 }
 
 .viewDB-buyers-table th {

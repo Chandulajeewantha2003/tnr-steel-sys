@@ -4,29 +4,25 @@ import axios from "axios";
 import Buyer from "./GMBuyer";
 import "./GMBuyer.css";
 import HeadBar from "../HeadBar/HeadBar";
-
-import jsPDF from "jspdf"; // Import jsPDF
+import jsPDF from "jspdf";
 
 const URL = "http://localhost:5000/buyers";
 
-// Fetch data from the API
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
 };
 
 function GMBuyers() {
-  const [buyers, setBuyers] = useState([]); // State for all buyers
-  const [filteredBuyers, setFilteredBuyers] = useState([]); // State for filtered buyers
+  const [buyers, setBuyers] = useState([]);
+  const [filteredBuyers, setFilteredBuyers] = useState();
 
-  // Fetch the list of buyers on component mount
   useEffect(() => {
     fetchHandler().then((data) => {
       setBuyers(data.buyers);
-      setFilteredBuyers(data.buyers); // Initially, display all buyers
+      setFilteredBuyers(data.buyers);
     });
   }, []);
 
-  // Handle deleting a buyer and updating the state
   const handleDelete = (id) => {
     setBuyers((prevBuyers) => prevBuyers.filter((buyer) => buyer._id !== id));
     setFilteredBuyers((prevBuyers) =>
@@ -34,7 +30,6 @@ function GMBuyers() {
     );
   };
 
-  // Search functionality
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = (e) => {
@@ -50,27 +45,22 @@ function GMBuyers() {
     setFilteredBuyers(filtered);
   };
 
-  // Generate PDF report
   const generatePDF = () => {
     const doc = new jsPDF();
 
-    // Set title styling
     doc.setFontSize(16);
-    doc.setTextColor(0, 102, 204); // Blue color for the title
+    doc.setTextColor(0, 102, 204);
     doc.text("Direct Buyers Report", 105, 15, null, null, "center");
 
-    // Loop through users and format content
     filteredBuyers.forEach((buyer, i) => {
-      const yOffset = 25 + i * 40; // Increased spacing for better readability
+      const yOffset = 25 + i * 40;
 
-      // Section header
       doc.setFontSize(12);
-      doc.setTextColor(0, 153, 76); // Green color for headers
+      doc.setTextColor(0, 153, 76);
       doc.text(`Buyer ${i + 1}`, 15, yOffset);
 
-      // User details
       doc.setFontSize(10);
-      doc.setTextColor(0, 0, 0); // Black color for regular text
+      doc.setTextColor(0, 0, 0);
       doc.text(`ID: ${buyer._id}`, 20, yOffset + 7);
       doc.text(`Name: ${buyer.name}`, 20, yOffset + 14);
       doc.text(`Contact: ${buyer.contact}`, 20, yOffset + 21);
@@ -83,25 +73,23 @@ function GMBuyers() {
     <div>
       <GMNav />
       <HeadBar />
-      <div className="buyers-container">
-        <div className="header">
-          <h2 className="buyer-title">Buyers' List</h2>
+      <div className="gm-buy-xyz-container">
+        <div className="gm-buy-xyz-header">
+          <h2 className="gm-buy-xyz-title">Buyers' List</h2>
         </div>
 
-        <div className="table-container">
-          <div className="table-controls">
-            {/* Search Input */}
+        <div className="gm-buy-xyz-table-container">
+          <div className="gm-buy-xyz-controls">
             <input
               type="search"
               placeholder="Search Here"
-              className="search-input"
+              className="gm-buy-xyz-search-input"
               value={searchQuery}
-              onChange={handleSearch} // Add onChange event
+              onChange={handleSearch}
             />
           </div>
 
-          {/* Buyers Table */}
-          <table className="buyers-table">
+          <table className="gm-buy-xyz-table">
             <thead>
               <tr>
                 <th>Buyer ID</th>
@@ -125,9 +113,8 @@ function GMBuyers() {
             </tbody>
           </table>
 
-          {/* Download Report Button */}
-          <div className="report-btn-container">
-            <button onClick={generatePDF} className="report-btn">
+          <div className="gm-buy-xyz-report-btn-container">
+            <button onClick={generatePDF} className="gm-buy-xyz-report-btn">
               Download Report
             </button>
           </div>

@@ -187,8 +187,9 @@ function IndirectBuyerIssueItem() {
 
   return (
     <div className="indirectissue-items-container">
-      <HeadBar />
       <SalesNav />
+      <HeadBar />
+      
 
       <div className="indirectissue-items-content">
         <div className="indirectissue-items-header">
