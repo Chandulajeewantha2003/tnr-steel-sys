@@ -1,15 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 .spreturns-items-container {
-  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  padding: 20px;
-  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #06013b 0%, #1a1a40 100%);
+  color: #333;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .spreturns-items-content {
   max-width: 1200px;
-  margin: 0 auto;
+  margin-left:165px;
+  margin-top: 20px;
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -17,12 +20,13 @@
 }
 
 .spreturns-items-header {
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-  gap: 20px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e7ff;
 }
 
 .spreturns-title {

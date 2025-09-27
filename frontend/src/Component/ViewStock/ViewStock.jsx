@@ -149,7 +149,7 @@ function ViewStock() {
   });
 
   return (
-    <div className="VS-main-container">
+    <div className="VS-main-container"style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
       <Nav />
       <HeadBar />
       <div className="VS-container">
@@ -207,7 +207,7 @@ function ViewStock() {
 
         {error && <div className="VS-error">{error}</div>}
 
-        <div className="VS-table-container">
+        <div className="VS-table-container" >
           <table className="VS-table">
             <thead>
               <tr>

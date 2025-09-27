@@ -5,7 +5,7 @@
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #06013b 0%, #1a1a40 100%);
-  padding: 0 20px;
+  
 }
 
 .ingredient-request-home-container::before {

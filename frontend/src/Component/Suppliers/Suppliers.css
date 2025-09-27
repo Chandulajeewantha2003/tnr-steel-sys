@@ -1,0 +1,277 @@
+:root {
+    --primary-color: #112e51;
+    --secondary-color: #0071bc;
+    --accent-color: #02bfe7;
+    --success-color: #2e8540;
+    --danger-color: #e31c3d;
+    --warning-color: #fdb81e;
+    --light-gray: #f1f1f1;
+    --medium-gray: #d6d7d9;
+    --dark-gray: #5b616b;
+    --text-color: #212121;
+    --white: #ffffff;
+    --border-radius: 4px;
+    --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* ===== SUPPLIERS LIST PAGE STYLES ===== */
+
+.sup-xyz-buyers-container {
+    max-width: 1450px;
+    margin-left: 100px;
+    margin-top: 20px ;
+    padding: 0 20px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.sup-xyz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px; /* Reduced from 20px to 5px to reduce gap */
+}
+
+.sup-xyz-buyer-title {
+    display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 0;
+  font-weight: 600;
+  position: relative;
+  gap: 8px;
+  text-shadow: 0 0 10px rgba(142, 84, 233, 0.5), 0 0 20px rgba(142, 84, 233, 0.3);
+  animation: glow 2s ease-in-out infinite;
+}
+
+.sup-xyz-new-buyer-btn {
+    background-color: #17304c;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.sup-xyz-new-buyer-btn:hover {
+    background-color: #234569;
+}
+
+.sup-xyz-advanced-filters {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.sup-xyz-search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: white;
+    transition: border-color 0.3s;
+}
+
+.sup-xyz-search-input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.sup-xyz-results-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.sup-xyz-items-per-page {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sup-xyz-items-per-page select {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.sup-xyz-table-container {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+}
+
+.sup-xyz-buyers-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.sup-xyz-pagedetails {
+    color: #17304c;
+}
+
+.sup-xyz-buyers-table th {
+    background-color: #f8f9fa;
+    color: #17304c;
+    text-align: left;
+    padding: 14px 32px;
+    font-weight: 600;
+    border-bottom: 2px solid #e9ecef;
+    position: sticky;
+    top: 0;
+}
+
+.sup-xyz-buyers-table td {
+    padding: 12px 32px;
+    border-bottom: 1px solid #e9ecef;
+    color: #17304c;
+}
+
+/* Column widths for balanced layout */
+
+.sup-xyz-buyers-table th:nth-child(1),
+.sup-xyz-buyers-table td:nth-child(1) {
+    width: 18%; /* Supplier ID */
+}
+
+.sup-xyz-buyers-table th:nth-child(2),
+.sup-xyz-buyers-table td:nth-child(2) {
+    width: 18%; /* Supplier Name */
+}
+
+.sup-xyz-buyers-table th:nth-child(3),
+.sup-xyz-buyers-table td:nth-child(3) {
+    width: 22%; /* Supplier Address */
+}
+
+.sup-xyz-buyers-table th:nth-child(4),
+.sup-xyz-buyers-table td:nth-child(4) {
+    width: 12%; /* Supplier Phone */
+}
+
+.sup-xyz-buyers-table th:nth-child(5),
+.sup-xyz-buyers-table td:nth-child(5) {
+    width: 20%; /* Supplier Email */
+    word-break: break-word; /* Ensure long emails wrap */
+}
+
+.sup-xyz-buyers-table th:nth-child(6),
+.sup-xyz-buyers-table td:nth-child(6) {
+    width: 10%; /* Action */
+}
+
+.sup-xyz-buyers-table tbody tr {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.sup-xyz-buyers-table tbody tr:hover {
+    background-color: #f9fbfd;
+}
+
+.sup-xyz-action-icons {
+    display: flex;
+    gap: 15px; /* Increased gap for better spacing */
+    justify-content: center;
+}
+
+.sup-xyz-action {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px; /* Add padding to prevent cramped appearance */
+}
+
+.sup-xyz-action-icons i {
+    color: #17304c;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease;
+}
+
+.sup-xyz-action-icons i:hover {
+    transform: scale(1.2);
+}
+
+.sup-xyz-pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.sup-xyz-pagination-controls button {
+    padding: 8px 16px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.sup-xyz-pagination-controls button:hover:not(:disabled) {
+    background-color: #e9ecef;
+}
+
+.sup-xyz-pagination-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.sup-xyz-report-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.sup-xyz-report-btn {
+    padding: 10px 18px;
+    background-color: #17304c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.sup-xyz-report-btn:hover {
+    background-color: #234569;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 768px) {
+    .sup-xyz-advanced-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .sup-xyz-search-input {
+        width: 100%;
+    }
+    .sup-xyz-report-btn-container {
+        flex-direction: column;
+        width: 100%;
+    }
+    .sup-xyz-report-btn {
+        width: 100%;
+    }
+}

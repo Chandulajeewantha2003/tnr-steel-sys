@@ -15,31 +15,38 @@
     --transition: all 0.3s ease;
 }
 
-
 /* ===== PRODUCTS LIST PAGE STYLES ===== */
 
-.viewDB-buyers-container {
+.prod-xyz-buyers-container {
     max-width: 1450px;
-    margin: 20px auto;
+    margin-left: 100px;
+    margin-top: 20px;
     padding: 0 20px;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.viewDB-header {
+.prod-xyz-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 5px; /* Reduced from 20px to 5px to reduce gap */
 }
 
-.viewDB-buyer-title {
-    color: #17304c;
-    font-size: 24px;
-    margin: 0;
+.prod-xyz-buyer-title {
+    display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 0;
+  font-weight: 600;
+  position: relative;
+  gap: 8px;
+  text-shadow: 0 0 10px rgba(142, 84, 233, 0.5), 0 0 20px rgba(142, 84, 233, 0.3);
+  animation: glow 2s ease-in-out infinite;
 }
 
-.viewDB-new-buyer-btn {
-    background-color: #17304c;
+.prod-xyz-new-buyer-btn {
+    background-color: #234569;
     color: white;
     border: none;
     padding: 10px 18px;
@@ -49,11 +56,9 @@
     transition: background-color 0.2s;
 }
 
-.viewDB-new-buyer-btn:hover {
-    background-color: #234569;
-}
 
-.viewDB-table-container {
+
+.prod-xyz-table-container {
     background-color: white;
     border-radius: 8px;
     overflow: hidden;
@@ -61,13 +66,12 @@
     margin-bottom: 20px;
 }
 
-.viewDB-buyers-table {
+.prod-xyz-buyers-table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
 }
 
-.viewDB-buyers-table th {
+.prod-xyz-buyers-table th {
     background-color: #f8f9fa;
     color: #17304c;
     text-align: left;
@@ -78,73 +82,67 @@
     top: 0;
 }
 
-.viewDB-buyers-table td {
+.prod-xyz-buyers-table td {
     padding: 12px 32px;
     border-bottom: 1px solid #e9ecef;
     color: #17304c;
 }
 
-
 /* Column widths for balanced layout */
 
-.viewDB-buyers-table th:nth-child(1),
-.viewDB-buyers-table td:nth-child(1) {
-    width: 30%;
-    /* Product ID */
+.prod-xyz-buyers-table th:nth-child(1),
+.prod-xyz-buyers-table td:nth-child(1) {
+    width: 30%; /* Product ID */
 }
 
-.viewDB-buyers-table th:nth-child(2),
-.viewDB-buyers-table td:nth-child(2) {
-    width: 30%;
-    /* Product Name */
+.prod-xyz-buyers-table th:nth-child(2),
+.prod-xyz-buyers-table td:nth-child(2) {
+    width: 30%; /* Product Name */
 }
 
-.viewDB-buyers-table th:nth-child(3),
-.viewDB-buyers-table td:nth-child(3) {
-    width: 30%;
-    /* Product Price */
+.prod-xyz-buyers-table th:nth-child(3),
+.prod-xyz-buyers-table td:nth-child(3) {
+    width: 30%; /* Product Price */
 }
 
-.viewDB-buyers-table th:nth-child(4),
-.viewDB-buyers-table td:nth-child(4) {
-    width: 10%;
-    /* Actions */
+.prod-xyz-buyers-table th:nth-child(4),
+.prod-xyz-buyers-table td:nth-child(4) {
+    width: 10%; /* Actions */
 }
 
-.viewDB-buyers-table tbody tr {
+.prod-xyz-buyers-table tbody tr {
     transition: background-color 0.2s ease-in-out;
 }
 
-.viewDB-buyers-table tbody tr:hover {
+.prod-xyz-buyers-table tbody tr:hover {
     background-color: #f9fbfd;
 }
 
-.viewDB-action-icons {
+.prod-xyz-action-icons {
     display: flex;
     gap: 10px;
     justify-content: center;
 }
 
-.viewDB-action {
+.prod-xyz-action {
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
 
-.viewDB-action-icons i {
+.prod-xyz-action-icons i {
     color: #17304c;
     font-size: 1.2rem;
     transition: transform 0.2s ease;
 }
 
-.viewDB-action-icons i:hover {
+.prod-xyz-action-icons i:hover {
     transform: scale(1.2);
 }
 
-
 /* ===== POPUP STYLES ===== */
 
-.viewDB-popup-overlay {
+.prod-xyz-popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -157,12 +155,11 @@
     z-index: 1000;
 }
 
-.viewDB-popup-content {
+.prod-xyz-popup-content {
     background-color: white;
     border-radius: 8px;
     width: 100%;
-    max-width: 500px;
-    /* Adjusted for product form */
+    max-width: 500px; /* Adjusted for product form */
     max-height: 90vh;
     overflow-y: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -180,7 +177,7 @@
     }
 }
 
-.viewDB-form-title-dbuyers-popup {
+.prod-xyz-form-title-dbuyers-popup {
     color: #17304c;
     font-size: 24px;
     margin-bottom: 20px;
@@ -188,12 +185,12 @@
     border-bottom: 1px solid #e9ecef;
 }
 
-.viewDB-form-group-dbuyers-popup {
+.prod-xyz-form-group-dbuyers-popup {
     margin-bottom: 20px;
     padding: 0 20px;
 }
 
-.viewDB-lable-popup {
+.prod-xyz-lable-popup {
     display: block;
     margin-bottom: 6px;
     font-size: 13px;
@@ -201,7 +198,7 @@
     color: #555;
 }
 
-.viewDB-form-group-dbuyers-popup input {
+.prod-xyz-form-group-dbuyers-popup input {
     width: 100%;
     padding: 8px 12px;
     border: 1px solid #ddd;
@@ -210,20 +207,20 @@
     background-color: white;
 }
 
-.viewDB-form-group-dbuyers-popup input:focus {
+.prod-xyz-form-group-dbuyers-popup input:focus {
     border-color: #3498db;
     outline: none;
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
-.viewDB-popup-buttons {
+.prod-xyz-popup-buttons {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
     padding: 20px;
 }
 
-.viewDB-save-btn-dbuyers-popup {
+.prod-xyz-save-btn-dbuyers-popup {
     background-color: #17304c;
     color: white;
     padding: 10px 18px;
@@ -234,11 +231,11 @@
     transition: background-color 0.2s;
 }
 
-.viewDB-save-btn-dbuyers-popup:hover {
+.prod-xyz-save-btn-dbuyers-popup:hover {
     background-color: #234569;
 }
 
-.viewDB-cancel-btn-popup {
+.prod-xyz-cancel-btn-popup {
     background-color: #f1f1f1;
     color: #333;
     padding: 10px 18px;
@@ -249,20 +246,19 @@
     transition: background-color 0.2s;
 }
 
-.viewDB-cancel-btn-popup:hover {
+.prod-xyz-cancel-btn-popup:hover {
     background-color: #e5e5e5;
 }
-
 
 /* Responsive adjustments */
 
 @media (max-width: 768px) {
-    .viewDB-header {
+    .prod-xyz-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
-    .viewDB-new-buyer-btn {
+    .prod-xyz-new-buyer-btn {
         width: 100%;
     }
 }

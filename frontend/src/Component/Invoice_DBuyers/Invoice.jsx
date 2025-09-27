@@ -5,6 +5,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import "./Invoice.css";
 import axios from "axios";
+import HeadBar from "../HeadBar/HeadBar";
 
 function Invoice() {
   const [invoiceData, setInvoiceData] = useState([]);
@@ -112,13 +113,16 @@ function Invoice() {
   };
 
   return (
+    <div style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
+    <HeadBar />
     <div className="directbuyerinvoice-container">
+      
       <Nav />
       <div id="directbuyerinvoice-content">
         <div className="directbuyerinvoice-header">
           <div className="directbuyerinvoice-header-top">
             <img
-              src="./images/logo.png"
+              src="/logo.png"
               alt="Logo"
               className="directbuyerinvoice-logo"
             />
@@ -211,6 +215,7 @@ function Invoice() {
           Submit
         </button>
       </div>
+    </div>
     </div>
   );
 }

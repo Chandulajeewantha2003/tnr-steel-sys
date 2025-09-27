@@ -113,8 +113,8 @@ function StockRequestForm() {
 
   return (
     <div className="stock-request-container">
-      <HeadBar />
       <SalesNav />
+      <HeadBar />
       <div className="stock-request-main">
         <h2 className="form-title">Stock Request Form</h2>
         <form onSubmit={handleSubmit} className="stock-request-form">

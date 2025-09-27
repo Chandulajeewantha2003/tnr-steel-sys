@@ -4,8 +4,9 @@
 /* Main container */
 
 .dbreturns-returns-container {
-    max-width: 1200px;
-    margin: 20px auto;
+    max-width: 1400px;
+    margin-left: 100px;
+    margin-top: 20px ;
     padding: 0 20px;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -21,9 +22,16 @@
 }
 
 .dbreturns-returns-title {
-    color: #17304c;
-    font-size: 24px;
-    margin: 0;
+    display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 0;
+  font-weight: 600;
+  position: relative;
+  gap: 8px;
+  text-shadow: 0 0 10px rgba(142, 84, 233, 0.5), 0 0 20px rgba(142, 84, 233, 0.3);
+  animation: glow 2s ease-in-out infinite;
 }
 
 
@@ -175,7 +183,7 @@
 .dbreturns-returns-table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    
 }
 
 .dbreturns-returns-table th {

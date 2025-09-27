@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./GMviewproducts.css"; // Added styling
 import GMNav from "../GMNav/GMNav";
 import HeadBar from "../HeadBar/HeadBar";
+
 function GMviewproducts() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
@@ -142,16 +143,16 @@ function GMviewproducts() {
     <div>
       <GMNav />
       <HeadBar />
-      <div className="viewDB-buyers-container">
-        <div className="viewDB-header">
-          <h2 className="viewDB-buyer-title">Products List</h2>
-          <button className="viewDB-new-buyer-btn" onClick={handleOpenModal}>
+      <div className="prod-xyz-buyers-container">
+        <div className="prod-xyz-header">
+          <h2 className="prod-xyz-buyer-title">Products List</h2>
+          <button className="prod-xyz-new-buyer-btn" onClick={handleOpenModal}>
             + New Product
           </button>
         </div>
 
-        <div className="viewDB-table-container">
-          <table className="viewDB-buyers-table">
+        <div className="prod-xyz-table-container">
+          <table className="prod-xyz-buyers-table">
             <thead>
               <tr>
                 <th>Product ID</th>
@@ -182,15 +183,15 @@ function GMviewproducts() {
 
       {/* Add Product Modal */}
       {isModalOpen && (
-        <div className="viewDB-popup-overlay" onClick={handleCloseModal}>
+        <div className="prod-xyz-popup-overlay" onClick={handleCloseModal}>
           <div
-            className="viewDB-popup-content"
+            className="prod-xyz-popup-content"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="viewDB-form-title-dbuyers-popup">Add New Product</h2>
+            <h2 className="prod-xyz-form-title-dbuyers-popup">Add New Product</h2>
             <form onSubmit={handleSubmit}>
-              <div className="viewDB-form-group-dbuyers-popup">
-                <label className="viewDB-lable-popup" htmlFor="name">
+              <div className="prod-xyz-form-group-dbuyers-popup">
+                <label className="prod-xyz-lable-popup" htmlFor="name">
                   Product Name
                 </label>
                 <input
@@ -205,8 +206,8 @@ function GMviewproducts() {
                   required
                 />
               </div>
-              <div className="viewDB-form-group-dbuyers-popup">
-                <label className="viewDB-lable-popup" htmlFor="price">
+              <div className="prod-xyz-form-group-dbuyers-popup">
+                <label className="prod-xyz-lable-popup" htmlFor="price">
                   Product Price
                 </label>
                 <input
@@ -223,13 +224,13 @@ function GMviewproducts() {
                   step="0.01"
                 />
               </div>
-              <div className="viewDB-popup-buttons">
-                <button type="submit" className="viewDB-save-btn-dbuyers-popup">
+              <div className="prod-xyz-popup-buttons">
+                <button type="submit" className="prod-xyz-save-btn-dbuyers-popup">
                   Add
                 </button>
                 <button
                   type="button"
-                  className="viewDB-cancel-btn-popup"
+                  className="prod-xyz-cancel-btn-popup"
                   onClick={handleCloseModal}
                 >
                   Cancel
@@ -243,17 +244,17 @@ function GMviewproducts() {
       {/* Update Product Modal */}
       {isUpdateModalOpen && (
         <div
-          className="viewDB-popup-overlay"
+          className="prod-xyz-popup-overlay"
           onClick={() => setIsUpdateModalOpen(false)}
         >
           <div
-            className="viewDB-popup-content"
+            className="prod-xyz-popup-content"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="viewDB-form-title-dbuyers-popup">Update Product</h2>
+            <h2 className="prod-xyz-form-title-dbuyers-popup">Update Product</h2>
             <form onSubmit={handleUpdateSubmit}>
-              <div className="viewDB-form-group-dbuyers-popup">
-                <label className="viewDB-lable-popup" htmlFor="name">
+              <div className="prod-xyz-form-group-dbuyers-popup">
+                <label className="prod-xyz-lable-popup" htmlFor="name">
                   Product Name
                 </label>
                 <input
@@ -271,8 +272,8 @@ function GMviewproducts() {
                   required
                 />
               </div>
-              <div className="viewDB-form-group-dbuyers-popup">
-                <label className="viewDB-lable-popup" htmlFor="price">
+              <div className="prod-xyz-form-group-dbuyers-popup">
+                <label className="prod-xyz-lable-popup" htmlFor="price">
                   Product Price
                 </label>
                 <input
@@ -291,6 +292,18 @@ function GMviewproducts() {
                   min="0"
                   step="0.01"
                 />
+              </div>
+              <div className="prod-xyz-popup-buttons">
+                <button type="submit" className="prod-xyz-save-btn-dbuyers-popup">
+                  Update
+                </button>
+                <button
+                  type="button"
+                  className="prod-xyz-cancel-btn-popup"
+                  onClick={() => setIsUpdateModalOpen(false)}
+                >
+                  Cancel
+                </button>
               </div>
             </form>
           </div>

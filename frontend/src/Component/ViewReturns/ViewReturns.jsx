@@ -159,35 +159,35 @@ function ViewReturns() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: "#06013b", minHeight: "100vh" }}>
       <Nav />
       <HeadBar />
-      <div className="dbreturns-returns-container">
-        <div className="dbreturns-header">
-          <h2 className="dbreturns-returns-title" style={{ color: '#fff',textShadow:'0 0 10px rgba(142, 84, 233, 0.5), 0 0 20px rgba(142, 84, 233, 0.3)',animation:'animation: glow 2s ease-in-out infinite;'}}>Returns Records</h2>
+      <div className="ret-xyz-container">
+        <div className="ret-xyz-header">
+          <h2 className="ret-xyz-title" style={{ color: "#fff", textShadow: "0 0 10px rgba(142, 84, 233, 0.5), 0 0 20px rgba(142, 84, 233, 0.3)", animation: "glow 2s ease-in-out infinite;" }}>Returns Records</h2>
         </div>
 
-        <div className="dbreturns-advanced-filters">
-          <div className="dbreturns-search-container">
+        <div className="ret-xyz-advanced-filters">
+          <div className="ret-xyz-search-container">
             <input
               type="search"
               placeholder="Search any field..."
-              className="dbreturns-search-input"
+              className="ret-xyz-search-input"
               value={searchQuery}
               onChange={handleSearch}
             />
           </div>
-          <div className="dbreturns-filter-container">
-            <div className="dbreturns-filter-group">
+          <div className="ret-xyz-filter-container">
+            <div className="ret-xyz-filter-group">
               <label>Date Range:</label>
-              <div className="dbreturns-date-inputs">
+              <div className="ret-xyz-date-inputs">
                 <input
                   type="date"
                   value={dateRange.start}
                   onChange={(e) =>
                     setDateRange({ ...dateRange, start: e.target.value })
                   }
-                  className="dbreturns-date-input"
+                  className="ret-xyz-date-input"
                 />
                 <span>to</span>
                 <input
@@ -196,13 +196,13 @@ function ViewReturns() {
                   onChange={(e) =>
                     setDateRange({ ...dateRange, end: e.target.value })
                   }
-                  className="dbreturns-date-input"
+                  className="ret-xyz-date-input"
                 />
               </div>
             </div>
-            <div className="dbreturns-filter-group">
+            <div className="ret-xyz-filter-group">
               <label>Price Range:</label>
-              <div className="dbreturns-price-inputs">
+              <div className="ret-xyz-price-inputs">
                 <input
                   type="number"
                   placeholder="Min"
@@ -210,7 +210,7 @@ function ViewReturns() {
                   onChange={(e) =>
                     setPriceRange({ ...priceRange, min: e.target.value })
                   }
-                  className="dbreturns-price-input"
+                  className="ret-xyz-price-input"
                 />
                 <span>to</span>
                 <input
@@ -220,13 +220,13 @@ function ViewReturns() {
                   onChange={(e) =>
                     setPriceRange({ ...priceRange, max: e.target.value })
                   }
-                  className="dbreturns-price-input"
+                  className="ret-xyz-price-input"
                 />
               </div>
             </div>
-            <div className="dbreturns-filter-group">
+            <div className="ret-xyz-filter-group">
               <select
-                className="dbreturns-filter-select"
+                className="ret-xyz-filter-select"
                 value={filterOption}
                 onChange={handleFilter}
               >
@@ -237,17 +237,17 @@ function ViewReturns() {
                 <option value="price-high-low">Price: High to Low</option>
               </select>
             </div>
-            <button onClick={resetFilters} className="dbreturns-reset-btn">
+            <button onClick={resetFilters} className="ret-xyz-reset-btn">
               Reset Filters
             </button>
           </div>
         </div>
 
-        <div className="dbreturns-results-summary">
+        <div className="ret-xyz-results-summary">
           <span>
             Showing {currentItems.length} of {filteredReturns.length} returns
           </span>
-          <div className="dbreturns-items-per-page">
+          <div className="ret-xyz-items-per-page">
             <span>Show</span>
             <select
               value={itemsPerPage}
@@ -263,39 +263,39 @@ function ViewReturns() {
         </div>
 
         <div
-          className="dbreturns-table-container"
-          style={{ width: "100%", backgroundColor: "white", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)", marginBottom: "20px"}}
+          className="ret-xyz-table-container"
+          style={{ width: "100%", backgroundColor: "white", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)", marginBottom: "20px" }}
         >
-          <table className="dbreturns-returns-table">
+          <table className="ret-xyz-table">
             <thead>
               <tr>
                 <th
                   onClick={() => handleSort("returnId")}
-                  className="dbreturns-sortable-header"
+                  className="ret-xyz-sortable-header"
                 >
                   Return ID{getSortIndicator("returnId")}
                 </th>
                 <th
                   onClick={() => handleSort("buyerId")}
-                  className="dbreturns-sortable-header"
+                  className="ret-xyz-sortable-header"
                 >
                   Buyer ID{getSortIndicator("buyerId")}
                 </th>
                 <th
                   onClick={() => handleSort("date")}
-                  className="dbreturns-sortable-header"
+                  className="ret-xyz-sortable-header"
                 >
                   Date{getSortIndicator("date")}
                 </th>
                 <th
                   onClick={() => handleSort("totalAmount")}
-                  className="dbreturns-sortable-header"
+                  className="ret-xyz-sortable-header"
                 >
                   Total Amount{getSortIndicator("totalAmount")}
                 </th>
                 <th
                   onClick={() => handleSort("returnMethod")}
-                  className="dbreturns-sortable-header"
+                  className="ret-xyz-sortable-header"
                 >
                   Return Method{getSortIndicator("returnMethod")}
                 </th>
@@ -308,7 +308,7 @@ function ViewReturns() {
                   key={returnData.returnId}
                   className={
                     hoveredRow === returnData.returnId
-                      ? "dbreturns-hovered-row"
+                      ? "ret-xyz-hovered-row"
                       : ""
                   }
                   onMouseEnter={() => setHoveredRow(returnData.returnId)}
@@ -322,7 +322,7 @@ function ViewReturns() {
                   <td>
                     <button
                       onClick={() => returnsviewDetails(returnData.returnId)}
-                      className="dbreturns-returnsview-btn"
+                      className="ret-xyz-view-btn"
                     >
                       View
                     </button>
@@ -332,22 +332,22 @@ function ViewReturns() {
             </tbody>
           </table>
           {filteredReturns.length === 0 && (
-            <div className="dbreturns-no-results">
+            <div className="ret-xyz-no-results">
               No returns records match your filters. Try adjusting your search
               criteria.
             </div>
           )}
         </div>
 
-        <div className="dbreturns-pagination-controls">
+        <div className="ret-xyz-pagination-controls">
           <button
             onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
-            className="dbreturns-pagination-btn"
+            className="ret-xyz-pagination-btn"
           >
             Previous
           </button>
-          <div className="dbreturns-page-numbers">
+          <div className="ret-xyz-page-numbers">
             {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
               let pageToShow;
               if (totalPages <= 5) {
@@ -363,8 +363,8 @@ function ViewReturns() {
                 <button
                   key={pageToShow}
                   onClick={() => paginate(pageToShow)}
-                  className={`dbreturns-page-number ${
-                    currentPage === pageToShow ? "dbreturns-active" : ""
+                  className={`ret-xyz-page-number ${
+                    currentPage === pageToShow ? "ret-xyz-active" : ""
                   }`}
                 >
                   {pageToShow}
@@ -373,11 +373,11 @@ function ViewReturns() {
             })}
             {totalPages > 5 && currentPage < totalPages - 2 && (
               <>
-                <span className="dbreturns-ellipsis">...</span>
+                <span className="ret-xyz-ellipsis">...</span>
                 <button
                   onClick={() => paginate(totalPages)}
-                  className={`dbreturns-page-number ${
-                    currentPage === totalPages ? "dbreturns-active" : ""
+                  className={`ret-xyz-page-number ${
+                    currentPage === totalPages ? "ret-xyz-active" : ""
                   }`}
                 >
                   {totalPages}
@@ -388,35 +388,35 @@ function ViewReturns() {
           <button
             onClick={() => paginate(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="dbreturns-pagination-btn"
+            className="ret-xyz-pagination-btn"
           >
             Next
           </button>
         </div>
 
-        <div className="dbreturns-report-controls">
-          <div className="dbreturns-report-btn-container">
-            <button onClick={generatePDF} className="dbreturns-report-btn">
+        <div className="ret-xyz-report-controls">
+          <div className="ret-xyz-report-btn-container">
+            <button onClick={generatePDF} className="ret-xyz-report-btn">
               Download PDF Report
             </button>
           </div>
         </div>
 
         {showModal && selectedReturn && (
-          <div className="dbreturns-modal">
-            <div className="dbreturns-modal-content">
-              <div className="dbreturns-modal-header">
+          <div className="ret-xyz-modal">
+            <div className="ret-xyz-modal-content">
+              <div className="ret-xyz-modal-header">
                 <h3>Return Details</h3>
                 <button
                   onClick={() => setShowModal(false)}
-                  className="dbreturns-close-modal"
+                  className="ret-xyz-close-modal"
                 >
                   ×
                 </button>
               </div>
-              <div className="dbreturns-invoice-details">
-                <div className="dbreturns-invoice-header">
-                  <div className="dbreturns-invoice-info">
+              <div className="ret-xyz-invoice-details">
+                <div className="ret-xyz-invoice-header">
+                  <div className="ret-xyz-invoice-info">
                     <p>
                       <strong>Return ID:</strong> {selectedReturn.returnId}
                     </p>
@@ -425,7 +425,7 @@ function ViewReturns() {
                       {new Date(selectedReturn.date).toLocaleString()}
                     </p>
                   </div>
-                  <div className="dbreturns-buyer-info">
+                  <div className="ret-xyz-buyer-info">
                     <p>
                       <strong>Buyer ID:</strong> {selectedReturn.buyerId}
                     </p>
@@ -440,7 +440,7 @@ function ViewReturns() {
                   </div>
                 </div>
                 <h4>Items</h4>
-                <table className="dbreturns-items-table">
+                <table className="ret-xyz-items-table">
                   <thead>
                     <tr>
                       <th>Item Name</th>
@@ -461,19 +461,19 @@ function ViewReturns() {
                   </tbody>
                   <tfoot>
                     <tr>
-                      <td colSpan="3" className="dbreturns-total-label">
+                      <td colSpan="3" className="ret-xyz-total-label">
                         Total
                       </td>
-                      <td className="dbreturns-total-amount">
+                      <td className="ret-xyz-total-amount">
                         LKR {selectedReturn.totalAmount.toFixed(2)}
                       </td>
                     </tr>
                   </tfoot>
                 </table>
-                <div className="dbreturns-modal-actions">
+                <div className="ret-xyz-modal-actions">
                   <button
                     onClick={() => setShowModal(false)}
-                    className="dbreturns-modal-btn dbreturns-cancel-btn"
+                    className="ret-xyz-modal-btn ret-xyz-cancel-btn"
                   >
                     Close
                   </button>

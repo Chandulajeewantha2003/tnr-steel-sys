@@ -371,14 +371,14 @@ function SalesDashboard() {
   };
 
   return (
-    <div className="salesdash-container">
-      <HeadBar />
+    <div className="salesdash-main-content">
       <SalesNav />
-
-      <div className="salesdash-main-content">
+      <HeadBar />
+      
+      <div >
+        <div className="sales-main-content-st">
         <div className="salesdash-header">
           <h2 className="salesdash-title">Sales Management Dashboard</h2>
-
           <div className="salesdash-timeframe-selector">
             <button
               className={`salesdash-timeframe-btn ${
@@ -655,6 +655,7 @@ function SalesDashboard() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
