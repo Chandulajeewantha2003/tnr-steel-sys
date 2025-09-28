@@ -109,7 +109,7 @@ function PMNav() {
           <hr className="pm-nav-divider" />
           <li className="pm-nav-item">
             <Link
-              to="/pmviewproducts"
+              to="/products"
               className={`pm-nav-link ${
                 activeLink === "/pmviewproducts" ? "pm-nav-active" : ""
               }`}

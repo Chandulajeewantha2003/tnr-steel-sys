@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./PMViewProducts.css";
-import PMNav from "../PMNav/PMNav";
+import Nav from "../Nav/Nav";
 import HeadBar from "../HeadBar/HeadBar";
 
 function PMViewProducts() {
@@ -68,8 +68,8 @@ function PMViewProducts() {
 
   return (
     <div className="pm-view-products-container" >
+       <Nav />
       <HeadBar />
-      <PMNav />
       
       <div className="pm-view-products-content">
         <div className="pm-view-products-header">

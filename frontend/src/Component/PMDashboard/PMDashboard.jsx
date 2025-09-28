@@ -294,7 +294,7 @@ function PMDashboard() {
                 </div>
               </Link>
 
-              <Link to="/pmviewproducts" className="pm-dashboard-button">
+              <Link to="/products" className="pm-dashboard-button">
                 <div className="pm-button-icon">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

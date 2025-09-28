@@ -769,7 +769,7 @@ function Home() {
               </div>
             </div>
           </Link>
-          <Link to="/products" className="dashboard-link-st">
+          <Link to="/pmviewproducts" className="dashboard-link-st">
             <div className="dashboard-btn-st">
               <div className="dash-btn-icon-st">
                 <i className="bi bi-inboxes-fill"></i>

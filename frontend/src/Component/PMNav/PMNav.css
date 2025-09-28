@@ -1,179 +1,180 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
-
 .pm-username-display {
-  position: fixed;
-  top: 50px;
-  right: 20px;
-  background-color: #efefef;
-  padding: 10px;
-  border-radius: 5px;
-  color: #37474f;
-  font-family: "Noto Sans", sans-serif;
-  font-size: 14px;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    background-color: #efefef;
+    padding: 10px;
+    border-radius: 5px;
+    color: #37474f;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 14px;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .pm-sidenav {
-  width: 90px;
-  background: rgba(79, 70, 229, 0.3); /* Adjusted for transparency and blur base, blended with #06013b */
-  height: 100vh;
-  margin-top: 0;
-  margin-left: 0;
-  padding: 100px 0 40px 0;
-  border-radius: 0;
-  display: flex;
-  flex-direction: column;
-  color: #f4f4f5;
-  position: fixed;
-  top: 0;
-  left: 0;
-  font-family: "Noto Sans", sans-serif;
-  transition: width 0.3s ease;
-  transform: translateX(0);
-  overflow: hidden;
-  backdrop-filter: blur(10px); /* Add blur effect */
-  -webkit-backdrop-filter: blur(10px); /* Safari support */
+    width: 90px;
+    background: rgba(79, 70, 229, 0.3);
+    /* Adjusted for transparency and blur base, blended with #06013b */
+    height: 100vh;
+    margin-top: 0;
+    margin-left: 0;
+    padding: 100px 0 40px 0;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    color: #f4f4f5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-family: "Noto Sans", sans-serif;
+    transition: width 0.3s ease;
+    transform: translateX(0);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    /* Add blur effect */
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari support */
 }
 
 .pm-sidenav.pm-sidenav-open {
-  transform: translateX(0);
-  width: 240px;
+    transform: translateX(0);
+    width: 240px;
 }
 
 .pm-center-icon-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  width: 60px;
-  height: 60px;
-  background: none;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  margin: 0 auto;
-  padding: 12px 20px;
-  transition: background 0.3s ease, transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+    background: none;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 0 auto;
+    padding: 12px 20px;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .pm-nav-label {
-  color: #f4f4f5;
-  font-weight: 500;
-  font-size: 15px;
-  opacity: 0;
-  white-space: nowrap;
-  transition: opacity 0.3s ease;
+    color: #f4f4f5;
+    font-weight: 500;
+    font-size: 15px;
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
 }
 
 .pm-sidenav.pm-sidenav-open .pm-nav-label {
-  opacity: 1;
+    opacity: 1;
 }
 
 .pm-profile-icon-btn {
-  color: #37474f;
-  background-color: #efefef;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  position: fixed;
-  top: 15px;
-  right: 20px;
-  padding: 5px;
-  z-index: 1000;
+    color: #37474f;
+    background-color: #efefef;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    padding: 5px;
+    z-index: 1000;
 }
 
 .pm-center-icon-btn svg {
-  display: block;
-  width: 32px; /* Increased icon size */
-  height: 32px; /* Increased icon size */
+    display: block;
+    width: 32px;
+    /* Increased icon size */
+    height: 32px;
+    /* Increased icon size */
 }
 
 .pm-nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .pm-nav-item {
-  margin: 8px 0;
-  text-align: left;
+    margin: 8px 0;
+    text-align: left;
 }
 
 .pm-nav-item a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .pm-nav-divider {
-  border: none;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
-  margin: 8px 0;
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 8px 0;
 }
 
 .pm-nav-link {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .pm-nav-link:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .pm-center-icon-btn.pm-btn-active {
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    transition: all 0.3s ease;
 }
 
 @keyframes pm-shadow-pulse {
-  0% {
-    box-shadow: 0 0 10px rgba(154, 195, 221, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(154, 195, 221, 0.9);
-  }
-  100% {
-    box-shadow: 0 0 10px rgba(154, 195, 221, 0.5);
-  }
+    0% {
+        box-shadow: 0 0 10px rgba(154, 195, 221, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(154, 195, 221, 0.9);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(154, 195, 221, 0.5);
+    }
 }
 
 .pm-center-icon-btn:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  box-shadow: none;
-  transform: translateX(4px);
-  transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    box-shadow: none;
+    transform: translateX(4px);
+    transition: all 0.3s ease;
 }
 
 .pm-center-icon-btn.pm-btn-active {
-  animation: none;
+    animation: none;
 }
 
 @media (max-width: 768px) {
-  .pm-sidenav {
-    transform: translateX(0);
-    width: 240px;
-  }
-
-  .pm-sidenav.pm-sidenav-open {
-    transform: translateX(0);
-  }
-
-  .pm-sidenav {
-    width: 240px;
-  }
+    .pm-sidenav {
+        transform: translateX(0);
+        width: 240px;
+    }
+    .pm-sidenav.pm-sidenav-open {
+        transform: translateX(0);
+    }
+    .pm-sidenav {
+        width: 240px;
+    }
 }
 
 @media (max-width: 480px) {
-  .pm-sidenav {
-    width: 240px;
-  }
-
-  .pm-nav-item a {
-    font-size: 14px;
-  }
+    .pm-sidenav {
+        width: 240px;
+    }
+    .pm-nav-item a {
+        font-size: 14px;
+    }
 }

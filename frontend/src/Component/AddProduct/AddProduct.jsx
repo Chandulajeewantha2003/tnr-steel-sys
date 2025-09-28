@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AddProduct.css"; // Updated CSS file
-import Nav from "../Nav/Nav";
+
+import PMNav from "../PMNav/PMNav";
 import HeadBar from "../HeadBar/HeadBar";
 
 function AddProducts() {
@@ -141,8 +142,10 @@ function AddProducts() {
 
   return (
     <div style={{ backgroundColor: "#06013b", minHeight: "100vh" }}>
-      <Nav />
+    
+
       <HeadBar />
+      <PMNav />
       <div className="prod-xyz-container">
         <div className="prod-xyz-header">
           <h2 className="prod-xyz-title">Products List</h2>
