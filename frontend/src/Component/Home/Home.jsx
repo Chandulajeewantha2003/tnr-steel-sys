@@ -706,6 +706,7 @@ function Home() {
                 <br />
                 <span className="btn-description">Manage your Stocks</span>
               </div>
+              
               <div className="btn-arrow">
                 <i className="bi bi-chevron-right"></i>
               </div>
@@ -735,6 +736,7 @@ function Home() {
                 <label className="dash-btn-text-st">Sales</label><br />
                 <span className="btn-description">View daily transactions</span>
               </div>
+              <span className="count-badge">{summaryStats.totalSales}</span>
               <div className="btn-arrow">
                 <i className="bi bi-chevron-right"></i>
               </div>
