@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap");
 
 
-/* Root Variables */
+/* clrs,gradient,shadows,borders*/
 :root {
   --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -28,7 +28,7 @@
 }
 
 
-/* Main Container */
+
 .pm-dashboard-container {
   min-height: 100vh;
   background: var(--bg-main);
@@ -41,7 +41,7 @@
 }
 
 
-/* Animated Particles Background */
+/* Animated Background */
 .pm-dashboard-container::before {
   content: '';
   position: fixed;

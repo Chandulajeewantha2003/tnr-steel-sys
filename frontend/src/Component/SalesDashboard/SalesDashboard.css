@@ -123,7 +123,7 @@ body {
 /* Timeframe Selector */
 .salesdash-timeframe-selector {
   display: flex;
-    background: #1e1b3d; /* Solid dark background */
+    background: #f1f1f3; /* Solid dark background */
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius);
     overflow: hidden;
@@ -136,9 +136,9 @@ body {
     padding: 0.75rem 1.5rem;
     
     /* Set a contrasting, solid background for the inactive button */
-    background: #1e1b3d; 
+    background: #f9f9fc; 
     
-    /* 🔴 THE CRITICAL FIX: Ensure text is fully white and not transparently filled */
+   
     color: var(--text-primary); /* Sets text color to solid white */
     -webkit-text-fill-color: var(--text-primary); /* Overrides transparent text-fill */
     
@@ -214,7 +214,7 @@ body {
 .salesdash-stat-info p {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color:white;
 }
 /* Dashboard Buttons */
 
