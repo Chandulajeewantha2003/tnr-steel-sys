@@ -5,7 +5,7 @@
 /* Main container */
 
 .allStockchange-all-requests-container {
-    max-width: 1400px;
+    max-width: 1600px;
     margin-left: 100px;
     margin-top: 20px ;
     padding: 0 20px;
@@ -37,6 +37,7 @@
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 

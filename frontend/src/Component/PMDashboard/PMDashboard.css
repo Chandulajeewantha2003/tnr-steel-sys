@@ -38,6 +38,7 @@
   color: var(--text-primary);
   position: relative;
   overflow: hidden;
+  margin-left: 94px;
 }
 
 
