@@ -9,6 +9,7 @@ function StockRequestForm() {
     product_name: "",
     quantity: "",
     note: "",
+    created_by: "",
   });
   const [stocks, setStocks] = useState([]);
   const [selectedStock, setSelectedStock] = useState(null);
@@ -24,7 +25,7 @@ function StockRequestForm() {
         const response = await fetch("http://localhost:5000/api/stocks", {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user?.token}`, // Adjust if no token is needed
+            Authorization: `Bearer ${user?.token}`,
           },
         });
         const data = await response.json();
@@ -59,19 +60,22 @@ function StockRequestForm() {
     setError("");
     setSuccess("");
 
-    if (!formData.product_name || !formData.quantity) {
-      setError("Product name and quantity are required.");
+    const { product_name, quantity, created_by } = formData;
+
+    if (!product_name || !quantity || !created_by) {
+      setError(
+        "Missing required fields: product_name, requested_quantity, or created_by"
+      );
       return;
     }
 
-    const quantity = Number(formData.quantity);
-    if (quantity <= 0) {
+    const quantityNum = Number(quantity);
+    if (quantityNum <= 0) {
       setError("Quantity must be greater than 0.");
       return;
     }
 
-    // Validate quantity against available stock
-    if (selectedStock && quantity > selectedStock.product_quantity) {
+    if (selectedStock && quantityNum > selectedStock.product_quantity) {
       setError(
         `Requested quantity exceeds available stock (${selectedStock.product_quantity}).`
       );
@@ -84,13 +88,13 @@ function StockRequestForm() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user?.token}`, // Adjust if no token is needed
+          Authorization: `Bearer ${user?.token}`,
         },
         body: JSON.stringify({
-          product_name: formData.product_name,
-          quantity,
+          product_name,
+          requested_quantity: quantityNum,
           note: formData.note,
-          requested_by: user?.username || "Guest",
+          created_by: formData.created_by,
         }),
       });
 
@@ -99,7 +103,12 @@ function StockRequestForm() {
         setSuccess(
           `Request submitted successfully! Request ID: ${data.request_id}`
         );
-        setFormData({ product_name: "", quantity: "", note: "" });
+        setFormData({
+          product_name: "",
+          quantity: "",
+          note: "",
+          created_by: "",
+        });
         setSelectedStock(null);
         setTimeout(() => navigate("/my-requests"), 2000);
       } else {
@@ -118,6 +127,7 @@ function StockRequestForm() {
       <div className="stock-request-main">
         <h2 className="form-title">Stock Request Form</h2>
         <form onSubmit={handleSubmit} className="stock-request-form">
+          {/* Product Name */}
           <div className="form-group">
             <label htmlFor="product_name">Product Name</label>
             <select
@@ -143,6 +153,8 @@ function StockRequestForm() {
               )}
             </select>
           </div>
+
+          {/* Quantity */}
           <div className="form-group">
             <label htmlFor="quantity">Quantity</label>
             <input
@@ -161,6 +173,22 @@ function StockRequestForm() {
               </p>
             )}
           </div>
+
+          {/* Created By */}
+          <div className="form-group">
+            <label htmlFor="created_by">Created By</label>
+            <input
+              type="text"
+              id="created_by"
+              name="created_by"
+              value={formData.created_by}
+              onChange={handleChange}
+              placeholder="Enter your name"
+              required
+            />
+          </div>
+
+          {/* Note */}
           <div className="form-group">
             <label htmlFor="note">Note (Optional)</label>
             <textarea
@@ -172,8 +200,11 @@ function StockRequestForm() {
               rows="4"
             />
           </div>
+
+          {/* Error & Success Messages */}
           {error && <p className="error-message">{error}</p>}
           {success && <p className="success-message">{success}</p>}
+
           <button type="submit" className="submit-btn">
             Submit Request
           </button>
