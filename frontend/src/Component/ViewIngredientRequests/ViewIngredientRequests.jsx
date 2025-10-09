@@ -70,11 +70,11 @@ function ViewIngredientRequests() {
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
-
+//Sorting handler
   const toggleSortOrder = () => {
     setSortOrder(sortOrder === "newest" ? "oldest" : "newest");
   };
-
+//PDF
   const handleDownload = (request) => {
     const doc = new jsPDF();
     doc.setFontSize(16);
@@ -87,14 +87,14 @@ function ViewIngredientRequests() {
     doc.text(`Created At: ${new Date(request.createdAt).toLocaleDateString()}`, 20, 80);
     doc.save(`ingredient_request_${request._id}.pdf`);
   };
-
+//Del 
   const handleDeleteClick = (request) => {
     if (request.status === "pending") {
       setRequestToDelete(request);
       setShowDeleteModal(true);
     }
   };
-
+//delete confirmation
   const handleDeleteConfirm = async () => {
     if (!requestToDelete) return;
 
@@ -105,13 +105,13 @@ function ViewIngredientRequests() {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${user?.token}`,//API calls with token
           },
         }
       );
 
       if (response.status === 200 && response.data.success) {
-        setRequests(requests.filter((req) => req._id !== requestToDelete._id));
+        setRequests(requests.filter((req) => req._id !== requestToDelete._id));  //validation
         setSuccess("Request deleted successfully!");
         setShowDeleteModal(false);
         setRequestToDelete(null);
