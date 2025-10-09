@@ -123,10 +123,9 @@ body {
 /* Timeframe Selector */
 .salesdash-timeframe-selector {
   display: flex;
-<<<<<<< HEAD
-=======
+
     background: #f1f1f3; /* Solid dark background */
->>>>>>> 56fabce73be1953bf4092218ccd1e243a826ea2a
+
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius);
     overflow: hidden;
@@ -139,17 +138,17 @@ body {
     padding: 0.75rem 1.5rem;
     
     /* Set a contrasting, solid background for the inactive button */
-<<<<<<< HEAD
+
     background: #1e1b3d; 
     color: var(--text-primary); 
     -webkit-text-fill-color: white; /* Sets text color to solid white */
-=======
+
     background: #f9f9fc; 
     
    
     color: var(--text-primary); /* Sets text color to solid white */
     -webkit-text-fill-color: var(--text-primary); /* Overrides transparent text-fill */
->>>>>>> 56fabce73be1953bf4092218ccd1e243a826ea2a
+
     
     border: none;
     cursor: pointer;
@@ -223,11 +222,11 @@ body {
 .salesdash-stat-info p {
   font-size: 1.5rem;
   font-weight: 700;
-<<<<<<< HEAD
+
   color: white;
-=======
+  
   color:white;
->>>>>>> 56fabce73be1953bf4092218ccd1e243a826ea2a
+
 }
 /* Dashboard Buttons */
 
