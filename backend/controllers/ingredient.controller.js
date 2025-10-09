@@ -7,9 +7,9 @@ export const addIngredient = async (req, res) => {
 
   if (
     !ingredient.invoice_id ||
-    !ingredient.ingredient_name ||
+    !ingredient.material_name ||
     !ingredient.supplier_name ||
-    !ingredient.ingredient_quantity ||
+    !ingredient.material_quantity ||
     !ingredient.lot_price
   ) {
     console.log("Missing fields:", ingredient);

@@ -99,8 +99,8 @@ function GMViewStock() {
                       <>
                         <td>{item.supplier_name}</td>
                         <td>{item.invoice_id}</td>
-                        <td>{item.ingredient_name}</td>
-                        <td>{item.ingredient_quantity}</td>
+                        <td>{item.material_name}</td>
+                        <td>{item.material_quantity}</td>
                         <td>{item.lot_price}</td>
                       </>
                     ) : (

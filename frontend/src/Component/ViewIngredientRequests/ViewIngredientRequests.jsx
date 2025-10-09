@@ -54,7 +54,7 @@ function ViewIngredientRequests() {
     // Filter and then sort the data
     let filtered = requests.filter((request) =>
       request._id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      request.ingredient_id?.ingredient_name?.toLowerCase().includes(searchQuery.toLowerCase())
+      request.ingredient_id?.material_name?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     // Apply sorting
@@ -70,31 +70,31 @@ function ViewIngredientRequests() {
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
-//Sorting handler
+  //Sorting handler
   const toggleSortOrder = () => {
     setSortOrder(sortOrder === "newest" ? "oldest" : "newest");
   };
-//PDF
+  //PDF
   const handleDownload = (request) => {
     const doc = new jsPDF();
     doc.setFontSize(16);
     doc.text("Ingredient Request Details", 20, 20);
     doc.setFontSize(12);
     doc.text(`Request ID: ${request._id}`, 20, 40);
-    doc.text(`Ingredient Name: ${request.ingredient_id?.ingredient_name || "Unknown"}`, 20, 50);
+    doc.text(`Material Name: ${request.ingredient_id?.material_name || "Unknown"}`, 20, 50);
     doc.text(`Requested Quantity: ${request.request_quantity}`, 20, 60);
     doc.text(`Status: ${request.status.charAt(0).toUpperCase() + request.status.slice(1)}`, 20, 70);
     doc.text(`Created At: ${new Date(request.createdAt).toLocaleDateString()}`, 20, 80);
     doc.save(`ingredient_request_${request._id}.pdf`);
   };
-//Del 
+  //Del 
   const handleDeleteClick = (request) => {
     if (request.status === "pending") {
       setRequestToDelete(request);
       setShowDeleteModal(true);
     }
   };
-//delete confirmation
+  //delete confirmation
   const handleDeleteConfirm = async () => {
     if (!requestToDelete) return;
 
@@ -210,7 +210,7 @@ function ViewIngredientRequests() {
                       {filteredRequests.map((request) => (
                         <tr key={request._id}>
                           <td>{request._id}</td>
-                          <td>{request.ingredient_id?.ingredient_name}</td>
+                          <td>{request.ingredient_id?.material_name}</td>
                           <td>{request.request_quantity}</td>
                           <td className={`status-${request.status.toLowerCase()}`} style={{ textAlign:"center",fontWeight:"bold" }} >
                             {request.status.charAt(0).toUpperCase() + request.status.slice(1)}

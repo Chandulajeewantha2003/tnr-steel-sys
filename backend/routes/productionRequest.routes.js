@@ -11,8 +11,11 @@ const router = express.Router();
 // Add a new production request
 router.post("/", addProductionRequest);
 
-// Get all production requests or a specific request by ID
-router.get("/:id?", getProductionRequest); // id is optional
+// Get all production requests
+router.get("/", getProductionRequest);
+
+// Get a specific production request by ID
+router.get("/:id", getProductionRequest);
 
 // Update an existing production request by ID
 router.put("/:id", updateProductionRequest);

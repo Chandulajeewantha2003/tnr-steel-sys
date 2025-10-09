@@ -122,7 +122,7 @@ function IngredientRequestsApproval() {
                         {requests.map((request) => (
                           <tr key={request._id}>
                             <td>{request._id}</td>
-                            <td>{request.ingredient_id?.ingredient_name || "Unknown"}</td>
+                            <td>{request.ingredient_id?.material_name || "Unknown"}</td>
                             <td>{request.request_quantity}</td>
                             <td className={`status-${request.status}`}>
                               {request.status.charAt(0).toUpperCase() + request.status.slice(1)}

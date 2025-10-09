@@ -3,18 +3,16 @@ import {
   addStock,
   getAllStock,
   getStockById,
+  issueStock,
   sellStock, // Keeping deprecated endpoint as-is
 } from "../controllers/stock.controller.js";
 
 const router = express.Router();
 
 router.post("/", addStock);
-router.get("/:id", getStockById);
 router.get("/", getAllStock);
+router.get("/:id", getStockById);
+router.put("/issue", issueStock);
 router.post("/sell", sellStock); // Deprecated endpoint
-
-// Removed:
-// router.put("/:id", updateStock);
-// router.delete("/:id", deleteStock);
 
 export default router;

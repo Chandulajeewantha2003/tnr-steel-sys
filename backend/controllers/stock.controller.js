@@ -132,6 +132,56 @@ export const deleteStock = async (req, res) => {
   }
 };
 
+// Issue stock (reduce quantity)
+export const issueStock = async (req, res) => {
+  const { product_name, quantity } = req.body;
+
+  if (!product_name || !quantity || quantity <= 0) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing required fields: product_name and quantity (must be positive)",
+    });
+  }
+
+  try {
+    const stock = await Stock.findOne({ product_name });
+    
+    if (!stock) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found in stock",
+      });
+    }
+
+    if (stock.product_quantity < quantity) {
+      return res.status(400).json({
+        success: false,
+        message: "Insufficient stock quantity",
+      });
+    }
+
+    // Reduce the stock quantity
+    stock.product_quantity -= Number(quantity);
+    await stock.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Stock issued successfully",
+      data: {
+        product_name: stock.product_name,
+        remaining_quantity: stock.product_quantity,
+        issued_quantity: quantity,
+      },
+    });
+  } catch (error) {
+    console.error("Error issuing stock:", error.message);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error: " + error.message,
+    });
+  }
+};
+
 // Deprecated sellStock function
 export const sellStock = async (req, res) => {
   return res.status(410).json({

@@ -112,10 +112,10 @@ function IngredientRequestForm() {
                       onChange={(e) => setSelectedIngredient(e.target.value)}
                       className="ingredient-request-select"
                     >
-                      <option value="">-- Select an Materialt --</option>
+                      <option value="">-- Select a Material --</option>
                       {ingredients.map((ingredient) => (
                         <option key={ingredient._id} value={ingredient._id}>
-                          {ingredient.ingredient_name} (Qty: {ingredient.ingredient_quantity})
+                          {ingredient.material_name} (Qty: {ingredient.material_quantity})
                         </option>
                       ))}
                     </select>

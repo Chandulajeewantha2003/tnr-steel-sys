@@ -80,51 +80,65 @@ function ViewStock() {
   };
 
   const handleEdit = (item) => {
-    // Navigate to the stock change request form with the item ID
+    // Navigate to the appropriate form based on selection
     if (selection === "products") {
+      // For products, use stock change request form
       navigate(`/mystock-request/${item._id}`);
     } else {
-      navigate(`/myingredient-request/${item._id}`);
+      // For ingredients, show a message that editing is not available
+      alert("Ingredient editing is not currently available. Please use the Add Stock page to add new ingredients or contact your administrator for modifications.");
     }
   };
 
   const handleDelete = async (item) => {
     const itemType = selection === "products" ? "stock item" : "ingredient";
-    const endpointType = selection === "products" ? "stock" : "ingredient";
 
     if (
       window.confirm(
-        `Are you sure you want to request deletion of this ${itemType}?`
+        `Are you sure you want to delete this ${itemType}?`
       )
     ) {
       try {
-        const user = JSON.parse(sessionStorage.getItem("user"));
+        if (selection === "products") {
+          // For products, use stock change request system
+          const user = JSON.parse(sessionStorage.getItem("user"));
 
-        const response = await axios.post(
-          "http://localhost:5000/api/stock-change-requests",
-          {
-            [`${endpointType}_id`]: item._id,
-            request_type: "delete",
-            reason: `Requested deletion of ${itemType} via stock view`,
-            created_by: user.username,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
+          const response = await axios.post(
+            "http://localhost:5000/api/stock-change-requests",
+            {
+              stock_id: item._id,
+              request_type: "delete",
+              reason: `Requested deletion of ${itemType} via stock view`,
+              created_by: user.username,
             },
-          }
-        );
-
-        if (response.data.success) {
-          alert(
-            `Delete request for ${itemType} submitted successfully! Awaiting GM approval.`
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
           );
-          fetchData();
+
+          if (response.data.success) {
+            alert(
+              `Delete request for ${itemType} submitted successfully! Awaiting GM approval.`
+            );
+            fetchData();
+          }
+        } else {
+          // For ingredients, use direct deletion
+          const response = await axios.delete(
+            `http://localhost:5000/api/ingredients/${item._id}`
+          );
+
+          if (response.data.success) {
+            alert(`${itemType} deleted successfully!`);
+            fetchData();
+          }
         }
       } catch (error) {
-        console.error(`Error submitting ${itemType} delete request:`, error);
+        console.error(`Error deleting ${itemType}:`, error);
         alert(
-          `Failed to submit ${itemType} delete request: ${
+          `Failed to delete ${itemType}: ${
             error.response ? error.response.data.message : error.message
           }`
         );
@@ -141,7 +155,7 @@ function ViewStock() {
       return (
         item.supplier_name?.toLowerCase().includes(searchLower) ||
         item.invoice_id?.toLowerCase().includes(searchLower) ||
-        item.ingredient_name?.toLowerCase().includes(searchLower)
+        item.material_name?.toLowerCase().includes(searchLower)
       );
     } else {
       return item.product_name?.toLowerCase().includes(searchLower);
@@ -226,16 +240,16 @@ function ViewStock() {
                       Invoice ID {getSortIndicator("invoice_id")}
                     </th>
                     <th
-                      onClick={() => handleSort("ingredient_name")}
+                      onClick={() => handleSort("material_name")}
                       className="VS-sortable-header"
                     >
-                      Materials Name {getSortIndicator("ingredient_name")}
+                      Materials Name {getSortIndicator("material_name")}
                     </th>
                     <th
-                      onClick={() => handleSort("ingredient_quantity")}
+                      onClick={() => handleSort("material_quantity")}
                       className="VS-sortable-header"
                     >
-                      Quantity {getSortIndicator("ingredient_quantity")}
+                      Quantity {getSortIndicator("material_quantity")}
                     </th>
                     <th
                       onClick={() => handleSort("lot_price")}
@@ -289,8 +303,8 @@ function ViewStock() {
                       <>
                         <td className="VS-cell">{item.supplier_name}</td>
                         <td className="VS-cell">{item.invoice_id}</td>
-                        <td className="VS-cell">{item.ingredient_name}</td>
-                        <td className="VS-cell">{item.ingredient_quantity}</td>
+                        <td className="VS-cell">{item.material_name}</td>
+                        <td className="VS-cell">{item.material_quantity}</td>
                         <td className="VS-price-cell">
                           ${parseFloat(item.lot_price).toFixed(2)}
                         </td>

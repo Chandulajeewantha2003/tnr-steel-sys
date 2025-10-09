@@ -3,6 +3,7 @@ import axios from "axios";
 import "./ViewReturns.css";
 import Nav from "../Nav/Nav";
 import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 import HeadBar from "../HeadBar/HeadBar";
 
 function ViewReturns() {
@@ -18,6 +19,7 @@ function ViewReturns() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [hoveredRow, setHoveredRow] = useState(null);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 
   useEffect(() => {
     axios
@@ -95,38 +97,72 @@ function ViewReturns() {
     setFilteredReturns(sortedReturns);
   };
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
-
-    doc.setFontSize(16);
-    doc.setTextColor(17, 48, 81);
-    doc.text("Direct Returns Report", 105, 15, null, null, "center");
-
-    let yOffset = 25;
-
-    filteredReturns.forEach((sale, i) => {
-      if (yOffset > 260) {
-        doc.addPage();
-        yOffset = 20;
+  const generatePDF = async () => {
+    if (isGeneratingPDF) return; // Prevent multiple clicks
+    
+    setIsGeneratingPDF(true);
+    try {
+      console.log("Starting PDF generation...");
+      
+      // Show the hidden content temporarily for rendering
+      const input = document.getElementById("returns-report-content");
+      if (!input) {
+        console.error("Could not find returns-report-content element");
+        alert("Error: Could not find report content. Please refresh the page and try again.");
+        return;
       }
 
-      doc.setFontSize(12);
-      doc.setTextColor(17, 48, 81);
-      doc.text(`Return ${i + 1}`, 15, yOffset);
+      // Temporarily make the content visible for html2canvas
+      input.style.display = "block";
+      input.style.position = "absolute";
+      input.style.left = "-9999px";
+      input.style.top = "0";
 
-      doc.setFontSize(10);
-      doc.setTextColor(0, 0, 0);
-      doc.text(`Sales ID: ${sale._id}`, 20, yOffset + 7);
-      doc.text(`ReturnInvoice ID: ${sale.returnId}`, 20, yOffset + 14);
-      doc.text(`Buyer ID: ${sale.buyerId}`, 20, yOffset + 21);
-      doc.text(`Date: ${sale.date}`, 20, yOffset + 28);
-      doc.text(`Total Amount: ${sale.totalAmount}`, 20, yOffset + 35);
-      doc.text(`Return Method: ${sale.returnMethod}`, 20, yOffset + 42);
+      console.log("Capturing content with html2canvas...");
+      const canvas = await html2canvas(input, { 
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: "#ffffff",
+        width: input.scrollWidth,
+        height: input.scrollHeight
+      });
 
-      yOffset += 50;
-    });
+      // Hide the content again
+      input.style.display = "none";
+      input.style.position = "static";
+      input.style.left = "auto";
+      input.style.top = "auto";
 
-    doc.save("Direct_Returns_Report.pdf");
+      console.log("Canvas created, generating PDF...");
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      const pdfWidth = 200;
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      const fileName = `Direct_Returns_Report_${new Date().toISOString().split('T')[0]}.pdf`;
+      pdf.addImage(imgData, "PNG", 5, 5, pdfWidth, pdfHeight);
+      
+      console.log("Saving PDF...");
+      pdf.save(fileName);
+      console.log("PDF generated successfully!");
+      
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      alert(`Error generating PDF: ${error.message}. Please try again.`);
+      
+      // Make sure to hide the content if there was an error
+      const input = document.getElementById("returns-report-content");
+      if (input) {
+        input.style.display = "none";
+        input.style.position = "static";
+        input.style.left = "auto";
+        input.style.top = "auto";
+      }
+    } finally {
+      setIsGeneratingPDF(false);
+    }
   };
 
   const handleSort = (key) => {
@@ -396,9 +432,200 @@ function ViewReturns() {
 
         <div className="ret-xyz-report-controls">
           <div className="ret-xyz-report-btn-container">
-            <button onClick={generatePDF} className="ret-xyz-report-btn">
-              Download PDF Report
+            <button 
+              onClick={generatePDF} 
+              className="ret-xyz-report-btn"
+              disabled={isGeneratingPDF}
+            >
+              {isGeneratingPDF ? "Generating PDF..." : "Download PDF Report"}
             </button>
+          </div>
+        </div>
+
+        {/* Hidden styled content for PDF generation */}
+        <div id="returns-report-content" style={{ display: "none" }}>
+          <div style={{
+            fontFamily: "'Poppins', sans-serif",
+            padding: "40px",
+            backgroundColor: "#ffffff",
+            color: "#2d3748",
+            maxWidth: "800px",
+            margin: "0 auto"
+          }}>
+            {/* Header */}
+            <div style={{
+              textAlign: "center",
+              marginBottom: "40px",
+              borderBottom: "4px solid #17486b",
+              paddingBottom: "20px"
+            }}>
+              <h1 style={{
+                fontSize: "2.5rem",
+                fontWeight: "700",
+                color: "#17486b",
+                margin: "0 0 10px 0",
+                textTransform: "uppercase",
+                letterSpacing: "2px"
+              }}>
+                Direct Returns Report
+              </h1>
+              <p style={{
+                fontSize: "1.1rem",
+                color: "#4a5568",
+                margin: "0"
+              }}>
+                Generated on {new Date().toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
+              </p>
+            </div>
+
+            {/* Summary */}
+            <div style={{
+              backgroundColor: "#f7fafc",
+              padding: "20px",
+              borderRadius: "8px",
+              marginBottom: "30px",
+              border: "1px solid #e2e8f0"
+            }}>
+              <h3 style={{
+                fontSize: "1.2rem",
+                fontWeight: "600",
+                color: "#2d3748",
+                margin: "0 0 10px 0"
+              }}>
+                Report Summary
+              </h3>
+              <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "20px" }}>
+                <p style={{ margin: "0", color: "#4a5568" }}>
+                  Total Returns: <strong>{filteredReturns.length}</strong>
+                </p>
+                <p style={{ margin: "0", color: "#4a5568" }}>
+                  Showing: <strong>{currentItems.length}</strong> returns on this page
+                </p>
+                <p style={{ margin: "0", color: "#4a5568" }}>
+                  Total Return Amount: <strong>LKR {filteredReturns.reduce((sum, returnItem) => sum + returnItem.totalAmount, 0).toFixed(2)}</strong>
+                </p>
+              </div>
+            </div>
+
+            {/* Returns Table */}
+            <div style={{ marginBottom: "30px" }}>
+              <table style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                backgroundColor: "#ffffff",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                borderRadius: "8px",
+                overflow: "hidden"
+              }}>
+                <thead>
+                  <tr style={{ backgroundColor: "#17486b" }}>
+                    <th style={{
+                      padding: "15px",
+                      textAlign: "left",
+                      color: "#ffffff",
+                      fontWeight: "600",
+                      fontSize: "0.9rem",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px"
+                    }}>Return ID</th>
+                    <th style={{
+                      padding: "15px",
+                      textAlign: "left",
+                      color: "#ffffff",
+                      fontWeight: "600",
+                      fontSize: "0.9rem",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px"
+                    }}>Buyer ID</th>
+                    <th style={{
+                      padding: "15px",
+                      textAlign: "left",
+                      color: "#ffffff",
+                      fontWeight: "600",
+                      fontSize: "0.9rem",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px"
+                    }}>Date</th>
+                    <th style={{
+                      padding: "15px",
+                      textAlign: "left",
+                      color: "#ffffff",
+                      fontWeight: "600",
+                      fontSize: "0.9rem",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px"
+                    }}>Total Amount</th>
+                    <th style={{
+                      padding: "15px",
+                      textAlign: "left",
+                      color: "#ffffff",
+                      fontWeight: "600",
+                      fontSize: "0.9rem",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px"
+                    }}>Return Method</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentItems.map((returnItem, index) => (
+                    <tr key={returnItem.returnId} style={{
+                      backgroundColor: index % 2 === 0 ? "#ffffff" : "#f8fafc",
+                      borderBottom: "1px solid #e2e8f0"
+                    }}>
+                      <td style={{
+                        padding: "12px 15px",
+                        fontSize: "0.85rem",
+                        color: "#4a5568",
+                        fontFamily: "monospace"
+                      }}>{returnItem.returnId}</td>
+                      <td style={{
+                        padding: "12px 15px",
+                        fontSize: "0.85rem",
+                        color: "#4a5568"
+                      }}>{returnItem.buyerId}</td>
+                      <td style={{
+                        padding: "12px 15px",
+                        fontSize: "0.85rem",
+                        color: "#4a5568"
+                      }}>{new Date(returnItem.date).toLocaleDateString()}</td>
+                      <td style={{
+                        padding: "12px 15px",
+                        fontSize: "0.9rem",
+                        color: "#2d3748",
+                        fontWeight: "600"
+                      }}>LKR {returnItem.totalAmount.toFixed(2)}</td>
+                      <td style={{
+                        padding: "12px 15px",
+                        fontSize: "0.85rem",
+                        color: "#4a5568"
+                      }}>{returnItem.returnMethod}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Footer */}
+            <div style={{
+              textAlign: "center",
+              padding: "20px",
+              borderTop: "2px solid #e2e8f0",
+              color: "#718096",
+              fontSize: "0.85rem"
+            }}>
+              <p style={{ margin: "0" }}>
+                This report was generated by TNR Steel Systems Management System
+              </p>
+              <p style={{ margin: "5px 0 0 0" }}>
+                For any inquiries, please contact the system administrator
+              </p>
+            </div>
           </div>
         </div>
 

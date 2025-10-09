@@ -203,8 +203,8 @@ function AddStock() {
           await axios.post("http://localhost:5000/api/ingredients", {
             supplier_name: row.supplier,
             invoice_id: row.invoiceId,
-            ingredient_name: row.ingredientName,
-            ingredient_quantity: row.quantity,
+            material_name: row.ingredientName,
+            material_quantity: row.quantity,
             lot_price: row.lotPrice,
           });
         }

@@ -66,6 +66,7 @@ import PMViewProducts from "./Component/PMViewProducts/PMViewProducts";
 import SalesRequestApproval from "./Component/SalesRequestApproval/SalesRequestApproval";
 import ViewSalesRequests from "./Component/ViewSalesRequests/ViewSalesRequests";
 import StockRequestForm from "./Component/StockRequestForm/StockRequestForm";
+import ViewRequest from "./Component/ViewRequests/ViewRequest";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -148,6 +149,7 @@ function App() {
       <Route path="/pmviewproducts" element={<ProtectedRoute element={<PMViewProducts />} />} />
       <Route path="/sales-requests-approval" element={<ProtectedRoute element={<SalesRequestApproval />} />} />
       <Route path="/viewsalesrequests" element={<ProtectedRoute element={<ViewSalesRequests />} />} />
+      <Route path="/viewrequests" element={<ProtectedRoute element={<ViewRequest />} />} />
 
       {/* Fallback for unknown routes */}
       <Route path="*" element={<Navigate to="/tnrhomepage" />} />
