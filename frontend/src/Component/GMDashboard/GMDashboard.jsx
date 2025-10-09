@@ -15,7 +15,7 @@ import {
   Legend,
 } from "chart.js";
 import axios from "axios";
-
+import ChatBot from "../ChatBot/ChatBot";
 // Register Chart.js components
 ChartJS.register(
   CategoryScale,
@@ -28,6 +28,7 @@ ChartJS.register(
 );
 
 function GMDashboard() {
+  
   // State management
   const [timeframe, setTimeframe] = useState("week");
   const [isLoading, setIsLoading] = useState(true);
@@ -436,8 +437,10 @@ function GMDashboard() {
       <HeadBar />
       <GMNav />
 
+      
       {/* Main Content */}
       <div className="main-content-gm">
+        <ChatBot />
         <div className="dashboard-header">
           <h2 className="dash-title-gm">General Manager Dashboard</h2>
           <div className="timeframe-selector">
@@ -730,6 +733,9 @@ function GMDashboard() {
       </div>
     </div>
   );
+
+
+
 }
 
 export default GMDashboard;

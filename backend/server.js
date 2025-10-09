@@ -23,7 +23,7 @@ import indirectbuyerRoutes from "./routes/indirectbuyer.route.js";
 import salesstockRoutes from "./routes/salesstock.route.js";
 import stockRequestRoutes from "./routes/stockChangeRequest.route.js";
 import ingredientRequestRoutes from "./routes/ingredientrequest.route.js";
-
+import chatRoutes from "./routes/chat.route.js";
 dotenv.config();
 
 const app = express();
@@ -50,7 +50,7 @@ app.use("/api/indirectbuyers", indirectbuyerRoutes);
 app.use("/api/stock-change-requests", stockRequestRoutes);
 app.use("/api/ingredient-requests", ingredientRequestRoutes);
 app.use("/api/stock-requests", salesRequestRoutes);
-
+app.use("/api/chat", chatRoutes);
 app.use(cors());
 
 app.use("/buyers", router);
