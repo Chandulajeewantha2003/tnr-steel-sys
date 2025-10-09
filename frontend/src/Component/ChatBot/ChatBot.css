@@ -15,7 +15,7 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0b2ab5 0%, #764ba2 100%);
     border: none;
     font-size: 28px;
     cursor: pointer;
@@ -76,7 +76,7 @@
 /* Header */
 
 .chatbot-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #112dab 0%, #764ba2 100%);
     color: white;
     padding: 18px 20px;
     display: flex;
@@ -166,7 +166,7 @@
 }
 
 .chat-message.bot {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0726ad 0%, #764ba2 100%);
     color: white;
     align-self: flex-start;
     border-bottom-left-radius: 4px;
@@ -214,7 +214,7 @@
 
 .chatbot-input button {
     padding: 12px 24px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0d2cb6 0%, #764ba2 100%);
     color: white;
     border: none;
     border-radius: 24px;
