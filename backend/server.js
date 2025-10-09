@@ -37,7 +37,7 @@ app.use(
 );
 app.use("/api/products", productRoutes);
 app.use("/api/production-requests", productionRequestRoutes);
-//app.use("/api/sales-requests", salesRequestRoutes);
+app.use("/api/sales-requests", salesRequestRoutes);
 app.use("/api/employee", employeeRoutes);
 app.use("/api/stocks", stockRoutes);
 app.use("/api/salesstocks", salesstockRoutes);
