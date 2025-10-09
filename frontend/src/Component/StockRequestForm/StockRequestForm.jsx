@@ -17,6 +17,10 @@ function StockRequestForm() {
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate("/viewsalesrequests"); // route path
+  };
+
   // Fetch available stocks on component mount
   useEffect(() => {
     const fetchStocks = async () => {
@@ -205,9 +209,12 @@ function StockRequestForm() {
           {error && <p className="error-message">{error}</p>}
           {success && <p className="success-message">{success}</p>}
 
-          <button type="submit" className="submit-btn">
-            Submit Request
-          </button>
+        
+        <button type="button" className="submit-btn" onClick={handleClick}>
+          Submit Request
+        </button>
+      
+
         </form>
       </div>
     </div>
