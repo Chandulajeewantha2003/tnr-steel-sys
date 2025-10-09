@@ -40,7 +40,7 @@ function ChatBot() {
       ) : (
         <div className="chatbot-box">
           <div className="chatbot-header">
-            <h4>Assistant</h4>
+            <h4>TNR Assistant</h4>
             <button onClick={() => setIsOpen(false)}>✖</button>
           </div>
           <div className="chatbot-messages">
