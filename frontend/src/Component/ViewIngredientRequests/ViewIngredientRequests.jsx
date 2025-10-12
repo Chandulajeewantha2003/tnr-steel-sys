@@ -37,7 +37,7 @@ function ViewIngredientRequests() {
           setRequests(sortedData);
           setFilteredRequests(sortedData);
         } else {
-          setError("Failed to fetch ingredient requests.");
+          setError("Failed to fetch Material requests.");
         }
       } catch (err) {
         setError("Server error while fetching requests.");
@@ -144,7 +144,7 @@ function ViewIngredientRequests() {
                 <input
                   type="text"
                   className="search-bar-input"
-                  placeholder="Search by ID or ingredient name..."
+                  placeholder="Search by ID or Material name..."
                   value={searchQuery}
                   onChange={handleSearchChange}
                 />

@@ -70,11 +70,11 @@ function IngredientRequestForm() {
       );
 
       if (response.status === 201 && response.data.success) {
-        setSuccess("Ingredient request submitted successfully!");
+        setSuccess("Material request submitted successfully!");
         setSelectedIngredient("");
         setRequestQuantity("");
       } else {
-        setError("Failed to submit ingredient request.");
+        setError("Failed to submit Material request.");
       }
     } catch (err) {
       setError("Server error while submitting request.");
