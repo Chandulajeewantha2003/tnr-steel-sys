@@ -298,7 +298,7 @@ function PMDashboard() {
 
                   {/* New Feedbacks Button */}
                   <Link
-                    to="/view-feedbacks"
+                    to="/feedbacks"
                     className="pm-dashboard-button"
                   > 
                     <div className="pm-button-icon">

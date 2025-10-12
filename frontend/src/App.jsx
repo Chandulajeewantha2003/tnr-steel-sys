@@ -68,6 +68,7 @@ import ViewSalesRequests from "./Component/ViewSalesRequests/ViewSalesRequests";
 import StockRequestForm from "./Component/StockRequestForm/StockRequestForm";
 import SalesRequestForm from "./Component/SalesRequestForm/SalesRequestForm";
 import ViewRequest from "./Component/ViewRequests/ViewRequest";
+import FeedbackPage from "./Component/FeedbackPage/FeedbackPage";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -151,6 +152,7 @@ function App() {
       <Route path="/sales-requests-approval" element={<ProtectedRoute element={<SalesRequestApproval />} />} />
       <Route path="/viewsalesrequests" element={<ProtectedRoute element={<ViewSalesRequests />} />} />
       <Route path="/viewrequests" element={<ProtectedRoute element={<ViewRequest />} />} />
+      <Route path="/feedbacks" element={<ProtectedRoute element={<FeedbackPage />} />} />
 
       {/* Fallback for unknown routes */}
       <Route path="*" element={<Navigate to="/tnrhomepage" />} />
