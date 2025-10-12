@@ -23,7 +23,6 @@ function ViewSalesRequests() {
         const response = await axios.get("http://localhost:5000/api/sales-requests", {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user?.token}`,
           },
         });
         if (response.status === 200 && response.data.success) {

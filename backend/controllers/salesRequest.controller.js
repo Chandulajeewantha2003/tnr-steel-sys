@@ -1,5 +1,6 @@
 import SalesRequest from "../models/salesRequest.model.js";
 import Stock from "../models/stock.model.js";
+import SalesStock from "../models/salesstock.model.js";
 
 // Create a new sales request
 export const createSalesRequest = async(req, res) => {
@@ -149,14 +150,44 @@ export const updateSalesRequestStatus = async(req, res) => {
             });
         }
 
-        // If approved, reduce stock quantity
+        // If approved, reduce stock quantity from stock manager and add to sales manager
         if (status === "Approved") {
+            // Reduce from stock manager's inventory
             const stock = await Stock.findOne({
                 product_name: updatedRequest.product_name,
             });
             if (stock) {
                 stock.product_quantity -= updatedRequest.requested_quantity;
                 await stock.save();
+                
+                // Add to sales manager's inventory with correct price
+                const normalizedName = updatedRequest.product_name.trim();
+                console.log("Adding to sales stock with normalized name:", normalizedName);
+                console.log("Stock price from stock manager:", stock.product_price);
+                
+                let salesStock = await SalesStock.findOne({
+                    sp_name: normalizedName,
+                });
+
+                if (salesStock) {
+                    // If product already exists in sales stock, increase quantity and update price if needed
+                    salesStock.sp_quantity += updatedRequest.requested_quantity;
+                    // Only update price if current price is 0 or undefined
+                    if (!salesStock.sp_price || salesStock.sp_price === 0) {
+                        salesStock.sp_price = stock.product_price || 0;
+                    }
+                    await salesStock.save();
+                    console.log("Updated existing sales stock:", salesStock);
+                } else {
+                    // If product doesn't exist in sales stock, create new entry with correct price
+                    const newSalesStock = new SalesStock({
+                        sp_name: normalizedName,
+                        sp_quantity: updatedRequest.requested_quantity,
+                        sp_price: stock.product_price || 0, // Use price from stock manager's inventory
+                    });
+                    await newSalesStock.save();
+                    console.log("Created new sales stock entry:", newSalesStock);
+                }
             }
         }
 

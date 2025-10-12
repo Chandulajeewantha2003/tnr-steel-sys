@@ -234,7 +234,7 @@ function SPInvoice() {
 
         <div className="spinvoice-footer">
           <p>Thank you for your business!</p>
-          <p className="spinvoice-footer-company">Your Company Name</p>
+          <p className="spinvoice-footer-company">TNR Steel Company</p>
         </div>
       </div>
 

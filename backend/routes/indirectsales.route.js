@@ -46,9 +46,34 @@ router.post("/add", async (req, res) => {
     // Check if all items have sufficient stock
     for (const item of items) {
       console.log("Checking stock for item:", item);
-      const stock = await SalesStock.findOne({
-        sp_name: { $regex: new RegExp(`^${item.itemName}$`, "i") },
+      console.log("Item name length:", item.itemName.length);
+      console.log("Item name chars:", JSON.stringify(item.itemName));
+      
+      // Try multiple matching strategies
+      let stock = null;
+      const searchName = item.itemName.trim();
+      
+      // Strategy 1: Exact match
+      stock = await SalesStock.findOne({
+        sp_name: searchName,
       });
+      
+      if (!stock) {
+        // Strategy 2: Case-insensitive exact match
+        stock = await SalesStock.findOne({
+          sp_name: { $regex: new RegExp(`^${searchName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, "i") },
+        });
+      }
+      
+      if (!stock) {
+        // Strategy 3: Try to match against all stock items character by character
+        for (const stockItem of allStockItems) {
+          if (stockItem.sp_name.trim().toLowerCase() === searchName.toLowerCase()) {
+            stock = stockItem;
+            break;
+          }
+        }
+      }
 
       if (!stock) {
         const availableItems = allStockItems
@@ -145,11 +170,39 @@ router.post("/add", async (req, res) => {
     // Update stock quantities
     for (const item of items) {
       try {
-        const result = await SalesStock.findOneAndUpdate(
-          { sp_name: { $regex: new RegExp(`^${item.itemName}$`, "i") } },
+        const searchName = item.itemName.trim();
+        let result = null;
+        
+        // Strategy 1: Exact match
+        result = await SalesStock.findOneAndUpdate(
+          { sp_name: searchName },
           { $inc: { sp_quantity: -item.quantity } },
           { new: true }
         );
+        
+        if (!result) {
+          // Strategy 2: Case-insensitive exact match
+          result = await SalesStock.findOneAndUpdate(
+            { sp_name: { $regex: new RegExp(`^${searchName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, "i") } },
+            { $inc: { sp_quantity: -item.quantity } },
+            { new: true }
+          );
+        }
+        
+        if (!result) {
+          // Strategy 3: Find by character matching and update
+          const stockItem = await SalesStock.findOne({});
+          const allStockItems = await SalesStock.find({});
+          for (const stock of allStockItems) {
+            if (stock.sp_name.trim().toLowerCase() === searchName.toLowerCase()) {
+              stock.sp_quantity -= item.quantity;
+              await stock.save();
+              result = stock;
+              break;
+            }
+          }
+        }
+        
         console.log(`Updated stock for ${item.itemName}:`, result);
       } catch (stockError) {
         console.error(`Error updating stock for ${item.itemName}:`, stockError);

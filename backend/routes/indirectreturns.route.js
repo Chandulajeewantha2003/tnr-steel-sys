@@ -64,10 +64,17 @@ router.post("/add", async (req, res) => {
       console.log("Checking stock for item:", item);
       console.log("Searching for item with name:", item.itemName);
 
-      // Try to find the stock item with case-insensitive search
-      const stock = await SalesStock.findOne({
-        sp_name: { $regex: new RegExp(`^${item.itemName}$`, "i") },
+      // Try exact match first, then trimmed match
+      let stock = await SalesStock.findOne({
+        sp_name: item.itemName.trim(),
       });
+      
+      if (!stock) {
+        // Try case-insensitive match with trimmed name
+        stock = await SalesStock.findOne({
+          sp_name: { $regex: new RegExp(`^${item.itemName.trim()}$`, "i") },
+        });
+      }
 
       console.log(
         "Found stock:",

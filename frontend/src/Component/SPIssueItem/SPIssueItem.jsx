@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SalesNav from "../SalesNav/SalesNav";
 import HeadBar from "../HeadBar/HeadBar";
-import "./SPissueitem.css";
+import "./SPIssueItem.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
@@ -232,7 +232,7 @@ function IndirectBuyerIssueItem() {
                 className="indirectissue-clear-search"
                 onClick={clearSearch}
               >
-                <FaTimes />
+                ×
               </button>
             )}
           </div>
@@ -300,7 +300,7 @@ function IndirectBuyerIssueItem() {
                           onClick={() => decreaseQuantity(index)}
                           disabled={!row.selectedItem || row.quantity <= 1}
                         >
-                          <FaMinus />
+                          −
                         </button>
                         <input
                           className="indirectissue-quantity-input"
@@ -321,7 +321,7 @@ function IndirectBuyerIssueItem() {
                             row.quantity >= row.currentStock
                           }
                         >
-                          <FaPlus />
+                          +
                         </button>
                       </div>
                     </td>
@@ -332,7 +332,7 @@ function IndirectBuyerIssueItem() {
                         className="indirectissue-remove-row-btn"
                         disabled={rows.length === 1 || loading}
                       >
-                        <FaTimes />
+                        ×
                       </button>
                     </td>
                   </tr>
@@ -357,7 +357,7 @@ function IndirectBuyerIssueItem() {
             onClick={addNewRow}
             disabled={loading}
           >
-            <FaPlus />
+            +
           </button>
           <button
             className={`indirectissue-checkout-btn ${

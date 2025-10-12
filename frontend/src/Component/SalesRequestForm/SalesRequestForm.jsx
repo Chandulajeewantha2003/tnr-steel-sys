@@ -1,33 +1,38 @@
 import React, { useState, useEffect, useRef } from "react";
-import Nav from "../Nav/Nav";
+import SalesNav from "../SalesNav/SalesNav";
 import HeadBar from "../HeadBar/HeadBar";
 import axios from "axios";
 import "./SalesRequestForm.css";
 import { useNavigate } from "react-router-dom";
 
 function SalesRequestForm() {
-  const [rows, setRows] = useState([
-    { product_name: "", requested_quantity: 1 },
-  ]);
+  const [product_name, setProduct_name] = useState("");
+  const [requested_quantity, setRequested_quantity] = useState(1);
   const [stocks, setStocks] = useState([]);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const navigate = useNavigate();
   const isMounted = useRef(false);
 
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  const user = JSON.parse(sessionStorage.getItem("user")) || {};
 
-  // Fetch stock data
+  // Fetch stock manager's inventory data
   const fetchStockData = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/stocks");
-      console.log("Stock API Response:", response.data);
-      if (response.data.success) {
-        const stockData = response.data.data || [];
-        console.log("Raw stock data:", stockData);
-        setStocks(stockData);
-        console.log("Stocks set to state:", stockData);
+      console.log("Stock Manager Inventory API Response:", response.data);
+      
+      if (response.data && response.data.success && Array.isArray(response.data.data)) {
+        setStocks(response.data.data);
+        console.log("Stock manager inventory set to state:", response.data.data);
+      } else {
+        setError("No stock data available from stock manager");
+        setStocks([]);
       }
     } catch (error) {
-      console.error("Error fetching stock data:", error);
+      console.error("Error fetching stock manager inventory:", error);
+      setError("Failed to fetch stock manager inventory. Please try again.");
+      setStocks([]);
     }
   };
 
@@ -44,147 +49,146 @@ function SalesRequestForm() {
     };
   }, [navigate, user]);
 
-  const handleProductChange = (index, value) => {
-    const updatedRows = [...rows];
-    updatedRows[index].product_name = value;
-    setRows(updatedRows);
+  const handleProductChange = (value) => {
+    setProduct_name(value);
   };
 
-  const handleQuantityChange = (index, value) => {
-    const updatedRows = [...rows];
+  const handleQuantityChange = (value) => {
     const newQuantity = parseInt(value, 10) || 1;
     if (newQuantity >= 1) {
-      updatedRows[index].requested_quantity = newQuantity;
-    }
-    setRows(updatedRows);
-  };
-
-  const addNewRow = () => {
-    setRows([...rows, { product_name: "", requested_quantity: 1 }]);
-  };
-
-  const removeRow = (index) => {
-    if (rows.length > 1) {
-      setRows(rows.filter((_, rowIndex) => rowIndex !== index));
+      setRequested_quantity(newQuantity);
     }
   };
 
   const submitSalesRequest = async () => {
-    const filteredRows = rows.filter((row) => row.product_name);
-    if (filteredRows.length === 0) {
-      alert("Please select at least one product.");
+    // Clear previous messages
+    setError("");
+    setSuccess("");
+    
+    if (!product_name || product_name.trim() === "") {
+      setError("Please select a product.");
+      return;
+    }
+
+    if (requested_quantity < 1) {
+      setError("Please enter a valid quantity (minimum 1).");
+      return;
+    }
+
+    // Check if user has username
+    if (!user.username) {
+      setError("User session expired. Please login again.");
+      navigate("/login");
       return;
     }
 
     try {
-      for (const row of filteredRows) {
-        await axios.post(
-          "http://localhost:5000/api/sales-requests",
-          {
-            product_name: row.product_name,
-            requested_quantity: row.requested_quantity,
-            created_by: user.username,
+      const requestData = {
+        product_name: product_name,
+        requested_quantity: requested_quantity,
+        created_by: user.username,
+      };
+      
+      console.log("Submitting request:", requestData);
+      
+      const response = await axios.post(
+        "http://localhost:5000/api/sales-requests",
+        requestData,
+        {
+          headers: {
+            "Content-Type": "application/json",
           },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-      }
-      alert("Sales request submitted successfully!");
-      navigate("/my-requests");
+        }
+      );
+      
+      console.log("Request submitted:", response.data);
+      
+      setSuccess("Sales request submitted successfully!");
+      // Reset form
+      setProduct_name("");
+      setRequested_quantity(1);
+      
+      setTimeout(() => {
+        navigate("/viewsalesrequests");
+      }, 1500);
+      
     } catch (error) {
-      console.error(
-        "Error submitting sales request:",
-        error.response ? error.response.data : error.message
-      );
-      alert(
-        `Failed to submit sales request: ${
-          error.response ? error.response.data.message : error.message
-        }`
-      );
+      console.error("Error submitting sales request:", error);
+      const errorMessage = error.response?.data?.message || error.message || "Unknown error occurred";
+      setError(`Failed to submit sales request: ${errorMessage}`);
     }
   };
 
   return (
     <div className="sales-request-container">
+      <SalesNav />
       <HeadBar />
-      <Nav />
-      <h2 className="title-sales-request">Create Sales Request</h2>
+      
+      
+      <div className="sales-request-content">
+        <div className="sales-request-form">
+          <div className="sales-request-form-header">
+            <h2 className="sales-request-form-title">Request Stock</h2>
+          </div>
+          
+          {error && (
+            <div className="alert alert-error">
+              <i className="bi bi-exclamation-triangle"></i>
+              {error}
+            </div>
+          )}
+          
+          {success && (
+            <div className="alert alert-success">
+              <i className="bi bi-check-circle"></i>
+              {success}
+            </div>
+          )}
 
-      {/* Debug: Show stock data as plain text */}
-      {stocks.length > 0 && (
-        <div className="debug-section">
-          <p>Stocks available (debug):</p>
-          <ul>
-            {stocks.map((stock, index) => (
-              <li key={index}>
-                {stock.product_name} (Stock: {stock.product_quantity}, ID:{" "}
-                {stock._id})
-              </li>
-            ))}
-          </ul>
+          <div className="form-group">
+            <label htmlFor="product-select">Select Product</label>
+            <select
+              id="product-select"
+              className="form-select"
+              value={product_name}
+              onChange={(e) => handleProductChange(e.target.value)}
+            >
+              <option value="">Choose a product...</option>
+              {stocks.length > 0 ? (
+                stocks.map((stock) => (
+                  <option key={stock._id} value={stock.product_name}>
+                    {stock.product_name} (Available: {stock.product_quantity})
+                  </option>
+                ))
+              ) : (
+                <option value="">No products available</option>
+              )}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="quantity-input">Requested Quantity</label>
+            <input
+              id="quantity-input"
+              className="form-input"
+              type="number"
+              value={requested_quantity}
+              onChange={(e) => handleQuantityChange(e.target.value)}
+              min="1"
+              placeholder="Enter quantity"
+            />
+          </div>
+
+          <div className="form-actions">
+            <button 
+              className="submit-request-btn" 
+              onClick={submitSalesRequest}
+            >
+              <i className="bi bi-send"></i>
+              Submit Request
+            </button>
+          </div>
         </div>
-      )}
-
-      <table className="sales-request-table">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Requested Quantity</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, index) => (
-            <tr key={index}>
-              <td>
-                <select
-                  className="select-product"
-                  value={row.product_name}
-                  onChange={(e) => handleProductChange(index, e.target.value)}
-                >
-                  <option value="">Select Product</option>
-                  {stocks.length > 0 ? (
-                    stocks.map((stock) => (
-                      <option key={stock._id} value={stock.product_name}>
-                        {stock.product_name} (Stock: {stock.product_quantity})
-                      </option>
-                    ))
-                  ) : (
-                    <option value="">No products available</option>
-                  )}
-                </select>
-              </td>
-              <td>
-                <input
-                  className="quantity-input"
-                  type="number"
-                  value={row.requested_quantity}
-                  onChange={(e) => handleQuantityChange(index, e.target.value)}
-                  min="1"
-                />
-              </td>
-              <td>
-                <button
-                  className="remove-row-btn"
-                  onClick={() => removeRow(index)}
-                >
-                  -
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div>
-        <button className="add-row-btn-sales" onClick={addNewRow}>
-          +
-        </button>
-        <button className="submit-request-btn" onClick={submitSalesRequest}>
-          Submit Request
-        </button>
       </div>
     </div>
   );

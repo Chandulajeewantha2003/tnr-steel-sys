@@ -208,7 +208,7 @@ function AddStock() {
             lot_price: row.lotPrice,
           });
         }
-        showToast("Ingredients added successfully!", "success");
+        showToast("Material added successfully!", "success");
       }
       setTimeout(() => navigate("/viewstock"), 2000);
     } catch (error) {

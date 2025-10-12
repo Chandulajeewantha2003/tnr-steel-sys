@@ -66,6 +66,7 @@ import PMViewProducts from "./Component/PMViewProducts/PMViewProducts";
 import SalesRequestApproval from "./Component/SalesRequestApproval/SalesRequestApproval";
 import ViewSalesRequests from "./Component/ViewSalesRequests/ViewSalesRequests";
 import StockRequestForm from "./Component/StockRequestForm/StockRequestForm";
+import SalesRequestForm from "./Component/SalesRequestForm/SalesRequestForm";
 import ViewRequest from "./Component/ViewRequests/ViewRequest";
 
 function App() {
@@ -140,7 +141,7 @@ function App() {
       <Route path="/spreturnInvoice" element={<SPReturnInvoice />} />
       <Route path="/spInvoice" element={<SPInvoice />} />
       <Route path="/all-stock-change-requests" element={<AllStockRequestsApproval />} />
-      <Route path="/sales-request" element={<StockRequestForm />} />
+      <Route path="/sales-request" element={<ProtectedRoute element={<SalesRequestForm />} />} />
       <Route path="/mystock-change-requests" element={<MyStockChangeRequests />} />
       <Route path="/mystock-request/:stockId" element={<StockChangeRequestForm />} />
       <Route path="/ingredient-request" element={<ProtectedRoute element={<IngredientRequestForm />} />} />

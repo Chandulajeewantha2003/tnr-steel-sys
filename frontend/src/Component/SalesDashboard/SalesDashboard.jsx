@@ -40,6 +40,7 @@ function SalesDashboard() {
   const [timeframe, setTimeframe] = useState("week"); // 'day', 'week', 'month'
   const [salesData, setSalesData] = useState([]);
   const [returns, setReturns] = useState([]);
+  const [pendingRequestsCount, setPendingRequestsCount] = useState(0);
 
   // Function to get start date based on timeframe
   const getStartDate = (tf) => {
@@ -128,6 +129,17 @@ function SalesDashboard() {
               setError("Invalid returns data format received from server");
               setReturns([]);
             }
+          }
+
+          // Fetch pending sales requests count
+          const requestsResponse = await axios.get(
+            "http://localhost:5000/api/sales-requests"
+          );
+          if (requestsResponse.data.success) {
+            const pendingCount = requestsResponse.data.data.filter(
+              request => request.status === "Pending"
+            ).length;
+            setPendingRequestsCount(pendingCount);
           }
 
           // Calculate topSalesData
@@ -482,7 +494,7 @@ function SalesDashboard() {
               <div className="salesdash-btn-arrow">
                 <i className="bi bi-chevron-right"></i>
               </div>
-              <div className="salesdash-count-badge-s">12</div>
+              <div className="salesdash-count-badge-s">{pendingRequestsCount}</div>
             </div>
           </Link>
 

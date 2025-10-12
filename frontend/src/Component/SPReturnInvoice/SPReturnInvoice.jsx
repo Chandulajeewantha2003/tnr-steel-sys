@@ -207,7 +207,7 @@ function SPReturnInvoice() {
 
         <div className="spreturninvoice-footer">
           <p>Thank you for your business!</p>
-          <p className="spreturninvoice-footer-company">Tharushika Sweets</p>
+          <p className="spreturninvoice-footer-company">TNR Steel Company</p>
         </div>
       </div>
 
