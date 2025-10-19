@@ -25,7 +25,7 @@ function ViewRequest() {
       // Fetch sales and material requests in parallel
       const [salesRes, materialRes] = await Promise.all([
         axios.get("http://localhost:5000/api/stock-requests"),
-        axios.get("http://localhost:5000/api/ingredient-requests")
+        axios.get("http://localhost:5000/api/material-requests")
       ]);
 
       // Filter for pending requests only
@@ -56,7 +56,7 @@ function ViewRequest() {
           method = "put";
           break;
         case "materials":
-          endpoint = `http://localhost:5000/api/ingredient-requests/${requestId}`;
+          endpoint = `http://localhost:5000/api/material-requests/${requestId}`;
           updateData = { status: "approved" };
           method = "patch";
           break;
@@ -94,7 +94,7 @@ function ViewRequest() {
           method = "put";
           break;
         case "materials":
-          endpoint = `http://localhost:5000/api/ingredient-requests/${requestId}`;
+          endpoint = `http://localhost:5000/api/material-requests/${requestId}`;
           updateData = { status: "rejected" };
           method = "patch";
           break;
@@ -185,12 +185,12 @@ function ViewRequest() {
           {materialRequests.map((request) => (
             <div key={request._id} className="request-card">
               <div className="request-header">
-                <h4>{request.ingredient_id?.material_name || "Unknown Material"}</h4>
+                <h4>{request.material_id?.material_name || "Unknown Material"}</h4>
                 <span className="request-type">Materials Request</span>
               </div>
               <div className="request-details">
                 <p><strong>Quantity:</strong> {request.request_quantity}</p>
-                <p><strong>Supplier:</strong> {request.ingredient_id?.supplier_name || "Unknown"}</p>
+                <p><strong>Supplier:</strong> {request.material_id?.supplier_name || "Unknown"}</p>
                 <p><strong>Date:</strong> {formatDate(request.createdAt)}</p>
                 <p><strong>Status:</strong> <span className="status pending">{request.status}</span></p>
               </div>

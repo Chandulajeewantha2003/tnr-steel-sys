@@ -1,41 +1,41 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./IngredientRequestForm.css";
+import "./MaterialRequestForm.css";
 import PMNav from "../PMNav/PMNav";
 import HeadBar from "../HeadBar/HeadBar";
 
-function IngredientRequestForm() {
-  const [ingredients, setIngredients] = useState([]);
-  const [selectedIngredient, setSelectedIngredient] = useState("");
+function MaterialRequestForm() {
+  const [materials, setMaterials] = useState([]);
+  const [selectedMaterial, setSelectedMaterial] = useState("");
   const [requestQuantity, setRequestQuantity] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    const fetchIngredients = async () => {
+    const fetchMaterials = async () => {
       try {
         const user = JSON.parse(sessionStorage.getItem("user"));
-        const response = await axios.get("http://localhost:5000/api/ingredients", {
+        const response = await axios.get("http://localhost:5000/api/materials", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
           },
         });
         if (response.status === 200 && response.data.success) {
-          setIngredients(response.data.data);
+          setMaterials(response.data.data);
         } else {
-          setError("Failed to fetch ingredients.");
+          setError("Failed to fetch materials.");
         }
       } catch (err) {
-        setError("Server error while fetching ingredients.");
-        console.error("Error fetching ingredients:", err);
+        setError("Server error while fetching materials.");
+        console.error("Error fetching materials:", err);
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchIngredients();
+    fetchMaterials();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -43,8 +43,8 @@ function IngredientRequestForm() {
     setError("");
     setSuccess("");
 
-    if (!selectedIngredient || !requestQuantity) {
-      setError("Please select an ingredient and specify a quantity.");
+    if (!selectedMaterial || !requestQuantity) {
+      setError("Please select a material and specify a quantity.");
       return;
     }
 
@@ -56,9 +56,9 @@ function IngredientRequestForm() {
     try {
       const user = JSON.parse(sessionStorage.getItem("user"));
       const response = await axios.post(
-        "http://localhost:5000/api/ingredient-requests",
+        "http://localhost:5000/api/material-requests",
         {
-          ingredient_id: selectedIngredient,
+          material_id: selectedMaterial,
           request_quantity: parseFloat(requestQuantity),
         },
         {
@@ -71,7 +71,7 @@ function IngredientRequestForm() {
 
       if (response.status === 201 && response.data.success) {
         setSuccess("Material request submitted successfully!");
-        setSelectedIngredient("");
+        setSelectedMaterial("");
         setRequestQuantity("");
       } else {
         setError("Failed to submit Material request.");
@@ -107,15 +107,15 @@ function IngredientRequestForm() {
                       Select Material
                     </label>
                     <select
-                      id="ingredient"
-                      value={selectedIngredient}
-                      onChange={(e) => setSelectedIngredient(e.target.value)}
+                      id="material"
+                      value={selectedMaterial}
+                      onChange={(e) => setSelectedMaterial(e.target.value)}
                       className="ingredient-request-select"
                     >
                       <option value="">-- Select a Material --</option>
-                      {ingredients.map((ingredient) => (
-                        <option key={ingredient._id} value={ingredient._id}>
-                          {ingredient.material_name} (Qty: {ingredient.material_quantity})
+                      {materials.map((material) => (
+                        <option key={material._id} value={material._id}>
+                          {material.material_name} (Qty: {material.material_quantity})
                         </option>
                       ))}
                     </select>
@@ -148,4 +148,4 @@ function IngredientRequestForm() {
   );
 }
 
-export default IngredientRequestForm;
+export default MaterialRequestForm;

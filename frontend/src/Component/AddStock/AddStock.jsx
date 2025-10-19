@@ -80,7 +80,7 @@ function AddStock() {
         : {
             supplier: "",
             invoiceId: "",
-            ingredientName: "",
+            materialName: "",
             quantity: "",
             lotPrice: "",
           },
@@ -115,7 +115,7 @@ function AddStock() {
     setRows(updatedRows);
   };
 
-  const handleIngredientChange = (index, field, value) => {
+  const handleMaterialChange = (index, field, value) => {
     const updatedRows = [...rows];
     updatedRows[index][field] = value;
     setRows(updatedRows);
@@ -132,7 +132,7 @@ function AddStock() {
         : {
             supplier: "",
             invoiceId: "",
-            ingredientName: "",
+            materialName: "",
             quantity: "",
             lotPrice: "",
           },
@@ -146,7 +146,7 @@ function AddStock() {
       const confirmMessage =
         selection === "addProducts"
           ? `Remove ${rowToRemove.selectedItem || "this item"}?`
-          : `Remove ${rowToRemove.ingredientName || "this ingredient"}?`;
+          : `Remove ${rowToRemove.materialName || "this material"}?`;
       if (window.confirm(confirmMessage)) {
         setRows(rows.filter((_, rowIndex) => rowIndex !== index));
         showToast("Row removed", "success");
@@ -160,7 +160,7 @@ function AddStock() {
     if (selection === "addProducts") {
       return rows.some((row) => row.selectedItem && row.quantity > 0);
     } else {
-      return rows.some((row) => row.supplier && row.ingredientName && row.quantity);
+      return rows.some((row) => row.supplier && row.materialName && row.quantity);
     }
   };
 
@@ -169,7 +169,7 @@ function AddStock() {
       showToast(
         selection === "addProducts"
           ? "Please select at least one product with a valid quantity."
-          : "Please add at least one ingredient with supplier and quantity.",
+          : "Please add at least one material with supplier and quantity.",
         "error"
       );
       const tableElement = document.querySelector(".table-container");
@@ -198,12 +198,12 @@ function AddStock() {
         }
         showToast("Stock updated successfully!", "success");
       } else {
-        const filteredRows = rows.filter((row) => row.ingredientName);
+        const filteredRows = rows.filter((row) => row.materialName);
         for (const row of filteredRows) {
-          await axios.post("http://localhost:5000/api/ingredients", {
+          await axios.post("http://localhost:5000/api/materials", {
             supplier_name: row.supplier,
             invoice_id: row.invoiceId,
-            material_name: row.ingredientName,
+            material_name: row.materialName,
             material_quantity: row.quantity,
             lot_price: row.lotPrice,
           });
@@ -281,7 +281,7 @@ function AddStock() {
               onChange={handleSelectionChange}
             >
               <option value="addProducts">Add Products</option>
-              <option value="addIngredients">Add Materials</option>
+              <option value="addMaterials">Add Materials</option>
             </select>
           </div>
         </div>
@@ -371,7 +371,7 @@ function AddStock() {
                   {rows.map((row, index) => (
                     <motion.tr
                       key={index}
-                      className={`data-row ${row.selectedItem || row.ingredientName ? "selected-row" : ""}`}
+                      className={`data-row ${row.selectedItem || row.materialName ? "selected-row" : ""}`}
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.2, delay: index * 0.05 }}
@@ -440,7 +440,7 @@ function AddStock() {
                                 className="select-item"
                                 value={row.supplier}
                                 onChange={(e) =>
-                                  handleIngredientChange(index, "supplier", e.target.value)
+                                  handleMaterialChange(index, "supplier", e.target.value)
                                 }
                               >
                                 <option value="">Select Supplier</option>
@@ -461,7 +461,7 @@ function AddStock() {
                                 value={row.invoiceId}
                                 placeholder="Invoice #"
                                 onChange={(e) =>
-                                  handleIngredientChange(index, "invoiceId", e.target.value)
+                                  handleMaterialChange(index, "invoiceId", e.target.value)
                                 }
                               />
                             </div>
@@ -473,9 +473,9 @@ function AddStock() {
                                 className="text-input"
                                 type="text"
                                 placeholder="Materials name"
-                                value={row.ingredientName}
+                                value={row.materialName}
                                 onChange={(e) =>
-                                  handleIngredientChange(index, "ingredientName", e.target.value)
+                                  handleMaterialChange(index, "materialName", e.target.value)
                                 }
                               />
                             </div>
@@ -486,7 +486,7 @@ function AddStock() {
                                 className="quantity-btn decrease"
                                 onClick={() => {
                                   const currentValue = parseInt(row.quantity) || 0;
-                                  handleIngredientChange(
+                                  handleMaterialChange(
                                     index,
                                     "quantity",
                                     Math.max(1, currentValue - 1).toString()
@@ -502,14 +502,14 @@ function AddStock() {
                                 placeholder="Qty"
                                 value={row.quantity}
                                 onChange={(e) =>
-                                  handleIngredientChange(index, "quantity", e.target.value)
+                                  handleMaterialChange(index, "quantity", e.target.value)
                                 }
                               />
                               <button
                                 className="quantity-btn increase"
                                 onClick={() => {
                                   const currentValue = parseInt(row.quantity) || 0;
-                                  handleIngredientChange(index, "quantity", (currentValue + 1).toString());
+                                  handleMaterialChange(index, "quantity", (currentValue + 1).toString());
                                 }
                                 }>
                                 <i className="fas fa-plus"></i>
@@ -525,7 +525,7 @@ function AddStock() {
                                 placeholder="Price"
                                 value={row.lotPrice}
                                 onChange={(e) =>
-                                  handleIngredientChange(index, "lotPrice", e.target.value)
+                                  handleMaterialChange(index, "lotPrice", e.target.value)
                                 }
                               />
                             </div>
@@ -586,7 +586,7 @@ function AddStock() {
               </button>
             </motion.div>
 
-            {rows.some((row) => row.selectedItem || row.ingredientName) && (
+            {rows.some((row) => row.selectedItem || row.materialName) && (
               <motion.div
                 className="summary-panel"
                 initial={{ opacity: 0, y: 20 }}
@@ -612,7 +612,7 @@ function AddStock() {
                     <>
                       <p>
                         <strong>Materials to add:</strong>{" "}
-                        {rows.filter((r) => r.ingredientName).length}
+                        {rows.filter((r) => r.materialName).length}
                       </p>
                       <p>
                         <strong>Suppliers:</strong>{" "}
@@ -655,7 +655,7 @@ function AddStock() {
                   </>
                 ) : (
                   <>
-                    <p>Adding {rows.filter((r) => r.ingredientName).length} materials</p>
+                    <p>Adding {rows.filter((r) => r.materialName).length} materials</p>
                     <p>
                       From {new Set(rows.filter((r) => r.supplier).map((r) => r.supplier)).size} suppliers
                     </p>

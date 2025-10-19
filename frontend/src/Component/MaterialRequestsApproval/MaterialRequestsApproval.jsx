@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./IngredientRequestsApproval.css";
+import "./MaterialRequestsApproval.css";
 import Nav from "../Nav/Nav";
 import HeadBar from "../HeadBar/HeadBar";
 import SalesRequestApproval from "../SalesRequestApproval/SalesRequestApproval";
 
-function IngredientRequestsApproval() {
+function MaterialRequestsApproval() {
   const [requests, setRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -16,8 +16,8 @@ function IngredientRequestsApproval() {
     if (!showSalesRequests) {
       const fetchRequests = async () => {
         try {
-          const user = JSON.parse(sessionStorage.getItem("user"));
-          const response = await axios.get("http://localhost:5000/api/ingredient-requests", {
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        const response = await axios.get("http://localhost:5000/api/material-requests", {
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${user?.token}`,
@@ -26,7 +26,7 @@ function IngredientRequestsApproval() {
           if (response.status === 200 && response.data.success) {
             setRequests(response.data.data);
           } else {
-            setError("Failed to fetch ingredient requests.");
+            setError("Failed to fetch material requests.");
           }
         } catch (err) {
           setError("Server error while fetching requests.");
@@ -46,7 +46,7 @@ function IngredientRequestsApproval() {
     try {
       const user = JSON.parse(sessionStorage.getItem("user"));
       const response = await axios.patch(
-        `http://localhost:5000/api/ingredient-requests/${requestId}`,
+        `http://localhost:5000/api/material-requests/${requestId}`,
         { status: action },
         {
           headers: {
@@ -84,10 +84,10 @@ function IngredientRequestsApproval() {
           <div className="dropdown-container">
             <select
               className="request-type-dropdown"
-              value={showSalesRequests ? "sales" : "ingredient"}
+              value={showSalesRequests ? "sales" : "material"}
               onChange={handleDropdownChange}
             >
-              <option value="ingredient">Ingredient Requests</option>
+              <option value="material">Material Requests</option>
               <option value="sales">Sales Requests</option>
             </select>
           </div>
@@ -95,7 +95,7 @@ function IngredientRequestsApproval() {
             <SalesRequestApproval />
           ) : (
             <>
-              <h2 className="ingredient-requests-approval-title">Ingredient Requests Approval</h2>
+              <h2 className="ingredient-requests-approval-title">Material Requests Approval</h2>
               {isLoading ? (
                 <div className="ingredient-requests-approval-loading-spinner">
                   <div className="ingredient-requests-approval-spinner"></div>
@@ -106,13 +106,13 @@ function IngredientRequestsApproval() {
                   {error && <p className="ingredient-requests-approval-error-message">{error}</p>}
                   {success && <p className="ingredient-requests-approval-success-message">{success}</p>}
                   {requests.length === 0 ? (
-                    <p className="ingredient-requests-approval-no-data">No ingredient requests available.</p>
+                    <p className="ingredient-requests-approval-no-data">No material requests available.</p>
                   ) : (
                     <table className="ingredient-requests-approval-table">
                       <thead>
                         <tr>
                           <th>Request ID</th>
-                          <th>Ingredient Name</th>
+                          <th>Material Name</th>
                           <th>Requested Quantity</th>
                           <th>Status</th>
                           <th>Actions</th>
@@ -122,7 +122,7 @@ function IngredientRequestsApproval() {
                         {requests.map((request) => (
                           <tr key={request._id}>
                             <td>{request._id}</td>
-                            <td>{request.ingredient_id?.material_name || "Unknown"}</td>
+                            <td>{request.material_id?.material_name || "Unknown"}</td>
                             <td>{request.request_quantity}</td>
                             <td className={`status-${request.status}`}>
                               {request.status.charAt(0).toUpperCase() + request.status.slice(1)}
@@ -160,4 +160,4 @@ function IngredientRequestsApproval() {
   );
 }
 
-export default IngredientRequestsApproval;
+export default MaterialRequestsApproval;

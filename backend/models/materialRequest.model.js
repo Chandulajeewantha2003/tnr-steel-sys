@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const ingredientRequestSchema = new mongoose.Schema(
+const materialRequestSchema = new mongoose.Schema(
   {
-    ingredient_id: {
+    material_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Ingredient",
+      ref: "Material",
       required: true,
     },
     request_quantity: {
@@ -19,12 +19,13 @@ const ingredientRequestSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    collection: 'ingredientrequests' // Keep old collection name to preserve existing data
   }
 );
 
-const IngredientRequest = mongoose.model(
-  "IngredientRequest",
-  ingredientRequestSchema
+const MaterialRequest = mongoose.model(
+  "MaterialRequest",
+  materialRequestSchema
 );
 
-export default IngredientRequest;
+export default MaterialRequest;

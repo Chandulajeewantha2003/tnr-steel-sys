@@ -5,7 +5,7 @@ import "./GMViewStock.css";
 import HeadBar from "../HeadBar/HeadBar";
 
 function GMViewStock() {
-  const [selection, setSelection] = useState("ingredients");
+  const [selection, setSelection] = useState("materials");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -16,8 +16,8 @@ function GMViewStock() {
 
     try {
       const endpoint =
-        selection === "ingredients"
-          ? "http://localhost:5000/api/ingredients"
+        selection === "materials"
+          ? "http://localhost:5000/api/materials"
           : "http://localhost:5000/api/stocks";
 
       const response = await axios.get(endpoint);
@@ -53,7 +53,7 @@ function GMViewStock() {
             value={selection}
             onChange={(e) => setSelection(e.target.value)}
           >
-            <option value="ingredients">Materials</option>
+            <option value="materials">Materials</option>
             <option value="products">Products</option>
           </select>
         </div>
@@ -65,7 +65,7 @@ function GMViewStock() {
           <table className="gm-stock-xyz-table">
             <thead>
               <tr>
-                {selection === "ingredients" ? (
+                {selection === "materials" ? (
                   <>
                     <th>Supplier</th>
                     <th>Invoice ID</th>
@@ -86,7 +86,7 @@ function GMViewStock() {
               {data.length === 0 ? (
                 <tr>
                   <td
-                    colSpan={selection === "ingredients" ? 6 : 4}
+                    colSpan={selection === "materials" ? 6 : 4}
                     style={{ textAlign: "center" }}
                   >
                     No data available
@@ -95,7 +95,7 @@ function GMViewStock() {
               ) : (
                 data.map((item, index) => (
                   <tr key={index}>
-                    {selection === "ingredients" ? (
+                    {selection === "materials" ? (
                       <>
                         <td>{item.supplier_name}</td>
                         <td>{item.invoice_id}</td>

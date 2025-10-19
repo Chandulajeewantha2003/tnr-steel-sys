@@ -23,8 +23,8 @@ function ViewStock() {
 
     try {
       const endpoint =
-        selection === "ingredients"
-          ? "http://localhost:5000/api/ingredients"
+        selection === "materials"
+          ? "http://localhost:5000/api/materials"
           : "http://localhost:5000/api/stocks";
 
       const response = await axios.get(endpoint);
@@ -85,13 +85,13 @@ function ViewStock() {
       // For products, use stock change request form
       navigate(`/mystock-request/${item._id}`);
     } else {
-      // For ingredients, show a message that editing is not available
-      alert("Ingredient editing is not currently available. Please use the Add Stock page to add new ingredients or contact your administrator for modifications.");
+      // For materials, show a message that editing is not available
+      alert("Material editing is not currently available. Please use the Add Stock page to add new materials or contact your administrator for modifications.");
     }
   };
 
   const handleDelete = async (item) => {
-    const itemType = selection === "products" ? "stock item" : "ingredient";
+    const itemType = selection === "products" ? "stock item" : "material";
 
     if (
       window.confirm(
@@ -125,9 +125,9 @@ function ViewStock() {
             fetchData();
           }
         } else {
-          // For ingredients, use direct deletion
+          // For materials, use direct deletion
           const response = await axios.delete(
-            `http://localhost:5000/api/ingredients/${item._id}`
+            `http://localhost:5000/api/materials/${item._id}`
           );
 
           if (response.data.success) {
@@ -151,7 +151,7 @@ function ViewStock() {
     if (!searchTerm) return true;
 
     const searchLower = searchTerm.toLowerCase();
-    if (selection === "ingredients") {
+    if (selection === "materials") {
       return (
         item.supplier_name?.toLowerCase().includes(searchLower) ||
         item.invoice_id?.toLowerCase().includes(searchLower) ||
@@ -176,7 +176,7 @@ function ViewStock() {
               <input
                 type="text"
                 placeholder={`Search ${
-                  selection === "products" ? "products" : "ingredients"
+                  selection === "products" ? "products" : "materials"
                 }...`}
                 className="VS-search-input"
                 value={searchTerm}
@@ -195,7 +195,7 @@ function ViewStock() {
                 onChange={(e) => setSelection(e.target.value)}
               >
                 <option value="products">Products</option>
-                <option value="ingredients">Materials</option>
+                <option value="materials">Materials</option>
               </select>
             </div>
 
@@ -225,7 +225,7 @@ function ViewStock() {
           <table className="VS-table">
             <thead>
               <tr>
-                {selection === "ingredients" ? (
+                {selection === "materials" ? (
                   <>
                     <th
                       onClick={() => handleSort("supplier_name")}
@@ -288,7 +288,7 @@ function ViewStock() {
               {filteredData.length === 0 ? (
                 <tr>
                   <td
-                    colSpan={selection === "ingredients" ? 6 : 4}
+                    colSpan={selection === "materials" ? 6 : 4}
                     className="VS-no-data"
                   >
                     {searchTerm
@@ -299,7 +299,7 @@ function ViewStock() {
               ) : (
                 filteredData.map((item, index) => (
                   <tr key={index} className="VS-data-row">
-                    {selection === "ingredients" ? (
+                    {selection === "materials" ? (
                       <>
                         <td className="VS-cell">{item.supplier_name}</td>
                         <td className="VS-cell">{item.invoice_id}</td>

@@ -59,9 +59,9 @@ import ForgotPassword from "./Component/ForgotPassword/ForgotPassword";
 import ResetPassword from "./Component/ResetPassword/ResetPassword";
 import SPViewProduct from "./Component/SPViewProduct/SPViewProduct";
 import PMDashboard from "./Component/PMDashboard/PMDashboard";
-import IngredientRequestForm from "./Component/IngredientRequestForm/IngredientRequestForm";
-import IngredientRequestsApproval from "./Component/IngredientRequestsApproval/IngredientRequestsApproval";
-import ViewIngredientRequests from "./Component/ViewIngredientRequests/ViewIngredientRequests";
+import MaterialRequestForm from "./Component/MaterialRequestForm/MaterialRequestForm";
+import MaterialRequestsApproval from "./Component/MaterialRequestsApproval/MaterialRequestsApproval";
+import ViewMaterialRequests from "./Component/ViewMaterialRequests/ViewMaterialRequests";
 import PMViewProducts from "./Component/PMViewProducts/PMViewProducts";
 import SalesRequestApproval from "./Component/SalesRequestApproval/SalesRequestApproval";
 import ViewSalesRequests from "./Component/ViewSalesRequests/ViewSalesRequests";
@@ -145,9 +145,9 @@ function App() {
       <Route path="/sales-request" element={<ProtectedRoute element={<SalesRequestForm />} />} />
       <Route path="/mystock-change-requests" element={<MyStockChangeRequests />} />
       <Route path="/mystock-request/:stockId" element={<StockChangeRequestForm />} />
-      <Route path="/ingredient-request" element={<ProtectedRoute element={<IngredientRequestForm />} />} />
-      <Route path="/ingredient-requests-approval" element={<ProtectedRoute element={<IngredientRequestsApproval />} />} />
-      <Route path="/view-ingredient-requests" element={<ProtectedRoute element={<ViewIngredientRequests />} />} />
+      <Route path="/material-request" element={<ProtectedRoute element={<MaterialRequestForm />} />} />
+      <Route path="/material-requests-approval" element={<ProtectedRoute element={<MaterialRequestsApproval />} />} />
+      <Route path="/view-material-requests" element={<ProtectedRoute element={<ViewMaterialRequests />} />} />
       <Route path="/pmviewproducts" element={<ProtectedRoute element={<PMViewProducts />} />} />
       <Route path="/sales-requests-approval" element={<ProtectedRoute element={<SalesRequestApproval />} />} />
       <Route path="/viewsalesrequests" element={<ProtectedRoute element={<ViewSalesRequests />} />} />

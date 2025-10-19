@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "./ViewIngredientRequests.css";
+import "./ViewMaterialRequests.css";
 import PMNav from "../PMNav/PMNav";
 import HeadBar from "../HeadBar/HeadBar";
 import axios from "axios";
 import { jsPDF } from "jspdf";
 
-function ViewIngredientRequests() {
+function ViewMaterialRequests() {
   const [requests, setRequests] = useState([]);
   const [filteredRequests, setFilteredRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +21,7 @@ function ViewIngredientRequests() {
       try {
         const user = JSON.parse(sessionStorage.getItem("user"));
         const response = await axios.get(
-          "http://localhost:5000/api/ingredient-requests",
+          "http://localhost:5000/api/material-requests",
           {
             headers: {
               "Content-Type": "application/json",
@@ -37,7 +37,7 @@ function ViewIngredientRequests() {
           setRequests(sortedData);
           setFilteredRequests(sortedData);
         } else {
-          setError("Failed to fetch ingredient requests.");
+          setError("Failed to fetch Material requests.");
         }
       } catch (err) {
         setError("Server error while fetching requests.");
@@ -54,7 +54,7 @@ function ViewIngredientRequests() {
     // Filter and then sort the data
     let filtered = requests.filter((request) =>
       request._id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      request.ingredient_id?.ingredient_name?.toLowerCase().includes(searchQuery.toLowerCase())
+      request.material_id?.material_name?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     // Apply sorting
@@ -70,48 +70,48 @@ function ViewIngredientRequests() {
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
-
+  //Sorting handler
   const toggleSortOrder = () => {
     setSortOrder(sortOrder === "newest" ? "oldest" : "newest");
   };
-
+  //PDF
   const handleDownload = (request) => {
     const doc = new jsPDF();
     doc.setFontSize(16);
-    doc.text("Ingredient Request Details", 20, 20);
+    doc.text("Material Request Details", 20, 20);
     doc.setFontSize(12);
     doc.text(`Request ID: ${request._id}`, 20, 40);
-    doc.text(`Ingredient Name: ${request.ingredient_id?.ingredient_name || "Unknown"}`, 20, 50);
+    doc.text(`Material Name: ${request.material_id?.material_name || "Unknown"}`, 20, 50);
     doc.text(`Requested Quantity: ${request.request_quantity}`, 20, 60);
     doc.text(`Status: ${request.status.charAt(0).toUpperCase() + request.status.slice(1)}`, 20, 70);
     doc.text(`Created At: ${new Date(request.createdAt).toLocaleDateString()}`, 20, 80);
-    doc.save(`ingredient_request_${request._id}.pdf`);
+    doc.save(`material_request_${request._id}.pdf`);
   };
-
+  //Del 
   const handleDeleteClick = (request) => {
     if (request.status === "pending") {
       setRequestToDelete(request);
       setShowDeleteModal(true);
     }
   };
-
+  //delete confirmation
   const handleDeleteConfirm = async () => {
     if (!requestToDelete) return;
 
     try {
       const user = JSON.parse(sessionStorage.getItem("user"));
       const response = await axios.delete(
-        `http://localhost:5000/api/ingredient-requests/${requestToDelete._id}`,
+        `http://localhost:5000/api/material-requests/${requestToDelete._id}`,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${user?.token}`,//API calls with token
           },
         }
       );
 
       if (response.status === 200 && response.data.success) {
-        setRequests(requests.filter((req) => req._id !== requestToDelete._id));
+        setRequests(requests.filter((req) => req._id !== requestToDelete._id));  //validation
         setSuccess("Request deleted successfully!");
         setShowDeleteModal(false);
         setRequestToDelete(null);
@@ -130,7 +130,7 @@ function ViewIngredientRequests() {
   };
 
   return (
-    <div className="view-ingredient-requests-container">
+    <div className="view-ingredient-requests-container" style={{ backgroundColor: '#06013b', minHeight: '100vh' }}>
       <HeadBar />
       <div className="view-ingredient-requests-layout">
         <div className="view-ingredient-requests-sidebar">
@@ -138,13 +138,13 @@ function ViewIngredientRequests() {
         </div>
         <div className="view-ingredient-requests-main-content">
           <div className="view-ingredient-requests-content-wrapper">
-            <h2 className="view-ingredient-requests-title">My Ingredient Requests</h2>
+            <h2 className="view-ingredient-requests-title">My Materials Requests</h2>
             <div className="search-and-sort-container">
               <div className="search-bar-container">
                 <input
                   type="text"
                   className="search-bar-input"
-                  placeholder="Search by ID or ingredient name..."
+                  placeholder="Search by ID or Material name..."
                   value={searchQuery}
                   onChange={handleSearchChange}
                 />
@@ -189,30 +189,30 @@ function ViewIngredientRequests() {
                 <p>Loading requests...</p>
               </div>
             ) : (
-              <div className="view-ingredient-requests-table-container">
+              <div className="view-ingredient-requests-table-container" style={{ width: "100%", backgroundColor: "white", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)", marginBottom: "20px" }}>
                 {error && <p className="view-ingredient-requests-error-message">{error}</p>}
                 {success && <p className="view-ingredient-requests-success-message">{success}</p>}
                 {filteredRequests.length === 0 ? (
-                  <p className="view-ingredient-requests-no-data">No ingredient requests found.</p>
+                  <p className="view-ingredient-requests-no-data">No material requests found.</p>
                 ) : (
-                  <table className="view-ingredient-requests-table">
+                  <table className="view-ingredient-requests-table" style={{ width: "100%", minWidth: "100%" }}>
                     <thead>
                       <tr>
-                        <th>Request ID</th>
-                        <th>Ingredient Name</th>
-                        <th>Requested Quantity</th>
-                        <th>Status</th>
-                        <th>Requested At</th>
-                        <th>Actions</th>
+                        <th style={{ backgroundColor: "#3498db", width: "15%" }}>Request ID</th>
+                        <th style={{ backgroundColor: "#3498db", width: "20%" }}>Material Name</th>
+                        <th style={{ backgroundColor: "#3498db", width: "15%" }}>Requested Quantity</th>
+                        <th style={{ backgroundColor: "#3498db", width: "15%" }}>Status</th>
+                        <th style={{ backgroundColor: "#3498db", width: "20%" }}>Requested At</th>
+                        <th style={{ backgroundColor: "#3498db", width: "15%" }}>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {filteredRequests.map((request) => (
                         <tr key={request._id}>
                           <td>{request._id}</td>
-                          <td>{request.ingredient_id?.ingredient_name}</td>
+                          <td>{request.material_id?.material_name}</td>
                           <td>{request.request_quantity}</td>
-                          <td className={`status-${request.status.toLowerCase()}`}>
+                          <td className={`status-${request.status.toLowerCase()}`} style={{ textAlign:"center",fontWeight:"bold" }} >
                             {request.status.charAt(0).toUpperCase() + request.status.slice(1)}
                           </td>
                           <td>{new Date(request.createdAt).toLocaleDateString()}</td>
@@ -250,7 +250,7 @@ function ViewIngredientRequests() {
         <div className="delete-modal-overlay">
           <div className="delete-modal">
             <h3>Confirm Delete</h3>
-            <p>Are you sure you want to delete this ingredient request?</p>
+            <p>Are you sure you want to delete this material request?</p>
             <div className="delete-modal-buttons">
               <button className="delete-modal-cancel" onClick={handleDeleteCancel}>
                 Cancel
@@ -266,4 +266,4 @@ function ViewIngredientRequests() {
   );
 }
 
-export default ViewIngredientRequests;
+export default ViewMaterialRequests;

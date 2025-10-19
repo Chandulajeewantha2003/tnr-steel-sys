@@ -1,7 +1,7 @@
-//stock.model.js
+//material.model.js
 import mongoose from "mongoose";
 
-const ingredientSchema = new mongoose.Schema(
+const materialSchema = new mongoose.Schema(
   {
     invoice_id: {
       type: String,
@@ -26,9 +26,10 @@ const ingredientSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    collection: 'ingredients' // Keep old collection name to preserve existing data
   }
 );
 
-const Ingredient = mongoose.model("Ingredient", ingredientSchema);
+const Material = mongoose.model("Material", materialSchema);
 
-export default Ingredient;
+export default Material;

@@ -73,15 +73,15 @@ function PMNav() {
           <hr className="pm-nav-divider" />
           <li className="pm-nav-item">
             <Link
-              to="/view-ingredient-requests"
+              to="/view-material-requests"
               className={`pm-nav-link ${
-                activeLink === "/view-ingredient-requests" ? "pm-nav-active" : ""
+                activeLink === "/view-material-requests" ? "pm-nav-active" : ""
               }`}
-              onClick={() => handleLinkClick("/view-ingredient-requests")}
+              onClick={() => handleLinkClick("/view-material-requests")}
             >
               <button
                 className={`pm-center-icon-btn ${
-                  activeLink === "/view-ingredient-requests" ? "pm-btn-active" : ""
+                  activeLink === "/view-material-requests" ? "pm-btn-active" : ""
                 }`}
               >
                 <svg
@@ -137,15 +137,15 @@ function PMNav() {
           <hr className="pm-nav-divider" />
           <li className="pm-nav-item">
             <Link
-              to="/ingredient-request"
+              to="/material-request"
               className={`pm-nav-link ${
-                activeLink === "/ingredient-request" ? "pm-nav-active" : ""
+                activeLink === "/material-request" ? "pm-nav-active" : ""
               }`}
-              onClick={() => handleLinkClick("/ingredient-request")}
+              onClick={() => handleLinkClick("/material-request")}
             >
               <button
                 className={`pm-center-icon-btn ${
-                  activeLink === "/ingredient-request" ? "pm-btn-active" : ""
+                  activeLink === "/material-request" ? "pm-btn-active" : ""
                 }`}
               >
                 <svg

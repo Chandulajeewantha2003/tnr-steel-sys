@@ -1,17 +1,17 @@
-import IngredientRequest from "../models/ingredientRequest.model.js";
+import MaterialRequest from "../models/materialRequest.model.js";
 import mongoose from "mongoose";
 
-export const addIngredientRequest = async (req, res) => {
-  const { ingredient_id, request_quantity } = req.body;
+export const addMaterialRequest = async (req, res) => {
+  const { material_id, request_quantity } = req.body;
 
-  if (!ingredient_id || !request_quantity) {
+  if (!material_id || !request_quantity) {
     return res
       .status(400)
       .json({ success: false, message: "Please provide all details" });
   }
 
-  const newRequest = new IngredientRequest({
-    ingredient_id,
+  const newRequest = new MaterialRequest({
+    material_id,
     request_quantity,
     status: "pending",
   });
@@ -20,22 +20,22 @@ export const addIngredientRequest = async (req, res) => {
     await newRequest.save();
     res.status(201).json({ success: true, data: newRequest });
   } catch (error) {
-    console.error("Error in creating ingredient request:", error.message);
+    console.error("Error in creating material request:", error.message);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
 
-export const getAllIngredientRequests = async (req, res) => {
+export const getAllMaterialRequests = async (req, res) => {
   try {
-    const requests = await IngredientRequest.find({}).populate("ingredient_id");
+    const requests = await MaterialRequest.find({}).populate("material_id");
     res.status(200).json({ success: true, data: requests });
   } catch (error) {
-    console.error("Error fetching ingredient requests:", error.message);
+    console.error("Error fetching material requests:", error.message);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
 
-export const updateIngredientRequest = async (req, res) => {
+export const updateMaterialRequest = async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
 
@@ -50,11 +50,11 @@ export const updateIngredientRequest = async (req, res) => {
   }
 
   try {
-    const updatedRequest = await IngredientRequest.findByIdAndUpdate(
+    const updatedRequest = await MaterialRequest.findByIdAndUpdate(
       id,
       { status },
       { new: true }
-    ).populate("ingredient_id");
+    ).populate("material_id");
     if (!updatedRequest) {
       return res
         .status(404)
@@ -62,12 +62,12 @@ export const updateIngredientRequest = async (req, res) => {
     }
     res.status(200).json({ success: true, data: updatedRequest });
   } catch (error) {
-    console.error("Error updating ingredient request:", error.message);
+    console.error("Error updating material request:", error.message);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
 
-export const deleteIngredientRequest = async (req, res) => {
+export const deleteMaterialRequest = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -77,7 +77,7 @@ export const deleteIngredientRequest = async (req, res) => {
   }
 
   try {
-    const request = await IngredientRequest.findById(id);
+    const request = await MaterialRequest.findById(id);
 
     if (!request) {
       return res
@@ -94,12 +94,12 @@ export const deleteIngredientRequest = async (req, res) => {
         });
     }
 
-    await IngredientRequest.findByIdAndDelete(id);
+    await MaterialRequest.findByIdAndDelete(id);
     res
       .status(200)
       .json({ success: true, message: "Request deleted successfully" });
   } catch (error) {
-    console.error("Error deleting ingredient request:", error.message);
+    console.error("Error deleting material request:", error.message);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };

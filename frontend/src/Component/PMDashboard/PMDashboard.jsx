@@ -34,7 +34,7 @@ function PMDashboard() {
   const [stats, setStats] = useState({
     pendingRequests: 0,
     approvedRequests: 0,
-    totalIngredients: 0,
+    totalMaterials: 0,
     lowStockItems: 0,
   });
   const [loading, setLoading] = useState(true);
@@ -52,17 +52,17 @@ function PMDashboard() {
     const fetchDashboardData = async () => {
       try {
         setLoading(true);
-        // Fetch ingredient requests
+        // Fetch material requests
         const requestsRes = await axios.get(
-          "http://localhost:5000/api/ingredient-requests"
+          "http://localhost:5000/api/material-requests"
         );
         const requests = requestsRes.data.data || [];
 
-        // Fetch ingredients
-        const ingredientsRes = await axios.get(
-          "http://localhost:5000/api/ingredients"
+        // Fetch materials
+        const materialsRes = await axios.get(
+          "http://localhost:5000/api/materials"
         );
-        const ingredients = ingredientsRes.data.data || [];
+        const materials = materialsRes.data.data || [];
 
         // Calculate stats
         const pendingRequests = requests.filter(
@@ -71,8 +71,8 @@ function PMDashboard() {
         const approvedRequests = requests.filter(
           (req) => req.status === "approved"
         ).length;
-        const lowStockItems = ingredients.filter(
-          (ing) => ing.ingredient_quantity < ing.min_quantity
+        const lowStockItems = materials.filter(
+          (mat) => mat.material_quantity < mat.min_quantity
         ).length;
 
         // Prepare request trend data....Line chart data
@@ -99,7 +99,7 @@ function PMDashboard() {
           labels: last7Days,
           datasets: [
             {
-              label: "Ingredient Requests",
+              label: "Material Requests",
               data: requestCounts,
               borderColor: "#1976d2",
               backgroundColor: "rgba(25, 118, 210, 0.1)",
@@ -110,16 +110,16 @@ function PMDashboard() {
         });
 
         // Prepare stock level data
-        const topIngredients = ingredients
-          .sort((a, b) => b.ingredient_quantity - a.ingredient_quantity)
+        const topMaterials = materials
+          .sort((a, b) => b.material_quantity - a.material_quantity)
           .slice(0, 5);
 
         setStockData({
-          labels: topIngredients.map((ing) => ing.ingredient_name),
+          labels: topMaterials.map((mat) => mat.material_name),
           datasets: [
             {
               label: "Current Stock",
-              data: topIngredients.map((ing) => ing.ingredient_quantity),
+              data: topMaterials.map((mat) => mat.material_quantity),
               backgroundColor: "rgba(46, 125, 50, 0.6)",
               borderColor: "#2e7d32",
               borderWidth: 1,
@@ -130,7 +130,7 @@ function PMDashboard() {
         setStats({
           pendingRequests,
           approvedRequests,
-          totalIngredients: ingredients.length,
+          totalMaterials: materials.length,
           lowStockItems,
         });
       } catch (error) {
@@ -152,7 +152,7 @@ function PMDashboard() {
       },
       title: {
         display: true,
-        text: "Ingredient Requests Trend (Last 7 Days)",
+        text: "Material Requests Trend (Last 7 Days)",
       },
     },
     scales: {
@@ -173,7 +173,7 @@ function PMDashboard() {
       },
       title: {
         display: true,
-        text: "Top 5 Ingredients by Stock Level",
+        text: "Top 5 Materials by Stock Level",
       },
     },
     scales: {
@@ -239,7 +239,7 @@ function PMDashboard() {
                 </div>
                 <div className="pm-stat-info">
                   <h3>Total Materials</h3>
-                  <p>{stats.totalIngredients}</p>
+                  <p>{stats.totalMaterials}</p>
                 </div>
               </div>
 
@@ -267,7 +267,7 @@ function PMDashboard() {
                 <div className="pm-dashboard-buttons">
                   {/* Existing Button */}
                   <Link
-                    to="/view-ingredient-requests"
+                    to="/view-material-requests"
                     className="pm-dashboard-button"
                   >
                     <div className="pm-button-icon">
@@ -340,7 +340,7 @@ function PMDashboard() {
                 </div>
               </Link>
 
-              <Link to="/ingredient-request" className="pm-dashboard-button">
+              <Link to="/material-request" className="pm-dashboard-button">
                 <div className="pm-button-icon">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

@@ -341,7 +341,7 @@ body::after {
   
 }
 
-/* Column widths for ingredients (5 columns) */
+/* Column widths for materials (5 columns) */
 
 .gm-stock-xyz-table th:nth-child(1),
 .gm-stock-xyz-table td:nth-child(1) {
@@ -355,7 +355,7 @@ body::after {
 
 .gm-stock-xyz-table th:nth-child(3),
 .gm-stock-xyz-table td:nth-child(3) {
-  width: 25%; /* Ingredient Name */
+  width: 25%; /* Material Name */
 }
 
 .gm-stock-xyz-table th:nth-child(4),

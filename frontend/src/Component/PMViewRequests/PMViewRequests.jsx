@@ -18,7 +18,7 @@ function PMViewRequests() {
           throw new Error("User ID not found in session.");
         }
         const response = await axios.get(
-          `http://localhost:5000/api/ingredient-requests?userId=${user._id}`,
+          `http://localhost:5000/api/material-requests?userId=${user._id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -29,7 +29,7 @@ function PMViewRequests() {
         if (response.status === 200 && response.data.success) {
           setRequests(response.data.data);
         } else {
-          setError("Failed to fetch your ingredient requests.");
+          setError("Failed to fetch your material requests.");
         }
       } catch (err) {
         setError("Server error while fetching requests.");
@@ -48,7 +48,7 @@ function PMViewRequests() {
       <PMNav />
       <div className="pm-view-requests-main-content">
         <div className="pm-view-requests-content-wrapper">
-          <h2 className="pm-view-requests-title">My Ingredient Requests</h2>
+          <h2 className="pm-view-requests-title">My Material Requests</h2>
           {isLoading ? (
             <div className="pm-view-requests-loading-spinner">
               <div className="pm-view-requests-spinner"></div>
@@ -64,7 +64,7 @@ function PMViewRequests() {
                   <thead>
                     <tr>
                       <th>Request ID</th>
-                      <th>Ingredient Name</th>
+                      <th>Material Name</th>
                       <th>Requested Quantity</th>
                       <th>Status</th>
                       <th>Date Requested</th>
@@ -74,7 +74,7 @@ function PMViewRequests() {
                     {requests.map((request) => (
                       <tr key={request._id}>
                         <td>{request._id}</td>
-                        <td>{request.ingredient_id?.material_name || "Unknown"}</td>
+                        <td>{request.material_id?.material_name || "Unknown"}</td>
                         <td>{request.request_quantity}</td>
                         <td className={`status-${request.status}`}>
                           {request.status.charAt(0).toUpperCase() + request.status.slice(1)}

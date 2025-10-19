@@ -642,7 +642,10 @@ function Home() {
       <Nav />
       <div className="main-content-st">
         <div className="dashboard-header">
-          <h2 className="dash-title-st">Stock Manager Dashboard</h2>
+          <h2 className="dash-title-st" style={{background:'linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #ffffff 50%, #e0e0e0 75%, #ffffff 100%)',
+            backgroundSize:'300% 300%',WebkitTextFillColor:'transparent',webkitbackgroundclip:'text',backgroundClip:'text',animation:'textShine 3s ease-in-out infinite',textShadow:' 0 4px 20px rgba(255, 255, 255, 0.3)'
+            
+          }}>Stock Manager Dashboard</h2>
           <div className="timeframe-selector">
             <button
               className={`timeframe-btn ${
