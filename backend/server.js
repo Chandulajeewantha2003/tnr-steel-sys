@@ -35,6 +35,20 @@ app.use(
         origin: ["http://localhost:5173", "http://127.0.0.1:5173", "https://tnr-steel-sys-ten.vercel.app", process.env.FRONTEND_URL].filter(Boolean),
     })
 );
+app.get("/", (req, res) => {
+    res.json({ success: true, message: "TNR Steel API is running" });
+});
+
+app.get("/api/health", async (req, res) => {
+    try {
+        await connectDB();
+        res.json({ success: true, message: "Backend and MongoDB are connected" });
+    } catch (error) {
+        console.error("MongoDB health check failed:", error.message);
+        res.status(503).json({ success: false, message: "Database connection unavailable" });
+    }
+});
+
 app.use(async (req, res, next) => {
     try {
         await connectDB();
@@ -70,67 +84,13 @@ app.use("/files", express.static("files"));
 
 //direct sales
 app.use("/api/sales", salesRoutes);
-app.post("/api/sales/add", async(req, res) => {
-    try {
-        console.log("Received Data:", req.body);
-        const { buyerId, items, totalAmount } = req.body;
-
-        if (!buyerId || !items || items.length === 0 || !totalAmount) {
-            return res.status(400).json({ success: false, message: "Missing data" });
-        }
-
-        const newSale = { buyerId, items, totalAmount, date: new Date() };
-        const result = await db.collection("sales").insertOne(newSale);
-
-        res.json({ success: true, insertedId: result.insertedId });
-    } catch (error) {
-        console.error("Database Error:", error);
-        res.status(500).json({ success: false, message: "Internal server error" });
-    }
-});
 
 //indirect sales
 app.use("/api/indirectsales", indirectsalesRoute);
-app.post("/api/indirectsales/add", async(req, res) => {
-    try {
-        console.log("Received Data:", req.body);
-        const { buyerId, items, totalAmount } = req.body;
-
-        if (!buyerId || !items || items.length === 0 || !totalAmount) {
-            return res.status(400).json({ success: false, message: "Missing data" });
-        }
-
-        const newSale = { buyerId, items, totalAmount, date: new Date() };
-        const result = await db.collection("sales").insertOne(newSale);
-
-        res.json({ success: true, insertedId: result.insertedId });
-    } catch (error) {
-        console.error("Database Error:", error);
-        res.status(500).json({ success: false, message: "Internal server error" });
-    }
-});
 
 //directreturns
 
 app.use("/api/returns", returnRoutes);
-app.post("/api/returns/add", async(req, res) => {
-    try {
-        console.log("Received Data:", req.body);
-        const { buyerId, items, totalAmount } = req.body;
-
-        if (!buyerId || !items || items.length === 0 || !totalAmount) {
-            return res.status(400).json({ success: false, message: "Missing data" });
-        }
-
-        const newReturn = { buyerId, items, totalAmount, date: new Date() };
-        const result = await db.collection("returns").insertOne(newReturn);
-
-        res.json({ success: true, insertedId: result.insertedId });
-    } catch (error) {
-        console.error("Database Error:", error);
-        res.status(500).json({ success: false, message: "Internal server error" });
-    }
-});
 
 //indirectreturns
 
