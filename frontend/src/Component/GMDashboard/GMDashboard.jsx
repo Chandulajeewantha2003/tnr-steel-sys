@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import GMNav from "../GMNav/GMNav";
-import "./GMDashboard.css";
+import "./GMdashboard.css";
 import { Link } from "react-router-dom";
 import HeadBar from "../HeadBar/HeadBar";
 import { Bar, Doughnut } from "react-chartjs-2";

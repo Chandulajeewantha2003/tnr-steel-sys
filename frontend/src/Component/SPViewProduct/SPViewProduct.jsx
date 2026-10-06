@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./SPviewProduct.css"; // Added styling
+import "./SPViewProduct.css"; // Added styling
 import SalesNav from "../SalesNav/SalesNav";
 import HeadBar from "../HeadBar/HeadBar";
 function SPviewproducts() {

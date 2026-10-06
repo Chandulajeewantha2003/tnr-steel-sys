@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SalesNav from "../SalesNav/SalesNav";
 import HeadBar from "../HeadBar/HeadBar";
-import "./ViewSalesStock.css";
+import "./viewSalesStock.css";
 import axios from "axios";
 
 function ViewSalesStock() {
