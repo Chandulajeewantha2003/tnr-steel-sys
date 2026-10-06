@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import GMNav from "../GMNav/GMNav";
 import axios from "axios";
@@ -17,8 +18,8 @@ function GMViewStock() {
     try {
       const endpoint =
         selection === "materials"
-          ? "http://localhost:5000/api/materials"
-          : "http://localhost:5000/api/stocks";
+          ? `${API_BASE_URL}/api/materials`
+          : `${API_BASE_URL}/api/stocks`;
 
       const response = await axios.get(endpoint);
       if (response.data.success) {

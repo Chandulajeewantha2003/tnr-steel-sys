@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import SalesNav from "../SalesNav/SalesNav";
 import "./SalesDashboard.css";
@@ -87,7 +88,7 @@ function SalesDashboard() {
       try {
         // Fetch stock data
         const stockResponse = await axios.get(
-          "http://localhost:5000/api/salesstocks"
+          `${API_BASE_URL}/api/salesstocks`
         );
         if (stockResponse.data) {
           if (Array.isArray(stockResponse.data)) {
@@ -110,7 +111,7 @@ function SalesDashboard() {
 
         // Fetch sales data
         const salesResponse = await axios.get(
-          "http://localhost:5000/api/indirectsales"
+          `${API_BASE_URL}/api/indirectsales`
         );
         if (salesResponse.data.success) {
           const sales = salesResponse.data.sales;
@@ -118,7 +119,7 @@ function SalesDashboard() {
 
           // Fetch returns data
           const returnsResponse = await axios.get(
-            "http://localhost:5000/api/indirectreturns"
+            `${API_BASE_URL}/api/indirectreturns`
           );
           if (returnsResponse.data) {
             if (Array.isArray(returnsResponse.data)) {
@@ -133,7 +134,7 @@ function SalesDashboard() {
 
           // Fetch pending sales requests count
           const requestsResponse = await axios.get(
-            "http://localhost:5000/api/sales-requests"
+            `${API_BASE_URL}/api/sales-requests`
           );
           if (requestsResponse.data.success) {
             const pendingCount = requestsResponse.data.data.filter(

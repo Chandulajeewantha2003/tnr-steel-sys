@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -30,8 +31,8 @@ function SPReturns() {
       try {
         setLoading(true);
         const [stockResponse, buyersResponse] = await Promise.all([
-          axios.get("http://localhost:5000/api/salesstocks"),
-          axios.get("http://localhost:5000/api/indirectbuyers"),
+          axios.get(`${API_BASE_URL}/api/salesstocks`),
+          axios.get(`${API_BASE_URL}/api/indirectbuyers`),
         ]);
 
         console.log("Stock Response:", stockResponse.data);

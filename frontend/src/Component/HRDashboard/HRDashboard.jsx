@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import HRNav from "../HRNav/HRNav";
 import "./HRDashboard.css";
@@ -18,7 +19,7 @@ function HRDashboard() {
       try {
         setIsLoading(true);
         const response = await axios.get(
-          "http://localhost:5000/api/attendance"
+          `${API_BASE_URL}/api/attendance`
         );
         if (response.data.success) {
           const records = response.data.data;
@@ -73,7 +74,7 @@ function HRDashboard() {
 
     const fetchEmployeeData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/employee");
+        const response = await axios.get(`${API_BASE_URL}/api/employee`);
         if (response.data.success) {
           const employees = response.data.data;
           setTotalEmployees(employees.length);

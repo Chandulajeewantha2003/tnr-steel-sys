@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./SalesRequestApproval.css";
@@ -13,7 +14,7 @@ function SalesRequestApproval() {
     const fetchRequests = async () => {
       try {
         const user = JSON.parse(sessionStorage.getItem("user"));
-        const response = await axios.get("http://localhost:5000/api/sales-requests", {
+        const response = await axios.get(`${API_BASE_URL}/api/sales-requests`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
@@ -41,7 +42,7 @@ function SalesRequestApproval() {
     try {
       const user = JSON.parse(sessionStorage.getItem("user"));
       const response = await axios.put(
-        `http://localhost:5000/api/sales-requests/${requestId}/status`,
+        `${API_BASE_URL}/api/sales-requests/${requestId}/status`,
         { status: action },
         {
           headers: {

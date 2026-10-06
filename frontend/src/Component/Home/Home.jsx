@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Nav from "../Nav/Nav";
@@ -125,7 +126,7 @@ function Home() {
   useEffect(() => {
     const fetchStockItems = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/stocks");
+        const response = await axios.get(`${API_BASE_URL}/api/stocks`);
         console.log("API Response:", response.data); // Debug the full response
 
         if (response.data.success && Array.isArray(response.data.data)) {
@@ -189,7 +190,7 @@ function Home() {
 
   const fetchStockItems = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/stocks");
+      const response = await axios.get(`${API_BASE_URL}/api/stocks`);
       console.log("API Response:", response.data); // Log the full response
 
       if (response.data.success && Array.isArray(response.data.data)) {
@@ -284,7 +285,7 @@ function Home() {
             );
 
       const response = await axios.get(
-        `http://localhost:5000/api/sales?startDate=${startDate}&endDate=${endDate}`
+        `${API_BASE_URL}/api/sales?startDate=${startDate}&endDate=${endDate}`
       );
 
       if (response.data.success) {
@@ -410,7 +411,7 @@ function Home() {
 
     try {
       const { startDate, endDate } = getDateRange();
-      let url = `http://localhost:5000/api/sales?startDate=${startDate}&endDate=${endDate}`;
+      let url = `${API_BASE_URL}/api/sales?startDate=${startDate}&endDate=${endDate}`;
 
       if (selectedItem) {
         url += `&itemName=${selectedItem}`;
@@ -517,7 +518,7 @@ function Home() {
   // Other fetching functions
   const fetchBuyerCount = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/buyers");
+      const response = await axios.get(`${API_BASE_URL}/buyers`);
       if (response.data.buyers) {
         setBuyerCount(response.data.buyers.length);
       } else {
@@ -531,7 +532,7 @@ function Home() {
 
   const fetchProductCount = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/products");
+      const response = await axios.get(`${API_BASE_URL}/api/products`);
       if (response.data.success && response.data.data) {
         setProductCount(response.data.data.length);
       } else {
@@ -547,7 +548,7 @@ function Home() {
     try {
       const today = new Date().toISOString().split("T")[0];
       const response = await axios.get(
-        `http://localhost:5000/api/sales?startDate=${today}&endDate=${today}`
+        `${API_BASE_URL}/api/sales?startDate=${today}&endDate=${today}`
       );
 
       if (response.data.success) {
@@ -560,7 +561,7 @@ function Home() {
         setTodaySalesCount(filteredSales.length);
       } else {
         const allSalesResponse = await axios.get(
-          "http://localhost:5000/api/sales"
+          `${API_BASE_URL}/api/sales`
         );
         if (allSalesResponse.data.success) {
           const todaySales = allSalesResponse.data.sales.filter(
@@ -586,7 +587,7 @@ function Home() {
     try {
       const today = new Date().toISOString().split("T")[0];
       const response = await axios.get(
-        `http://localhost:5000/api/returns?startDate=${today}&endDate=${today}`
+        `${API_BASE_URL}/api/returns?startDate=${today}&endDate=${today}`
       );
 
       if (response.data.success) {
@@ -599,7 +600,7 @@ function Home() {
         setTodayReturnsCount(filteredReturns.length);
       } else {
         const allReturnsResponse = await axios.get(
-          "http://localhost:5000/api/returns"
+          `${API_BASE_URL}/api/returns`
         );
         if (allReturnsResponse.data.success) {
           const todayReturns = allReturnsResponse.data.returns.filter(

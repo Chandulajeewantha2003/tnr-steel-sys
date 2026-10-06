@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import HeadBar from "../HeadBar/HeadBar";
@@ -51,7 +52,7 @@ function ResetPassword() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/reset-password",
+        `${API_BASE_URL}/api/auth/reset-password`,
         {
           token,
           newPassword: formData.newPassword,

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import "./ViewMaterialRequests.css";
 import PMNav from "../PMNav/PMNav";
@@ -21,7 +22,7 @@ function ViewMaterialRequests() {
       try {
         const user = JSON.parse(sessionStorage.getItem("user"));
         const response = await axios.get(
-          "http://localhost:5000/api/material-requests",
+          `${API_BASE_URL}/api/material-requests`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -101,7 +102,7 @@ function ViewMaterialRequests() {
     try {
       const user = JSON.parse(sessionStorage.getItem("user"));
       const response = await axios.delete(
-        `http://localhost:5000/api/material-requests/${requestToDelete._id}`,
+        `${API_BASE_URL}/api/material-requests/${requestToDelete._id}`,
         {
           headers: {
             "Content-Type": "application/json",

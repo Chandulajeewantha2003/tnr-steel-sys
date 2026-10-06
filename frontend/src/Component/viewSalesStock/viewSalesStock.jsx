@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import SalesNav from "../SalesNav/SalesNav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -14,7 +15,7 @@ function ViewSalesStock() {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get("http://localhost:5000/api/salesstocks");
+      const response = await axios.get(`${API_BASE_URL}/api/salesstocks`);
       console.log("API Response:", response.data);
       if (response.data.success) {
         setStockItems(response.data.data || []);

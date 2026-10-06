@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import SPNav from "../SalesNav/SalesNav";
 import { useNavigate } from "react-router-dom";
@@ -83,7 +84,7 @@ function SPInvoice() {
 
       // Save the sale data to the database FIRST
       const saleResponse = await axios.post(
-        "http://localhost:5000/api/indirectsales/add",
+        `${API_BASE_URL}/api/indirectsales/add`,
         indirectsaleData
       );
 

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import HeadBar from "../HeadBar/HeadBar";
@@ -16,7 +17,7 @@ function ForgotPassword() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/forgot-password",
+        `${API_BASE_URL}/api/auth/forgot-password`,
         { email }
       );
       if (response.data.success) {

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import Nav from "../Nav/Nav";
 import { useNavigate } from "react-router-dom";
@@ -72,7 +73,7 @@ function Invoice() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/sales/add",
+        `${API_BASE_URL}/api/sales/add`,
         saleData
       );
       console.log("Response:", response.data);

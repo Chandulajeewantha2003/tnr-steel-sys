@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +25,7 @@ function AddStock() {
   const fetchProductData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/api/products");
+      const response = await axios.get(`${API_BASE_URL}/api/products`);
       if (response.data.success) {
         setProducts(response.data.data);
       } else {
@@ -38,7 +39,7 @@ function AddStock() {
 
   const fetchStockData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/stocks");
+      const response = await axios.get(`${API_BASE_URL}/api/stocks`);
       if (response.data.success) {
         setStocks(response.data.data);
       } else {
@@ -54,7 +55,7 @@ function AddStock() {
 
   const fetchSuppliers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/suppliers");
+      const response = await axios.get(`${API_BASE_URL}/api/suppliers`);
       if (response.data.success) {
         setSuppliers(response.data.data);
       } else {
@@ -190,7 +191,7 @@ function AddStock() {
       if (selection === "addProducts") {
         const filteredRows = rows.filter((row) => row.selectedItem);
         for (const row of filteredRows) {
-          await axios.post("http://localhost:5000/api/stocks", {
+          await axios.post(`${API_BASE_URL}/api/stocks`, {
             product_name: row.selectedItem,
             product_quantity: row.quantity,
             product_price: row.price || 0,
@@ -200,7 +201,7 @@ function AddStock() {
       } else {
         const filteredRows = rows.filter((row) => row.materialName);
         for (const row of filteredRows) {
-          await axios.post("http://localhost:5000/api/materials", {
+          await axios.post(`${API_BASE_URL}/api/materials`, {
             supplier_name: row.supplier,
             invoice_id: row.invoiceId,
             material_name: row.materialName,

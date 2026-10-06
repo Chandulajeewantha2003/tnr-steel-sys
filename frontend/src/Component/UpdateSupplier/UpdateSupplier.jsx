@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
@@ -34,7 +35,7 @@ function UpdateSupplier() {
     const fetchHandler = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/suppliers/${id}`
+          `${API_BASE_URL}/api/suppliers/${id}`
         );
         setInputs(res.data.data); // Ensure the response structure is correct
       } catch (err) {
@@ -279,7 +280,7 @@ function UpdateSupplier() {
 
   // Send request to backend
   const sendRequest = async () => {
-    await axios.put(`http://localhost:5000/api/suppliers/${id}`, {
+    await axios.put(`${API_BASE_URL}/api/suppliers/${id}`, {
       supplier_name: String(inputs.supplier_name),
       supplier_address: String(inputs.supplier_address),
       supplier_phone: String(inputs.supplier_phone),

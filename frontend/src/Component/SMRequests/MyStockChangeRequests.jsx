@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -21,7 +22,7 @@ function MyStockChangeRequests() {
   const fetchUserRequests = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/stock-change-requests/my-requests?created_by=${user.username}`
+        `${API_BASE_URL}/api/stock-change-requests/my-requests?created_by=${user.username}`
       );
       if (response.data.success) {
         setRequests(response.data.data);
@@ -40,7 +41,7 @@ function MyStockChangeRequests() {
     if (window.confirm("Are you sure you want to delete this request?")) {
       try {
         const response = await axios.delete(
-          `http://localhost:5000/api/stock-change-requests/${id}`
+          `${API_BASE_URL}/api/stock-change-requests/${id}`
         );
         if (response.data.success) {
           setRequests(requests.filter((req) => req._id !== id));

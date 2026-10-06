@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -20,7 +21,7 @@ function MyRequests() {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/sales-requests/my-requests?created_by=${user.username}`
+        `${API_BASE_URL}/api/sales-requests/my-requests?created_by=${user.username}`
       );
       if (response.data.success) {
         setRequests(response.data.data);
@@ -39,7 +40,7 @@ function MyRequests() {
     if (window.confirm("Are you sure you want to delete this request?")) {
       try {
         const response = await axios.delete(
-          `http://localhost:5000/api/sales-requests/${id}`
+          `${API_BASE_URL}/api/sales-requests/${id}`
         );
         if (response.data.success) {
           setRequests(requests.filter((req) => req._id !== id));

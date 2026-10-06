@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import GMNav from "../GMNav/GMNav";
 import "./GMdashboard.css";
@@ -96,7 +97,7 @@ function GMDashboard() {
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const buyersRes = await axios.get("http://localhost:5000/buyers");
+        const buyersRes = await axios.get(`${API_BASE_URL}/buyers`);
         const buyerCount =
           buyersRes.data && Array.isArray(buyersRes.data.buyers)
             ? buyersRes.data.buyers.length
@@ -104,7 +105,7 @@ function GMDashboard() {
         setBuyerCount(buyerCount);
 
         const productsRes = await axios.get(
-          "http://localhost:5000/api/products"
+          `${API_BASE_URL}/api/products`
         );
         const productCount =
           productsRes.data && Array.isArray(productsRes.data.data)
@@ -113,7 +114,7 @@ function GMDashboard() {
         setProductCount(productCount);
 
         const suppliersRes = await axios.get(
-          "http://localhost:5000/api/suppliers"
+          `${API_BASE_URL}/api/suppliers`
         );
         const supplierCount =
           suppliersRes.data &&
@@ -127,7 +128,7 @@ function GMDashboard() {
 
         // Fetch summary stats
         const summaryRes = await axios.get(
-          "http://localhost:5000/api/summary-stats"
+          `${API_BASE_URL}/api/summary-stats`
         );
         if (summaryRes.data.success) {
           setSummaryStats(summaryRes.data.stats);
@@ -174,7 +175,7 @@ function GMDashboard() {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/sales?startDate=${startDate}&endDate=${endDate}`
+        `${API_BASE_URL}/api/sales?startDate=${startDate}&endDate=${endDate}`
       );
 
       if (response.data.success) {
@@ -239,7 +240,7 @@ function GMDashboard() {
         if (Object.keys(itemSalesMap).length === 0) {
           try {
             const topProductsRes = await axios.get(
-              "http://localhost:5000/api/sales"
+              `${API_BASE_URL}/api/sales`
             );
             if (
               topProductsRes.data.success &&
@@ -347,7 +348,7 @@ function GMDashboard() {
   // Function to fetch stock data
   const fetchStockData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/stocks");
+      const response = await axios.get(`${API_BASE_URL}/api/stocks`);
       console.log("Stock API Response:", response.data);
 
       if (response.data.success && Array.isArray(response.data.data)) {

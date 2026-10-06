@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect, useRef } from "react";
 import SalesNav from "../SalesNav/SalesNav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -19,7 +20,7 @@ function SalesRequestForm() {
   // Fetch stock manager's inventory data
   const fetchStockData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/stocks");
+      const response = await axios.get(`${API_BASE_URL}/api/stocks`);
       console.log("Stock Manager Inventory API Response:", response.data);
       
       if (response.data && response.data.success && Array.isArray(response.data.data)) {
@@ -92,7 +93,7 @@ function SalesRequestForm() {
       console.log("Submitting request:", requestData);
       
       const response = await axios.post(
-        "http://localhost:5000/api/sales-requests",
+        `${API_BASE_URL}/api/sales-requests`,
         requestData,
         {
           headers: {

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./SPSales.css";
@@ -34,7 +35,7 @@ function IndirectBuyerSales() {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/indirectsales"
+        `${API_BASE_URL}/api/indirectsales`
       );
       console.log("Sales response:", response.data);
       if (response.data.success) {
@@ -149,7 +150,7 @@ function IndirectBuyerSales() {
   const viewDetails = async (invoiceId) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/indirectsales/${invoiceId}`
+        `${API_BASE_URL}/api/indirectsales/${invoiceId}`
       );
       if (response.data.success) {
         setSelectedSale(response.data.sale);

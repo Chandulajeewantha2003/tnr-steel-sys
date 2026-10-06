@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import HRNav from "../HRNav/HRNav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -19,7 +20,7 @@ function ViewAttendance() {
     setError(null);
 
     try {
-      const response = await axios.get("http://localhost:5000/api/attendance", {
+      const response = await axios.get(`${API_BASE_URL}/api/attendance`, {
         timeout: 10000,
       });
       console.log("API Response:", response.data);
@@ -104,7 +105,7 @@ function ViewAttendance() {
     try {
       setLoading(true);
       const response = await axios.put(
-        "http://localhost:5000/api/attendance",
+        `${API_BASE_URL}/api/attendance`,
         attendanceData
       );
       console.log("Update API Response:", response.data);

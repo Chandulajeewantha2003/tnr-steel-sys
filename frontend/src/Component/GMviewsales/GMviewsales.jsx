@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./GMviewsales.css";
@@ -24,7 +25,7 @@ function GMviewsales() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/sales")
+      .get(`${API_BASE_URL}/api/sales`)
       .then((response) => {
         if (response.data.success) {
           setSales(response.data.sales);
@@ -38,7 +39,7 @@ function GMviewsales() {
 
   const viewDetails = (invoiceId) => {
     axios
-      .get(`http://localhost:5000/api/sales/${invoiceId}`)
+      .get(`${API_BASE_URL}/api/sales/${invoiceId}`)
       .then((response) => {
         if (response.data.success) {
           setSelectedSale(response.data.sale);

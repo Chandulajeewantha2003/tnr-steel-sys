@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState } from "react";
 import "./AddSupplier.css";
 import GMNav from "../GMNav/GMNav";
@@ -236,7 +237,7 @@ const AddSupplier = () => {
 
   const sendRequest = async () => {
     await axios
-      .post("http://localhost:5000/api/suppliers", {
+      .post(`${API_BASE_URL}/api/suppliers`, {
         supplier_name: String(inputs.supplier_name),
         supplier_address: String(inputs.supplier_address),
         supplier_phone: String(inputs.supplier_phone),

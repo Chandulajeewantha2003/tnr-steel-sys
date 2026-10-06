@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import GMNav from "../GMNav/GMNav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -8,7 +9,7 @@ import { Link } from "react-router-dom";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
-const URL = "http://localhost:5000/api/suppliers";
+const URL = `${API_BASE_URL}/api/suppliers`;
 
 const fetchHandler = async () => {
   try {

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import "./UpdateEmployee.css";
 import HRNav from "../HRNav/HRNav";
@@ -28,7 +29,7 @@ const UpdateEmployee = () => {
     const fetchEmployee = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/employee/${id}`
+          `${API_BASE_URL}/api/employee/${id}`
         );
         if (response.data.success) {
           const employee = response.data.data;
@@ -122,7 +123,7 @@ const UpdateEmployee = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/employee/${id}`,
+        `${API_BASE_URL}/api/employee/${id}`,
         inputs
       );
       if (response.data.success) {

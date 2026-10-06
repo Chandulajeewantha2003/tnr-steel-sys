@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import HRNav from "../HRNav/HRNav";
@@ -19,7 +20,7 @@ function AccessControlDashboard() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/users");
+        const response = await axios.get(`${API_BASE_URL}/api/users`);
         if (response.data.success) {
           setUsers(response.data.data);
         } else {
@@ -42,7 +43,7 @@ function AccessControlDashboard() {
     if (userToDelete) {
       try {
         const response = await axios.delete(
-          `http://localhost:5000/api/users/${userToDelete}`
+          `${API_BASE_URL}/api/users/${userToDelete}`
         );
         if (response.data.success) {
           setUsers((prev) => prev.filter((user) => user._id !== userToDelete));

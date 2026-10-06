@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import "./GMNav.css";
 import { Link, useLocation } from "react-router-dom";
@@ -22,7 +23,7 @@ function GMNav() {
     const fetchRequestCount = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/stock-change-requests/pending"
+          `${API_BASE_URL}/api/stock-change-requests/pending`
         );
         if (response.data.success) {
           setRequestCount(response.data.data.length);

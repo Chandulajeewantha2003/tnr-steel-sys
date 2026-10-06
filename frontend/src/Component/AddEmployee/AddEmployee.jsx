@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import "./AddEmployee.css";
 import HRNav from "../HRNav/HRNav";
@@ -86,7 +87,7 @@ const AddEmployee = () => {
     const timer = setTimeout(async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/employee/check-nic/${inputs.nicNo}`
+          `${API_BASE_URL}/api/employee/check-nic/${inputs.nicNo}`
         );
         setNicExists(response.data.exists);
         if (response.data.exists) {
@@ -276,7 +277,7 @@ const AddEmployee = () => {
   };
 
   const sendRequest = async () => {
-    const response = await axios.post("http://localhost:5000/api/employee", {
+    const response = await axios.post(`${API_BASE_URL}/api/employee`, {
       name: String(inputs.name),
       mobileNo: String(inputs.mobileNo),
       position: String(inputs.position),

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import "./MySalesRequests.css";
@@ -12,7 +13,7 @@ function MySalesRequests() {
   const fetchMySalesRequests = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/api/sales-requests");
+      const response = await axios.get(`${API_BASE_URL}/api/sales-requests`);
       if (response.data.success) {
         setSalesRequests(response.data.data);
       } else {

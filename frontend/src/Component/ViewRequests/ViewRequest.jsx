@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Nav from "../Nav/Nav";
@@ -24,8 +25,8 @@ function ViewRequest() {
     try {
       // Fetch sales and material requests in parallel
       const [salesRes, materialRes] = await Promise.all([
-        axios.get("http://localhost:5000/api/stock-requests"),
-        axios.get("http://localhost:5000/api/material-requests")
+        axios.get(`${API_BASE_URL}/api/stock-requests`),
+        axios.get(`${API_BASE_URL}/api/material-requests`)
       ]);
 
       // Filter for pending requests only
@@ -51,12 +52,12 @@ function ViewRequest() {
 
       switch (requestType) {
         case "sales":
-          endpoint = `http://localhost:5000/api/stock-requests/${requestId}/status`;
+          endpoint = `${API_BASE_URL}/api/stock-requests/${requestId}/status`;
           updateData = { status: "Approved" };
           method = "put";
           break;
         case "materials":
-          endpoint = `http://localhost:5000/api/material-requests/${requestId}`;
+          endpoint = `${API_BASE_URL}/api/material-requests/${requestId}`;
           updateData = { status: "approved" };
           method = "patch";
           break;
@@ -89,12 +90,12 @@ function ViewRequest() {
 
       switch (requestType) {
         case "sales":
-          endpoint = `http://localhost:5000/api/stock-requests/${requestId}/status`;
+          endpoint = `${API_BASE_URL}/api/stock-requests/${requestId}/status`;
           updateData = { status: "Rejected" };
           method = "put";
           break;
         case "materials":
-          endpoint = `http://localhost:5000/api/material-requests/${requestId}`;
+          endpoint = `${API_BASE_URL}/api/material-requests/${requestId}`;
           updateData = { status: "rejected" };
           method = "patch";
           break;

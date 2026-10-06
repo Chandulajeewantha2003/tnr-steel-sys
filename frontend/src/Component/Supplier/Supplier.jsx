@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React from "react";
 import "./Supplier.css";
 import { Link } from "react-router-dom";
@@ -15,7 +16,7 @@ function Supplier({ supplier, onDelete }) {
   const deleteHandler = async () => {
     if (window.confirm("Are you sure you want to delete this supplier?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/suppliers/${_id}`);
+        await axios.delete(`${API_BASE_URL}/api/suppliers/${_id}`);
         onDelete(_id);
       } catch (error) {
         console.error("Error deleting supplier:", error);

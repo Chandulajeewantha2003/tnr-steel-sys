@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ViewSalesRequests.css";
@@ -20,7 +21,7 @@ function ViewSalesRequests() {
     const fetchRequests = async () => {
       try {
         const user = JSON.parse(sessionStorage.getItem("user"));
-        const response = await axios.get("http://localhost:5000/api/sales-requests", {
+        const response = await axios.get(`${API_BASE_URL}/api/sales-requests`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -99,7 +100,7 @@ function ViewSalesRequests() {
     try {
       const user = JSON.parse(sessionStorage.getItem("user"));
       const response = await axios.delete(
-        `http://localhost:5000/api/sales-requests/${requestToDelete._id}`,
+        `${API_BASE_URL}/api/sales-requests/${requestToDelete._id}`,
         {
           headers: {
             "Content-Type": "application/json",

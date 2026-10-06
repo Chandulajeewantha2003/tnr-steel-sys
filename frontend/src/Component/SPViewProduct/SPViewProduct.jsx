@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import "./SPViewProduct.css"; // Added styling
 import SalesNav from "../SalesNav/SalesNav";
@@ -13,7 +14,7 @@ function SPviewproducts() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch(`${API_BASE_URL}/api/products`);
         if (response.ok) {
           const data = await response.json();
           setProducts(data.data);
@@ -53,7 +54,7 @@ function SPviewproducts() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/products", {
+      const response = await fetch(`${API_BASE_URL}/api/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +76,7 @@ function SPviewproducts() {
   // Handle deleting a product
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/products/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -114,7 +115,7 @@ function SPviewproducts() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/products/${productToUpdate._id}`,
+        `${API_BASE_URL}/api/products/${productToUpdate._id}`,
         {
           method: "PUT",
           headers: {

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import GMNav from "../GMNav/GMNav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -16,7 +17,7 @@ function AllStockRequestsApproval() {
   const fetchAllRequests = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/stock-change-requests/pending"
+        `${API_BASE_URL}/api/stock-change-requests/pending`
       );
 
       if (response.data.success) {
@@ -27,7 +28,7 @@ function AllStockRequestsApproval() {
           requestsData.map(async (req) => {
             try {
               const stockRes = await axios.get(
-                `http://localhost:5000/api/stocks/${req.stock_id}`
+                `${API_BASE_URL}/api/stocks/${req.stock_id}`
               );
               const productName = stockRes.data?.data?.product_name || "N/A";
               return { ...req, product_name: productName };
@@ -58,7 +59,7 @@ function AllStockRequestsApproval() {
   const handleStatusUpdate = async (id, status) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/stock-change-requests/${id}/status`,
+        `${API_BASE_URL}/api/stock-change-requests/${id}/status`,
         { status, reviewed_by: user.username }
       );
       if (response.data.success) {

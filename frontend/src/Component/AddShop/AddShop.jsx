@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState } from "react";
 import SalesNav from "../SalesNav/SalesNav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -188,7 +189,7 @@ function AddShop() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/indirectbuyers/",
+        `${API_BASE_URL}/api/indirectbuyers/`,
         formData
       );
       if (response.data.success) {

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState } from "react";
 import GMNav from "../GMNav/GMNav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -64,7 +65,7 @@ function GMCreateUser() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users",
+        `${API_BASE_URL}/api/users`,
         formData
       );
       if (response.data.success) {

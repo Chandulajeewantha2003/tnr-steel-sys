@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import HRNav from "../HRNav/HRNav";
 import axios from "axios";
@@ -22,7 +23,7 @@ function ViewEmployees() {
     setError(null);
 
     try {
-      const response = await axios.get("http://localhost:5000/api/employee");
+      const response = await axios.get(`${API_BASE_URL}/api/employee`);
       if (response.data.success) {
         setData(response.data.data);
         setFilteredData(response.data.data);
@@ -65,7 +66,7 @@ function ViewEmployees() {
 
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/employee/${employeeToDelete._id}`
+        `${API_BASE_URL}/api/employee/${employeeToDelete._id}`
       );
       if (response.data.success) {
         fetchData();

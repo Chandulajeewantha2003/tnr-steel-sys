@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import "./AddProduct.css"; // Updated CSS file
 
@@ -15,7 +16,7 @@ function AddProducts() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch(`${API_BASE_URL}/api/products`);
         if (response.ok) {
           const data = await response.json();
           setProducts(data.data);
@@ -55,7 +56,7 @@ function AddProducts() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/products", {
+      const response = await fetch(`${API_BASE_URL}/api/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +78,7 @@ function AddProducts() {
   // Handle deleting a product
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/products/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -116,7 +117,7 @@ function AddProducts() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/products/${productToUpdate._id}`,
+        `${API_BASE_URL}/api/products/${productToUpdate._id}`,
         {
           method: "PUT",
           headers: {

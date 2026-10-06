@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SalesNav from "../SalesNav/SalesNav";
@@ -26,7 +27,7 @@ function ManageShops() {
   const fetchShops = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/indirectbuyers/"
+        `${API_BASE_URL}/api/indirectbuyers/`
       );
       if (response.data.success) {
         setShops(response.data.data);
@@ -67,7 +68,7 @@ function ManageShops() {
     if (window.confirm("Are you sure you want to delete this shop?")) {
       try {
         const response = await axios.delete(
-          `http://localhost:5000/api/indirectbuyers/${shopId}`
+          `${API_BASE_URL}/api/indirectbuyers/${shopId}`
         );
         if (response.data.success) {
           setShops(shops.filter((shop) => shop._id !== shopId));
@@ -122,7 +123,7 @@ function ManageShops() {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/indirectbuyers/${editingShop._id}`,
+        `${API_BASE_URL}/api/indirectbuyers/${editingShop._id}`,
         editingShop
       );
       if (response.data.success) {

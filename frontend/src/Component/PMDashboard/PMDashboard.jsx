@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import PMNav from "../PMNav/PMNav";
 import "./PMDashboard.css";
@@ -54,13 +55,13 @@ function PMDashboard() {
         setLoading(true);
         // Fetch material requests
         const requestsRes = await axios.get(
-          "http://localhost:5000/api/material-requests"
+          `${API_BASE_URL}/api/material-requests`
         );
         const requests = requestsRes.data.data || [];
 
         // Fetch materials
         const materialsRes = await axios.get(
-          "http://localhost:5000/api/materials"
+          `${API_BASE_URL}/api/materials`
         );
         const materials = materialsRes.data.data || [];
 

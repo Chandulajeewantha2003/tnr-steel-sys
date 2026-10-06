@@ -32,9 +32,18 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(
     cors({
-        origin: "http://localhost:5173", // Allow requests from this origin
+        origin: ["http://localhost:5173", "http://127.0.0.1:5173", "https://tnr-steel-sys-ten.vercel.app", process.env.FRONTEND_URL].filter(Boolean),
     })
 );
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (error) {
+        console.error("MongoDB connection failed:", error.message);
+        res.status(503).json({ success: false, message: "Database connection unavailable" });
+    }
+});
 app.use("/api/products", productRoutes);
 app.use("/api/production-requests", productionRequestRoutes);
 app.use("/api/sales-requests", salesRequestRoutes);
@@ -51,11 +60,10 @@ app.use("/api/stock-change-requests", stockRequestRoutes);
 app.use("/api/material-requests", materialRequestRoutes);
 app.use("/api/stock-requests", salesRequestRoutes);
 app.use("/api/chat", chatRoutes);
-app.use(cors());
 
 app.use("/buyers", router);
 const dir = "./files";
-if (!fs.existsSync(dir)) {
+if (!process.env.VERCEL && !fs.existsSync(dir)) {
     fs.mkdirSync(dir);
 }
 app.use("/files", express.static("files"));
@@ -127,7 +135,10 @@ app.post("/api/returns/add", async(req, res) => {
 //indirectreturns
 
 app.use("/api/indirectreturns", indirectreturnRoutes);
-app.listen(PORT, () => {
-    connectDB();
-    console.log("Server is running on http://localhost:" + PORT);
-});
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log("Server is running on http://localhost:" + PORT);
+    });
+}
+
+export default app;

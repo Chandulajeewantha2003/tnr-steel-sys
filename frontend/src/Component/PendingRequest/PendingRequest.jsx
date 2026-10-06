@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Nav from "../Nav/Nav";
@@ -17,7 +18,7 @@ function PendingRequests() {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/stock-requests/pending",
+        `${API_BASE_URL}/api/stock-requests/pending`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -37,7 +38,7 @@ function PendingRequests() {
   const handleAccept = async (id) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/stock-requests/${id}/accept`,
+        `${API_BASE_URL}/api/stock-requests/${id}/accept`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -53,7 +54,7 @@ function PendingRequests() {
   const handleDeny = async (id) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/stock-requests/${id}/deny`,
+        `${API_BASE_URL}/api/stock-requests/${id}/deny`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

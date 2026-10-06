@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import "./StockRequestForm.css";
 import SalesNav from "../SalesNav/SalesNav";
@@ -26,7 +27,7 @@ function StockRequestForm() {
     const fetchStocks = async () => {
       try {
         const user = JSON.parse(sessionStorage.getItem("user"));
-        const response = await fetch("http://localhost:5000/api/stocks", {
+        const response = await fetch(`${API_BASE_URL}/api/stocks`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
@@ -88,7 +89,7 @@ function StockRequestForm() {
 
     try {
       const user = JSON.parse(sessionStorage.getItem("user"));
-      const response = await fetch("http://localhost:5000/api/stock-requests", {
+      const response = await fetch(`${API_BASE_URL}/api/stock-requests`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

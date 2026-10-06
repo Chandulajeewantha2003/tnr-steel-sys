@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import HRNav from "../HRNav/HRNav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -16,7 +17,7 @@ function AddAttendance() {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/employee");
+        const response = await axios.get(`${API_BASE_URL}/api/employee`);
         console.log("Employee API Response:", response.data);
         if (response.data.success) {
           setEmployees(response.data.data);
@@ -47,7 +48,7 @@ function AddAttendance() {
       try {
         console.log("Checking attendance for date:", date);
         const response = await axios.get(
-          `http://localhost:5000/api/attendance?date=${date}`
+          `${API_BASE_URL}/api/attendance?date=${date}`
         );
         console.log("Attendance API Response:", response.data);
         console.log("Response data:", response.data.data);
@@ -115,7 +116,7 @@ function AddAttendance() {
     try {
       console.log("Submitting attendance data:", attendanceData);
       const response = await axios.post(
-        "http://localhost:5000/api/attendance",
+        `${API_BASE_URL}/api/attendance`,
         attendanceData
       );
       console.log("Submit API Response:", response.data);

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import axios from "axios";
@@ -24,8 +25,8 @@ function ViewStock() {
     try {
       const endpoint =
         selection === "materials"
-          ? "http://localhost:5000/api/materials"
-          : "http://localhost:5000/api/stocks";
+          ? `${API_BASE_URL}/api/materials`
+          : `${API_BASE_URL}/api/stocks`;
 
       const response = await axios.get(endpoint);
       if (response.data.success) {
@@ -104,7 +105,7 @@ function ViewStock() {
           const user = JSON.parse(sessionStorage.getItem("user"));
 
           const response = await axios.post(
-            "http://localhost:5000/api/stock-change-requests",
+            `${API_BASE_URL}/api/stock-change-requests`,
             {
               stock_id: item._id,
               request_type: "delete",
@@ -127,7 +128,7 @@ function ViewStock() {
         } else {
           // For materials, use direct deletion
           const response = await axios.delete(
-            `http://localhost:5000/api/materials/${item._id}`
+            `${API_BASE_URL}/api/materials/${item._id}`
           );
 
           if (response.data.success) {

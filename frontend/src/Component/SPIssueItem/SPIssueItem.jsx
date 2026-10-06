@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import SalesNav from "../SalesNav/SalesNav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -40,7 +41,7 @@ function IndirectBuyerIssueItem() {
   const fetchStockData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/api/salesstocks");
+      const response = await axios.get(`${API_BASE_URL}/api/salesstocks`);
       if (response.data.success) {
         setStockItems(response.data.data);
       } else {
@@ -58,7 +59,7 @@ function IndirectBuyerIssueItem() {
   const fetchIndirectBuyers = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/indirectbuyers"
+        `${API_BASE_URL}/api/indirectbuyers`
       );
       console.log("Indirect Buyers Response:", response.data);
       if (response.data.success) {

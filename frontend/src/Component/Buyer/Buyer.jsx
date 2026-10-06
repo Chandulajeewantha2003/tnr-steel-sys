@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import "./Buyer.css";
 import axios from "axios";
@@ -22,7 +23,7 @@ function Buyer({ buyer, onDelete }) {
   const deleteHandler = async () => {
     if (window.confirm("Are you sure you want to delete this buyer?")) {
       try {
-        await axios.delete(`http://localhost:5000/buyers/${_id}`);
+        await axios.delete(`${API_BASE_URL}/buyers/${_id}`);
         onDelete(_id);
       } catch (error) {
         console.error("Error deleting buyer:", error);
@@ -66,7 +67,7 @@ function Buyer({ buyer, onDelete }) {
 
   const sendRequest = async () => {
     try {
-      await axios.put(`http://localhost:5000/buyers/${_id}`, inputs);
+      await axios.put(`${API_BASE_URL}/buyers/${_id}`, inputs);
       window.location.reload();
     } catch (err) {
       console.error("Error updating buyer:", err);

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -40,7 +41,7 @@ function DirectBuyerReturns() {
   const fetchStockData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/api/stocks");
+      const response = await axios.get(`${API_BASE_URL}/api/stocks`);
       if (response.data.success) {
         setStockItems(response.data.data);
       } else {
@@ -56,7 +57,7 @@ function DirectBuyerReturns() {
 
   const fetchBuyers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/buyers");
+      const response = await axios.get(`${API_BASE_URL}/buyers`);
       if (response.data.buyers) {
         setBuyers(response.data.buyers);
       } else {

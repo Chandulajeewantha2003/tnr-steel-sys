@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./SPviewReturns.css";
@@ -29,7 +30,7 @@ function SPViewReturns() {
   useEffect(() => {
     // Fetch returns data from backend
     axios
-      .get("http://localhost:5000/api/indirectreturns")
+      .get(`${API_BASE_URL}/api/indirectreturns`)
       .then((response) => {
         console.log("Response from backend:", response.data);
         // Check if response.data is an array
@@ -51,7 +52,7 @@ function SPViewReturns() {
   const returnsviewDetails = async (returnId) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/indirectreturns/${returnId}`
+        `${API_BASE_URL}/api/indirectreturns/${returnId}`
       );
       console.log("Return details response:", response.data);
       if (response.data.success) {

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState } from "react";
 import axios from "axios";
 import "./ChatBot.css";
@@ -17,7 +18,7 @@ function ChatBot() {
     setMessages((prev) => [...prev, userMsg]);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/chat", {
+      const res = await axios.post(`${API_BASE_URL}/api/chat`, {
         message: input,
       });
 

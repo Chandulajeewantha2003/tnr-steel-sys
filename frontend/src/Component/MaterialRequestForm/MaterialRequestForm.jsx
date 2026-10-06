@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./MaterialRequestForm.css";
@@ -16,7 +17,7 @@ function MaterialRequestForm() {
     const fetchMaterials = async () => {
       try {
         const user = JSON.parse(sessionStorage.getItem("user"));
-        const response = await axios.get("http://localhost:5000/api/materials", {
+        const response = await axios.get(`${API_BASE_URL}/api/materials`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
@@ -56,7 +57,7 @@ function MaterialRequestForm() {
     try {
       const user = JSON.parse(sessionStorage.getItem("user"));
       const response = await axios.post(
-        "http://localhost:5000/api/material-requests",
+        `${API_BASE_URL}/api/material-requests`,
         {
           material_id: selectedMaterial,
           request_quantity: parseFloat(requestQuantity),

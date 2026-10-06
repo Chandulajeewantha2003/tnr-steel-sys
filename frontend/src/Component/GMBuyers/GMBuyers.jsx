@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import GMNav from "../GMNav/GMNav";
 import axios from "axios";
@@ -7,7 +8,7 @@ import HeadBar from "../HeadBar/HeadBar";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
-const URL = "http://localhost:5000/buyers";
+const URL = `${API_BASE_URL}/buyers`;
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);

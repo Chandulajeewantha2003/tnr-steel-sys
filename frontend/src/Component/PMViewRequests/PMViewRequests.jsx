@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./PMViewRequests.css";
@@ -18,7 +19,7 @@ function PMViewRequests() {
           throw new Error("User ID not found in session.");
         }
         const response = await axios.get(
-          `http://localhost:5000/api/material-requests?userId=${user._id}`,
+          `${API_BASE_URL}/api/material-requests?userId=${user._id}`,
           {
             headers: {
               "Content-Type": "application/json",

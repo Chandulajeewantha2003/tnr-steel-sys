@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import Nav from "../Nav/Nav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -20,7 +21,7 @@ function AllRequestsApproval() {
 
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/sales-requests"
+        `${API_BASE_URL}/api/sales-requests`
       );
       if (response.data.success) {
         setRequests(response.data.data);
@@ -46,7 +47,7 @@ function AllRequestsApproval() {
 
         // Fetch current stock for the product
         const stockResponse = await axios.get(
-          `http://localhost:5000/api/stocks?name=${request.product_name}`
+          `${API_BASE_URL}/api/stocks?name=${request.product_name}`
         );
         console.log("Stock API Response:", stockResponse.data);
 
@@ -78,7 +79,7 @@ function AllRequestsApproval() {
         console.log("New stock quantity to set:", newQuantity);
 
         const updateStockResponse = await axios.put(
-          `http://localhost:5000/api/stocks/${stock._id}`,
+          `${API_BASE_URL}/api/stocks/${stock._id}`,
           { product_quantity: newQuantity }
         );
         console.log("Stock Update Response:", updateStockResponse.data);
@@ -96,7 +97,7 @@ function AllRequestsApproval() {
         };
 
         const salesStockResponse = await axios.post(
-          "http://localhost:5000/api/salesstocks",
+          `${API_BASE_URL}/api/salesstocks`,
           salesStockData
         );
         console.log("SalesStock Add Response:", salesStockResponse.data);
@@ -109,7 +110,7 @@ function AllRequestsApproval() {
 
       // Update request status
       const response = await axios.put(
-        `http://localhost:5000/api/sales-requests/${id}/status`,
+        `${API_BASE_URL}/api/sales-requests/${id}/status`,
         { status }
       );
       console.log("Status Update Response:", response.data);

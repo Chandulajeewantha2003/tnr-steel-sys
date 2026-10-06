@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -210,7 +211,7 @@ const AddBuyers = () => {
 
   const sendRequest = async () => {
     await axios
-      .post("http://localhost:5000/buyers", {
+      .post(`${API_BASE_URL}/buyers`, {
         name: String(inputs.name),
         contact: Number(inputs.contact),
         address: String(inputs.address),

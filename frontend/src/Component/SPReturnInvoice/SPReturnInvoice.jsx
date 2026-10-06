@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import SPNav from "../SalesNav/SalesNav";
 import { useNavigate } from "react-router-dom";
@@ -81,7 +82,7 @@ function SPReturnInvoice() {
       console.log("Sending return data:", JSON.stringify(returnData, null, 2));
 
       const response = await axios.post(
-        "http://localhost:5000/api/indirectreturns/add",
+        `${API_BASE_URL}/api/indirectreturns/add`,
         returnData
       );
       console.log("Response from server:", response.data);

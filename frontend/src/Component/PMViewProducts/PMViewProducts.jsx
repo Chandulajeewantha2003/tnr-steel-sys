@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./PMViewProducts.css";
@@ -15,7 +16,7 @@ function PMViewProducts() {
       try {
         setLoading(true);
         // Fetch all stocks first
-        const stocksRes = await axios.get("http://localhost:5000/api/stocks");
+        const stocksRes = await axios.get(`${API_BASE_URL}/api/stocks`);
         const stocksData = stocksRes.data.data || [];
         console.log("StocksData:", stocksData);
         // Create maps for product_id and product_name
@@ -29,7 +30,7 @@ function PMViewProducts() {
         console.log("stockNameMap:", stockNameMap);
 
         // Fetch products
-        const productsRes = await axios.get("http://localhost:5000/api/products");
+        const productsRes = await axios.get(`${API_BASE_URL}/api/products`);
         const productsData = productsRes.data.data || [];
         console.log("ProductsData:", productsData);
 

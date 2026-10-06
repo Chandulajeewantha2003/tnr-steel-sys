@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./GMreturns.css";
@@ -21,7 +22,7 @@ function GMViewReturns() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/returns")
+      .get(`${API_BASE_URL}/api/returns`)
       .then((response) => {
         if (response.data.success) {
           setReturns(response.data.returns);
@@ -36,7 +37,7 @@ function GMViewReturns() {
   const returnsviewDetails = async (returnId) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/returns/${returnId}`
+        `${API_BASE_URL}/api/returns/${returnId}`
       );
       if (response.data.success) {
         setSelectedReturn(response.data.returnRecord);

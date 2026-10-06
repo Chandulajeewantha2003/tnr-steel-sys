@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../../config/api.js";
 import React, { useState, useEffect, useRef } from "react";
 import Nav from "../Nav/Nav";
 import HeadBar from "../HeadBar/HeadBar";
@@ -25,7 +26,7 @@ function StockChangeRequestForm() {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/stocks/${stockId}`
+        `${API_BASE_URL}/api/stocks/${stockId}`
       );
       if (response.data.success) {
         const data = response.data.data;
@@ -87,7 +88,7 @@ function StockChangeRequestForm() {
 
       setIsLoading(true);
       const response = await axios.post(
-        "http://localhost:5000/api/stock-change-requests",
+        `${API_BASE_URL}/api/stock-change-requests`,
         requestData,
         { headers: { "Content-Type": "application/json" } }
       );
